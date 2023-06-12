@@ -1,19 +1,16 @@
 import './App.css';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { TagPage } from './pages/tag';
 import { ThemeProvider } from './theme/theme.provider';
 
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: '/tag',
-      element: <TagPage />
-    }
-  ]);
-
   return (
     <ThemeProvider>
-      <RouterProvider router={router} />
+      <BrowserRouter>
+        <Routes>
+          <Route path={'/tag'} element={<TagPage />} />
+        </Routes>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
