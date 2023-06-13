@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { TagPage } from './tag';
-import { ThemeProvider } from '../theme/theme.provider';
+import { ThemeProvider } from '../theme/ThemeProvider';
 
 const meta: Meta<typeof TagPage> = {
   title: 'Tag',

@@ -7,7 +7,7 @@ export interface ThemeProviderProps {
 }
 
 export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
-  const theme = createTheme({});
+  const theme = createTheme();
 
   return (
     <MuiThemeProvider theme={theme}>
