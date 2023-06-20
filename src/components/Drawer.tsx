@@ -4,6 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
 import { Dropdown } from './Dropdown';
 import { makeStyles } from '@mui/styles';
+import { Environment } from './Environment';
 
 const useStyles = makeStyles(() => ({
   title: {
@@ -13,6 +14,15 @@ const useStyles = makeStyles(() => ({
     paddingLeft: '16px'
   }
 }));
+
+const names = [
+  { name: 'Projects', sublinks: ['Project Control', 'User Permissions', 'New Project'] },
+  { name: 'Studies', sublinks: ['Study Control', 'User Permissions', 'Entry Controls', 'Download Tags', 'Create New Study'] },
+  { name: 'Datasets', sublinks: ['Dataset Controls', 'Project Access'] },
+  { name: 'Contribute', sublinks: ['Contribute to a Study'] }
+];
+
+const style = { color: 'purple', fontSize: '20px' };
 
 function DrawerComponent() {
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -26,7 +36,8 @@ function DrawerComponent() {
             Home
           </Link>
         </List>
-        <Dropdown />
+        <Environment />
+        {names && <Dropdown links={names} styleProps={style} />}
       </Drawer>
       <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
         <MenuIcon />

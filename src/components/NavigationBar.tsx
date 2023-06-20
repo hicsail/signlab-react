@@ -24,7 +24,7 @@ const theme = createTheme({
       paper: '#fef8f8'
     },
     text: {
-      primary: '#2435ea'
+      primary: '#6dd5ed'
     },
     divider: '#97948b'
   }

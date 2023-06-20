@@ -5,14 +5,25 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
 
-const useStyles = makeStyles(() => ({
+interface Link {
+  name: string;
+  sublinks: string[];
+}
+
+interface StyleProps {
+  color: string;
+  fontSize: string;
+}
+
+interface LinksProps {
+  links: Link[];
+  styleProps: StyleProps;
+}
+const useStyles = makeStyles((styleProps: StyleProps) => ({
   title: {
     color: 'black',
     fontSize: '20px',
     fontFamily: 'BlinkMacSystemFont'
-  },
-  icon: {
-    color: 'white'
   },
   link: {
     color: 'black',
@@ -20,17 +31,14 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const links = [
-  { name: 'Projects', items: ['Project Control', 'User Permissions', 'New Project'] },
-  { name: 'Studies', items: ['Study Control', 'Create New Study'] },
-  { name: 'Datasets', items: ['Dataset Controls', 'Project Access'] }
-];
+const Dropdown: React.FC<LinksProps> = ({ links, styleProps }: LinksProps) => {
+  const classes = useStyles(styleProps);
 
-function Dropdown() {
-  const classes = useStyles();
+  console.log(styleProps);
+
   return (
     <div>
-      {links.map((item: any) => (
+      {links?.map((item: Link) => (
         <Accordion key={item.name} disableGutters elevation={0} sx={{ '&:before': { display: 'none' } }}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             <Link to={`/${item.name}`} className={classes.title}>
@@ -38,7 +46,7 @@ function Dropdown() {
             </Link>
           </AccordionSummary>
           <AccordionDetails>
-            {item.items.map((point: any) => (
+            {item.sublinks?.map((point: any) => (
               <p key={point} className={classes.link}>
                 {point}
               </p>
@@ -48,6 +56,6 @@ function Dropdown() {
       ))}
     </div>
   );
-}
+};
 
 export { Dropdown };
