@@ -10,16 +10,11 @@ interface Link {
   sublinks: string[];
 }
 
-interface StyleProps {
-  color: string;
-  fontSize: string;
-}
-
 interface LinksProps {
   links: Link[];
-  styleProps: StyleProps;
+  styleProps: boolean;
 }
-const useStyles = makeStyles((styleProps: StyleProps) => ({
+const useStyles = makeStyles(() => ({
   title: {
     color: 'black',
     fontSize: '20px',
@@ -31,8 +26,18 @@ const useStyles = makeStyles((styleProps: StyleProps) => ({
   }
 }));
 
+const environment = {
+  color: 'purple',
+  fontFamily: 'BlinkMacSystemFont'
+};
+
+const navigation = {
+  color: 'red',
+  fontFamily: 'sans-serif'
+};
+
 const Dropdown: React.FC<LinksProps> = ({ links, styleProps }: LinksProps) => {
-  const classes = useStyles(styleProps);
+  const classes = useStyles();
 
   console.log(styleProps);
 
@@ -41,7 +46,7 @@ const Dropdown: React.FC<LinksProps> = ({ links, styleProps }: LinksProps) => {
       {links?.map((item: Link) => (
         <Accordion key={item.name} disableGutters elevation={0} sx={{ '&:before': { display: 'none' } }}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Link to={`/${item.name}`} className={classes.title}>
+            <Link to={`/${item.name}`} style={styleProps ? environment : navigation}>
               {item.name}
             </Link>
           </AccordionSummary>

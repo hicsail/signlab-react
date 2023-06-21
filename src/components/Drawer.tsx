@@ -22,8 +22,6 @@ const names = [
   { name: 'Contribute', sublinks: ['Contribute to a Study'] }
 ];
 
-const style = { color: 'purple', fontSize: '20px' };
-
 function DrawerComponent() {
   const [openDrawer, setOpenDrawer] = useState(false);
   const classes = useStyles();
@@ -37,7 +35,7 @@ function DrawerComponent() {
           </Link>
         </List>
         <Environment />
-        {names && <Dropdown links={names} styleProps={style} />}
+        {names && <Dropdown links={names} styleProps={false} />}
       </Drawer>
       <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
         <MenuIcon />
