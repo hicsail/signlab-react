@@ -1,6 +1,6 @@
 import { AppBar, Toolbar, CssBaseline, Typography, ThemeProvider, createTheme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { DrawerComponent } from './Drawer';
+import { SideBar } from './SideBar';
 import { Divider } from '@mui/material';
 
 const useStyles = makeStyles(() => ({
@@ -24,7 +24,7 @@ const theme = createTheme({
       paper: '#fef8f8'
     },
     text: {
-      primary: '#6dd5ed'
+      primary: '#3acff0'
     },
     divider: '#97948b'
   }
@@ -38,7 +38,7 @@ function NavBar() {
       <AppBar className={classes.AppBar}>
         <CssBaseline />
         <Toolbar>
-          <DrawerComponent />
+          <SideBar />
           <Typography className={classes.logo}>ASL-LEX SignLab</Typography>
           <Divider orientation="vertical" flexItem />
           <p className={classes.p}>Login</p>

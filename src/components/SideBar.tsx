@@ -1,41 +1,45 @@
 import { useState } from 'react';
-import { Drawer, IconButton, List } from '@mui/material';
+import { Divider, Drawer, IconButton, List } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
-import { Dropdown } from './Dropdown';
 import { makeStyles } from '@mui/styles';
 import { Environment } from './Environment';
+import { Navigation } from './Navigation';
 
 const useStyles = makeStyles(() => ({
-  title: {
+  home: {
     color: 'black',
-    fontSize: '20px',
+    fontSize: '22px',
     fontFamily: 'BlinkMacSystemFont',
     paddingLeft: '16px'
+  },
+  h2: {
+    color: 'black',
+    fontFamily: 'BlinkMacSystemFont',
+    paddingLeft: '16px'
+  },
+  divider: {
+    paddingTop: '8px'
   }
 }));
 
-const names = [
-  { name: 'Projects', sublinks: ['Project Control', 'User Permissions', 'New Project'] },
-  { name: 'Studies', sublinks: ['Study Control', 'User Permissions', 'Entry Controls', 'Download Tags', 'Create New Study'] },
-  { name: 'Datasets', sublinks: ['Dataset Controls', 'Project Access'] },
-  { name: 'Contribute', sublinks: ['Contribute to a Study'] }
-];
-
-function DrawerComponent() {
+function SideBar() {
   const [openDrawer, setOpenDrawer] = useState(false);
   const classes = useStyles();
-
   return (
     <div>
       <Drawer PaperProps={{ sx: { width: '25%' } }} open={openDrawer} onClose={() => setOpenDrawer(false)}>
-        <List>
-          <Link to="/" onClick={() => setOpenDrawer(false)} className={classes.title}>
+        <List sx={{ marginTop: '20px' }}>
+          <Link to="/" onClick={() => setOpenDrawer(false)} className={classes.home}>
             Home
           </Link>
         </List>
+        <Divider orientation="horizontal" flexItem className={classes.divider} />
+        <h2 className={classes.h2}>Environment</h2>
         <Environment />
-        {names && <Dropdown links={names} styleProps={false} />}
+        <Divider orientation="horizontal" flexItem className={classes.divider} />
+        <h2 className={classes.h2}>Navigation</h2>
+        <Navigation />
       </Drawer>
       <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
         <MenuIcon />
@@ -43,4 +47,4 @@ function DrawerComponent() {
     </div>
   );
 }
-export { DrawerComponent };
+export { SideBar };
