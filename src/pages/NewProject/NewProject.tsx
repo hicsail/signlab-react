@@ -1,70 +1,89 @@
-import { materialRenderers, materialCells } from '@jsonforms/material-renderers';
-import { JsonForms } from '@jsonforms/react';
-import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { Button, FormControl, FormLabel, TextField } from '@mui/material';
 import { useState } from 'react';
 import { makeStyles } from '@mui/styles';
-
-const schema = {
-  type: 'object',
-  properties: {
-    name: {
-      type: 'string',
-      minLength: 3,
-      description: 'Please enter your name'
-    },
-    description: {
-      type: 'string',
-      description: 'Please enter your description'
-    }
-  },
-  required: ['name', 'description']
-};
-
-const uischema = {
-  type: 'Group',
-  label: 'Create New Project',
-  elements: [
-    {
-      type: 'Control',
-      label: 'Name',
-      scope: '#/properties/name'
-    },
-    {
-      type: 'Control',
-      label: 'Description',
-      scope: '#/properties/description'
-    }
-  ]
-};
-
-const initialData = {
-  name: 'John Doe',
-  description: '12345'
-};
 
 const useStyles = makeStyles(() => ({
   div: {
     position: 'fixed',
-    top: '15%',
-    left: '10%',
-    minWidth: '80%'
+    top: '10%',
+    left: '5%',
+    minWidth: '90%'
+  },
+  title: {
+    textAlign: 'left',
+    color: '#63636b',
+    fontFamily: 'BlinkMacSystemFont',
+    paddingLeft: '36px',
+    fontSize: '22px'
   }
 }));
 const NewProject: React.FC = () => {
-  const [data, setData] = useState(initialData);
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [checkName, setCheckName] = useState(false);
+  const [checkDescription, setCheckDescription] = useState(false);
+  const navigate = useNavigate();
+
+  const handleNameChange = (e: any) => {
+    setName(e.target.value);
+    if (!name.match(/^[A-Za-z0-9 \s]*$/)) {
+      setCheckName(true);
+    } else {
+      setCheckName(false);
+    }
+  };
+
+  const handleDescriptionChange = (e: any) => {
+    setDescription(e.target.value);
+    if (description.length < 5) {
+      setCheckDescription(true);
+    } else {
+      setCheckDescription(false);
+    }
+  };
+
+  const handleSubmit = (event: { preventDefault: () => void }) => {
+    if (checkName || checkDescription) {
+      event.preventDefault();
+      return;
+    }
+    //submit logic
+    //redirect to next page
+    navigate('/projectcontrol');
+  };
+
   const classes = useStyles();
+
   return (
     <div className={classes.div}>
-      {/* prettier-ignore */}
-      <JsonForms 
-        schema={schema} 
-        uischema={uischema} 
-        data={data} 
-        renderers={materialRenderers} 
-        cells={materialCells} 
-        onChange={({ data }) => setData(data)} 
-        />
-      <Button sx={{ color: 'white', bgcolor: '#2582f3', marginTop: '15px' }} variant="outlined">
+      <h3 className={classes.title}>Create New Project</h3>
+      <FormControl onSubmit={(e) => e.preventDefault()} defaultValue={name} sx={{ position: 'absolute', left: '5%', width: '90%' }}>
+        <FormLabel sx={{ textAlign: 'left' }}>Name</FormLabel>
+        <TextField
+          error={checkName}
+          helperText={checkName && 'Project name should not contain any special characters'}
+          required={true}
+          sx={{ marginBottom: '10px' }}
+          variant="outlined"
+          onChange={handleNameChange}
+        ></TextField>
+        <FormLabel sx={{ textAlign: 'left' }}>Description</FormLabel>
+        <TextField
+          error={checkDescription}
+          helperText={checkDescription && 'Project description should be longer than 5 characters'}
+          required={true}
+          type="text"
+          variant="outlined"
+          onChange={handleDescriptionChange}
+        ></TextField>
+      </FormControl>
+      <Button
+        disabled={checkName || checkDescription}
+        onClick={handleSubmit}
+        sx={{ color: 'white', bgcolor: '#2582f3', marginTop: '195px', position: 'absolute', right: '5%' }}
+        variant="outlined"
+      >
         Submit
       </Button>
     </div>
