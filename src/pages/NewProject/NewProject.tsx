@@ -1,23 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { Button, FormControl, FormLabel, TextField } from '@mui/material';
+import { Button, Container, FormControl, FormLabel, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
-import { makeStyles } from '@mui/styles';
 
-const useStyles = makeStyles(() => ({
-  div: {
-    position: 'fixed',
-    top: '10%',
-    left: '5%',
-    minWidth: '90%'
-  },
-  title: {
-    textAlign: 'left',
-    color: '#63636b',
-    fontFamily: 'BlinkMacSystemFont',
-    paddingLeft: '36px',
-    fontSize: '22px'
-  }
-}));
 const NewProject: React.FC = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -53,11 +37,14 @@ const NewProject: React.FC = () => {
     navigate('/projectcontrol');
   };
 
-  const classes = useStyles();
-
   return (
-    <div className={classes.div}>
-      <h3 className={classes.title}>Create New Project</h3>
+    <Container sx={{ left: "5%", width: "90%", top: "225px", position: "absolute" }}>
+      <Typography variant="h5" sx={{
+        textAlign: 'left',
+        color: 'black',
+        fontFamily: 'BlinkMacSystemFont',
+        padding: '10px 2%',
+      }} >Create New Project</Typography>
       <FormControl onSubmit={(e) => e.preventDefault()} defaultValue={name} sx={{ position: 'absolute', left: '5%', width: '90%' }}>
         <FormLabel sx={{ textAlign: 'left' }}>Name</FormLabel>
         <TextField
@@ -86,7 +73,7 @@ const NewProject: React.FC = () => {
       >
         Submit
       </Button>
-    </div>
+    </Container>
   );
 };
 
