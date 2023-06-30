@@ -12,16 +12,25 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
         paper: '#fef8f8'
       },
       text: {
-        primary: 'cyan'
+        primary: '#g123a1'
       },
       divider: '#97948b'
+    },
+    components: {
+      MuiLink: {
+        defaultProps: {
+          color: '#000',
+          fontSize: '20px',
+          fontFamily: 'BlinkMacSystemFont'
+        }
+      }
     }
   });
 
   theme.typography.h5 = {
     color: 'black',
     fontFamily: 'BlinkMacSystemFont',
-    padding: '13px',
+    padding: '14px',
     fontWeight: 'bold',
     fontSize: '23px'
   };

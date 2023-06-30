@@ -24,11 +24,6 @@ const DropdownComponent: React.FC<LinksProps> = ({ links }: LinksProps) => {
         <Accordion key={item.name} disableGutters elevation={0} sx={{ '&:before': { display: 'none' } }}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             <Link
-              sx={{
-                color: 'black',
-                fontSize: '20px',
-                fontFamily: 'BlinkMacSystemFont'
-              }}
               underline={'none'}
               href={`/${item.name}`}
             >
@@ -40,9 +35,7 @@ const DropdownComponent: React.FC<LinksProps> = ({ links }: LinksProps) => {
               <p>
                 <Link
                   sx={{
-                    color: 'black',
-                    fontSize: '16px',
-                    margin: '5px'
+                    fontSize: '16px'
                   }}
                   underline={'none'}
                   href={`/${sublink.link}`}
