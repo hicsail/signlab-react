@@ -4,16 +4,8 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
-interface Item {
-  name: string;
-  array: string[];
-}
 
-interface MenuComponentProps {
-  list: Item[];
-}
-
-const MenuComponent: React.FC<MenuComponentProps> = ({ list }: MenuComponentProps) => {
+const MenuComponent: React.FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
