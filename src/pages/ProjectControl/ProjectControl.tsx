@@ -1,5 +1,7 @@
+import { Typography } from '@mui/material';
+
 const ProjectControl: React.FC = () => {
-  return <h2>Project Control</h2>;
+  return <Typography variant="h4">Project Control</Typography>;
 };
 
 export { ProjectControl };

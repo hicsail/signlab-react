@@ -26,30 +26,10 @@ function SideBar() {
           </Link>
         </List>
         <Divider sx={{ paddingTop: '8px' }} orientation="horizontal" flexItem />
-        <Typography
-          sx={{
-            color: 'black',
-            fontFamily: 'BlinkMacSystemFont',
-            padding: '14px',
-            fontWeight: 'bold'
-          }}
-          variant="h5"
-        >
-          Environment
-        </Typography>
+        <Typography variant="h5">Environment</Typography>
         <Environment />
         <Divider orientation="horizontal" flexItem />
-        <Typography
-          sx={{
-            color: 'black',
-            fontFamily: 'BlinkMacSystemFont',
-            padding: '14px',
-            fontWeight: 'bold'
-          }}
-          variant="h5"
-        >
-          Navigation
-        </Typography>
+        <Typography variant="h5">Navigation</Typography>
         <Navigation />
       </Drawer>
       <IconButton onClick={() => setOpenDrawer(!openDrawer)}>

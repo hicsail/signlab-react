@@ -7,7 +7,25 @@ export interface ThemeProviderProps {
 }
 
 export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
-  const theme = createTheme();
+  const theme = createTheme({
+    palette: {
+      background: {
+        paper: '#fef8f8'
+      },
+      text: {
+        primary: 'cyan'
+      },
+      divider: '#97948b'
+    }
+  });
+
+  theme.typography.h5 = {
+    color: 'black',
+    fontFamily: 'BlinkMacSystemFont',
+    padding: '13px',
+    fontWeight: 'bold',
+    fontSize: '23px'
+  };
 
   return (
     <MuiThemeProvider theme={theme}>
