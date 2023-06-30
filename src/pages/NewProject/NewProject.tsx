@@ -38,13 +38,18 @@ const NewProject: React.FC = () => {
   };
 
   return (
-    <Container sx={{ left: "5%", width: "90%", top: "225px", position: "absolute" }}>
-      <Typography variant="h5" sx={{
-        textAlign: 'left',
-        color: 'black',
-        fontFamily: 'BlinkMacSystemFont',
-        padding: '10px 2%',
-      }} >Create New Project</Typography>
+    <Container sx={{ left: '5%', width: '90%', top: '225px', position: 'absolute' }}>
+      <Typography
+        variant="h5"
+        sx={{
+          textAlign: 'left',
+          color: 'black',
+          fontFamily: 'BlinkMacSystemFont',
+          padding: '10px 2%'
+        }}
+      >
+        Create New Project
+      </Typography>
       <FormControl onSubmit={(e) => e.preventDefault()} defaultValue={name} sx={{ position: 'absolute', left: '5%', width: '90%' }}>
         <FormLabel sx={{ textAlign: 'left' }}>Name</FormLabel>
         <TextField

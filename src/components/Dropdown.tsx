@@ -18,28 +18,36 @@ interface LinksProps {
 }
 
 const DropdownComponent: React.FC<LinksProps> = ({ links }: LinksProps) => {
-
   return (
     <div>
       {links?.map((item: Link) => (
         <Accordion key={item.name} disableGutters elevation={0} sx={{ '&:before': { display: 'none' } }}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Link sx={{
-              color: 'black',
-              fontSize: '20px',
-              fontFamily: 'BlinkMacSystemFont'
-            }} underline={"none"} href={`/${item.name}`} >
+            <Link
+              sx={{
+                color: 'black',
+                fontSize: '20px',
+                fontFamily: 'BlinkMacSystemFont'
+              }}
+              underline={'none'}
+              href={`/${item.name}`}
+            >
               {item.name}
             </Link>
           </AccordionSummary>
           <AccordionDetails>
             {item.sublinks?.map((sublink: SubLink) => (
               <p>
-                <Link sx={{
-                  color: 'black',
-                  fontSize: '16px',
-                  margin: '5px'
-                }} underline={"none"} href={`/${sublink.link}`} key={sublink.title}>
+                <Link
+                  sx={{
+                    color: 'black',
+                    fontSize: '16px',
+                    margin: '5px'
+                  }}
+                  underline={'none'}
+                  href={`/${sublink.link}`}
+                  key={sublink.title}
+                >
                   {sublink.title}
                 </Link>
               </p>

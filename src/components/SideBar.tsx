@@ -11,30 +11,45 @@ function SideBar() {
     <div>
       <Drawer PaperProps={{ sx: { width: '25%' } }} open={openDrawer} onClose={() => setOpenDrawer(false)}>
         <List sx={{ marginTop: '20px' }}>
-          <Link sx={{
-            color: 'black',
-            fontSize: '22px',
-            fontFamily: 'BlinkMacSystemFont',
-            paddingLeft: '16px'
-          }} underline={"none"} href="/" onClick={() => setOpenDrawer(false)}>
+          <Link
+            sx={{
+              color: 'black',
+              fontSize: '22px',
+              fontFamily: 'BlinkMacSystemFont',
+              paddingLeft: '16px'
+            }}
+            underline={'none'}
+            href="/"
+            onClick={() => setOpenDrawer(false)}
+          >
             Home
           </Link>
         </List>
         <Divider sx={{ paddingTop: '8px' }} orientation="horizontal" flexItem />
-        <Typography sx={{
-          color: 'black',
-          fontFamily: 'BlinkMacSystemFont',
-          padding: '14px',
-          fontWeight: 'bold'
-        }} variant="h5">Environment</Typography>
+        <Typography
+          sx={{
+            color: 'black',
+            fontFamily: 'BlinkMacSystemFont',
+            padding: '14px',
+            fontWeight: 'bold'
+          }}
+          variant="h5"
+        >
+          Environment
+        </Typography>
         <Environment />
         <Divider orientation="horizontal" flexItem />
-        <Typography sx={{
-          color: 'black',
-          fontFamily: 'BlinkMacSystemFont',
-          padding: '14px',
-          fontWeight: 'bold'
-        }} variant="h5">Navigation</Typography>
+        <Typography
+          sx={{
+            color: 'black',
+            fontFamily: 'BlinkMacSystemFont',
+            padding: '14px',
+            fontWeight: 'bold'
+          }}
+          variant="h5"
+        >
+          Navigation
+        </Typography>
         <Navigation />
       </Drawer>
       <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
