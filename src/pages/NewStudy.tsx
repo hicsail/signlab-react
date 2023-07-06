@@ -1,54 +1,118 @@
-/* import { materialRenderers, materialCells } from '@jsonforms/material-renderers';
+import { Button, Container } from '@mui/material';
+import { useState } from 'react';
+import { materialRenderers, materialCells } from '@jsonforms/material-renderers';
 import { JsonForms } from '@jsonforms/react';
-import Ajv from 'ajv';
 
 const schema = {
   type: 'object',
   properties: {
     name: {
       type: 'string',
-      pattern: '^[a-zA-Z 0-9]*$',
-      description: 'Please enter your name'
+      pattern: '^[a-zA-Z 0-9]*$'
     },
     description: {
+      type: 'string'
+    },
+    instructions: {
+      type: 'string'
+    },
+    times: {
       type: 'string',
-      description: 'Please enter your description'
+      default: 1
     }
   },
-  required: ['name', 'description'],
+  required: ['name', 'description', 'instructions'],
   errorMessage: {
     type: 'data should be an object',
-    properties: { name: 'Project name should be ...', description: 'Description ahah' },
+    properties: { name: 'Study name should be ...', description: 'Description ' },
     _: 'data should ...'
   }
 };
 
 const uischema = {
-  type: 'Group',
-  label: 'Create New Project',
+  type: 'Categorization',
   elements: [
     {
-      type: 'Control',
-      label: 'Name',
-      scope: '#/properties/name'
+      type: 'Category',
+      label: 'Study Identification',
+      elements: [
+        {
+          type: 'VerticalLayout',
+          elements: [
+            {
+              type: 'Control',
+              label: 'Name',
+              scope: '#/properties/name'
+            },
+            {
+              type: 'Control',
+              label: 'Description',
+              scope: '#/properties/description'
+            },
+            {
+              type: 'Control',
+              label: 'Instructions',
+              scope: '#/properties/instructions'
+            },
+            {
+              type: 'Control',
+              label: 'Number of times each entry needs to be tagged (default 1)',
+              scope: '#/properties/times'
+            }
+          ]
+        }
+      ]
     },
     {
-      type: 'Control',
-      label: 'Description',
-      scope: '#/properties/description'
+      type: 'Category',
+      label: 'Construct Tagging Interface',
+      elements: [
+        {
+          type: 'VerticalLayout',
+          elements: [
+            {
+              type: 'Control',
+              label: 'Name',
+              scope: '#/properties/name'
+            },
+            {
+              type: 'Control',
+              label: 'Description',
+              scope: '#/properties/description'
+            },
+            {
+              type: 'Control',
+              label: 'Instructions',
+              scope: '#/properties/instructions'
+            }
+          ]
+        }
+      ]
     }
-  ]
+  ],
+  options: {
+    variant: 'stepper',
+    showNavButtons: true
+  }
 };
 
-const ajv = new Ajv();
-const validate = ajv.compile(schema);
+const NewStudy: React.FC = () => {
+  const initialData = {
+    name: '',
+    description: ''
+  };
 
-const initialData = {
-  name: '',
-  description: ''
+  const [data, setData] = useState(initialData);
+
+  const handleChange = (data: any) => {
+    setData(data);
+  };
+
+  return (
+    <Container sx={{ left: '5%', width: '90%', top: '100px', position: 'absolute' }}>
+      <JsonForms schema={schema} uischema={uischema} data={data} renderers={materialRenderers} cells={materialCells} onChange={({ data }) => handleChange(data)} />
+    </Container>
+  );
 };
 
-const [data, setData] = useState(initialData);
-
-<JsonForms schema={schema} uischema={uischema} data={data} renderers={materialRenderers} cells={materialCells} onChange={({ data }) => setData(data)} />;
- */
+export { NewStudy };
