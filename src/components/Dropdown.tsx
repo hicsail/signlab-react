@@ -23,9 +23,7 @@ const DropdownComponent: React.FC<LinksProps> = ({ links }: LinksProps) => {
       {links?.map((item: Link) => (
         <Accordion key={item.name} disableGutters elevation={0} sx={{ '&:before': { display: 'none' } }}>
           <AccordionSummary key={item.name} expandIcon={<ExpandMoreIcon />}>
-            <Link underline={'none'} href={`/${item.name}`}>
-              {item.name}
-            </Link>
+            <Link underline={'none'}>{item.name}</Link>
           </AccordionSummary>
           <AccordionDetails key={item.name}>
             {item.sublinks?.map((sublink: SubLink) => (

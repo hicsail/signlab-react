@@ -8,6 +8,7 @@ import { NewProject } from './pages/NewProject';
 import { ProjectControl } from './pages/ProjectControl';
 import { SuccessPage } from './pages/SuccessPage';
 import { NewStudy } from './pages/NewStudy';
+import { ContributePage } from './pages/Contribute';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path={'/newstudy'} element={<NewStudy />} />
           <Route path={'/projectcontrol'} element={<ProjectControl />} />
           <Route path={'/successpage'} element={<SuccessPage />} />
+          <Route path={'/contribute'} element={<ContributePage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
