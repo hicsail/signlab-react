@@ -41,6 +41,12 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
     fontSize: '18px'
   };
 
+  theme.typography.body2 = {
+    fontFamily: 'BlinkMacSystemFont',
+    fontWeight: 'bold',
+    fontSize: '15px'
+  };
+
   return (
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
