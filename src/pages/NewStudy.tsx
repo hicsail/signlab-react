@@ -1,4 +1,4 @@
-import { Button, Container } from '@mui/material';
+import { Container } from '@mui/material';
 import { useState } from 'react';
 import { materialRenderers, materialCells } from '@jsonforms/material-renderers';
 import { JsonForms } from '@jsonforms/react';
@@ -19,6 +19,9 @@ const schema = {
     times: {
       type: 'string',
       default: 1
+    },
+    tag: {
+      type: 'number'
     }
   },
   required: ['name', 'description', 'instructions'],
@@ -82,8 +85,8 @@ const uischema = {
             },
             {
               type: 'Control',
-              label: 'Instructions',
-              scope: '#/properties/instructions'
+              label: 'Tag',
+              scope: '#/properties/tag'
             }
           ]
         }
@@ -99,7 +102,8 @@ const uischema = {
 const NewStudy: React.FC = () => {
   const initialData = {
     name: '',
-    description: ''
+    description: '',
+    instructions: ''
   };
 
   const [data, setData] = useState(initialData);

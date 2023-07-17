@@ -30,7 +30,8 @@ const DropdownComponent: React.FC<LinksProps> = ({ links }: LinksProps) => {
               <p key={sublink.title}>
                 <Link
                   sx={{
-                    fontSize: '16px'
+                    fontSize: '16px',
+                    fontWeight: 'regular'
                   }}
                   underline={'none'}
                   href={`/${sublink.link}`}
