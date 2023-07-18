@@ -38,13 +38,15 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
   theme.typography.body1 = {
     fontFamily: 'BlinkMacSystemFont',
     fontWeight: 'bold',
-    fontSize: '18px'
+    fontSize: '18px',
+    textAlign: 'left'
   };
 
   theme.typography.body2 = {
     fontFamily: 'BlinkMacSystemFont',
     fontWeight: 'bold',
-    fontSize: '15px'
+    fontSize: '15px',
+    textAlign: 'left'
   };
 
   return (
