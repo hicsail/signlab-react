@@ -1,7 +1,9 @@
 import { Container, Typography, Box, Stack, Button } from '@mui/material';
 import placeholder from './placeholder.png';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
-const ContributePage = () => {
+const ContributePage: React.FC = () => {
   const initialData = {
     image: placeholder,
     name: 'Study 12',
@@ -9,6 +11,15 @@ const ContributePage = () => {
     instructions: 'Analyze common verb conjugations and recognize a pattern',
     complete: false
   };
+  const navigate = useNavigate();
+
+  const handleSubmit = () => {
+    //submit logic
+    //redirect to next page
+
+    navigate('/tagging');
+  };
+
   return (
     <Container sx={{ left: '5%', width: '90%', top: '100px', position: 'absolute' }}>
       <Typography sx={{ left: '5%', position: 'absolute' }} variant="h5">
@@ -35,7 +46,7 @@ const ContributePage = () => {
               Training Complete! Reach out to your study administrator to get access to tagging
             </Typography>
           ) : (
-            <Button variant="outlined" sx={{ width: '40%', color: 'black' }}>
+            <Button variant="outlined" sx={{ width: '40%', color: 'black' }} onClick={handleSubmit}>
               Enter tagging
             </Button>
           )}
