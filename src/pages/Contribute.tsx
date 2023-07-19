@@ -5,68 +5,74 @@ import { useNavigate } from 'react-router-dom';
 const schema = {
   type: 'object',
   properties: {
-    users: {
-      type: 'array',
-      items: {
-        type: 'object',
-        title: 'Users',
-        properties: {
-          firstname: {
-            type: 'string'
-          },
-          lastname: {
-            type: 'string'
-          },
-          email: {
-            type: 'string',
-            format: 'email'
-          },
-          age: {
-            type: 'number',
-            minimum: 0
-          }
-        },
-        required: ['firstname']
-      }
+    name: {
+      type: 'string',
+      default: 'foo'
+    },
+    name_noDefault: {
+      type: 'string'
+    },
+    description: {
+      type: 'string',
+      default: 'bar'
+    },
+    done: {
+      type: 'boolean',
+      default: false
+    },
+    rating: {
+      type: 'integer',
+      default: 5
+    },
+    cost: {
+      type: 'number',
+      default: 5.5
+    },
+    dueDate: {
+      type: 'string',
+      format: 'date',
+      default: '2019-04-01'
     }
-  }
+  },
+  required: ['name', 'name_noDefault']
 };
 
 const uischema = {
-  type: 'ListWithDetail',
-  scope: '#/properties/users',
-  options: {
-    detail: {
-      type: 'VerticalLayout',
-      elements: [
-        {
-          type: 'HorizontalLayout',
-          elements: [
-            {
-              type: 'Control',
-              scope: '#/properties/firstname',
-              label: 'First Name'
-            },
-            {
-              type: 'Control',
-              scope: '#/properties/lastname',
-              label: 'Last Name'
-            }
-          ]
-        },
-        {
-          type: 'Control',
-          scope: '#/properties/age',
-          label: 'Age'
-        },
-        {
-          type: 'Control',
-          scope: '#/properties/email',
-          label: 'Email'
-        }
-      ]
+  type: 'VerticalLayout',
+  elements: [
+    {
+      type: 'Control',
+      scope: '#/properties/name'
+    },
+    {
+      type: 'Control',
+      scope: '#/properties/name_noDefault'
+    },
+    {
+      type: 'Control',
+      label: false,
+      scope: '#/properties/done'
+    },
+    {
+      type: 'Control',
+      scope: '#/properties/description',
+      options: {
+        multi: true
+      }
+    },
+    {
+      type: 'Control',
+      scope: '#/properties/rating'
+    },
+    {
+      type: 'Control',
+      scope: '#/properties/cost'
+    },
+    {
+      type: 'Control',
+      scope: '#/properties/dueDate'
     }
-  }
+  ]
 };
 
 const ContributePage: React.FC = () => {
@@ -82,7 +88,6 @@ const ContributePage: React.FC = () => {
   const handleSubmit = () => {
     //submit logic
     //redirect to next page
-
     navigate('/tagging', { state: { schema: schema, uischema: uischema } });
   };
 
