@@ -3,7 +3,6 @@ import { Button, Container } from '@mui/material';
 import { useState } from 'react';
 import { materialRenderers, materialCells } from '@jsonforms/material-renderers';
 import { JsonForms } from '@jsonforms/react';
-import { useProject } from '../hooks/useProject';
 
 const schema = {
   type: 'object',
@@ -45,7 +44,6 @@ const uischema = {
 
 const NewProject: React.FC = () => {
   const [error, setError] = useState(true);
-  const { addProject } = useProject();
   const navigate = useNavigate();
 
   const initialData = {
@@ -68,7 +66,6 @@ const NewProject: React.FC = () => {
       return;
     } else {
       //submit logic
-      addProject({ name: data.name, description: data.description });
       //redirect to next page
       setError(false);
       navigate('/successpage');

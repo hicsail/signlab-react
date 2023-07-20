@@ -16,6 +16,12 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
       },
       divider: '#97948b'
     },
+    typography: {
+      button: {
+        textTransform: 'none',
+        fontFamily: 'BlinkMacSystemFont'
+      }
+    },
     components: {
       MuiLink: {
         defaultProps: {

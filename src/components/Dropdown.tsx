@@ -1,7 +1,9 @@
-import { Accordion, Link } from '@mui/material';
+import { Accordion, Button, Link, Typography } from '@mui/material';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useContext } from 'react';
+import { SampleContext } from '../context/SampleContext';
 
 interface SubLink {
   title: string;
@@ -17,7 +19,13 @@ interface LinksProps {
   links: Link[];
 }
 
+/*const { project, study } = useContext(SampleContext); */
+
 const DropdownComponent: React.FC<LinksProps> = ({ links }: LinksProps) => {
+  /* const handleClick = (e: any) => {
+    setStudy(e.target.value);
+  }; */
+
   return (
     <div>
       {links?.map((item: Link) => (
@@ -28,17 +36,15 @@ const DropdownComponent: React.FC<LinksProps> = ({ links }: LinksProps) => {
           <AccordionDetails key={item.name}>
             {item.sublinks?.map((sublink: SubLink) => (
               <p key={sublink.title}>
-                <Link
+                <Button
                   sx={{
-                    fontSize: '16px',
-                    fontWeight: 'regular'
+                    fontSize: '15px',
+                    color: 'black'
                   }}
-                  underline={'none'}
-                  href={`/${sublink.link}`}
                   key={sublink.title}
                 >
                   {sublink.title}
-                </Link>
+                </Button>
               </p>
             ))}
           </AccordionDetails>
