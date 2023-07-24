@@ -7,26 +7,23 @@ import { useState } from 'react';
 const TagView = () => {
   const { state } = useLocation();
   console.log(state);
-  const [initialData, setData] = useState([
-    {
-      name: '',
-      name_noDefault: '',
-      description: '',
-      done: true,
-      rating: 0,
-      cost: 3.14,
-      dueDate: '2019-05-01'
-    }
-  ]);
+  const [initialData, setData] = useState({
+    name: '',
+    name_noDefault: '',
+    description: '',
+    done: true,
+    rating: 0,
+    cost: 3.14,
+    dueDate: '2019-05-01'
+  });
 
   const navigate = useNavigate();
 
   const handleNext = () => {
     //first save tagged data by sending it to backend
     //then tag the next entry
-    let newArray = initialData.slice();
-    newArray.push({ name: '', name_noDefault: '', description: '', done: false, rating: 0, cost: 0, dueDate: '2019-05-01' });
-    setData(newArray);
+
+    setData({ name: '', name_noDefault: '', description: '', done: false, rating: 0, cost: 0, dueDate: '2023-07-24' });
   };
 
   const handleClick = (route: string) => {
