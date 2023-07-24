@@ -1,9 +1,7 @@
-import { Accordion, Button, Link, Typography } from '@mui/material';
+import { Accordion, Button, Link } from '@mui/material';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useContext } from 'react';
-import { SampleContext } from '../context/SampleContext';
 
 interface SubLink {
   title: string;
