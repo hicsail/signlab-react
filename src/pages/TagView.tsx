@@ -2,20 +2,32 @@ import { JsonForms } from '@jsonforms/react';
 import { materialRenderers, materialCells } from '@jsonforms/material-renderers';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Box, Button, Container } from '@mui/material';
+import { useState } from 'react';
 
 const TagView = () => {
   const { state } = useLocation();
   console.log(state);
-  const initialData = {
-    name: '',
-    name_noDefault: '',
-    description: '',
-    done: true,
-    rating: 1,
-    cost: 3.14,
-    dueDate: '2019-05-01'
-  };
+  const [initialData, setData] = useState([
+    {
+      name: '',
+      name_noDefault: '',
+      description: '',
+      done: true,
+      rating: 0,
+      cost: 3.14,
+      dueDate: '2019-05-01'
+    }
+  ]);
+
   const navigate = useNavigate();
+
+  const handleNext = () => {
+    //first save tagged data by sending it to backend
+    //then tag the next entry
+    let newArray = initialData.slice();
+    newArray.push({ name: '', name_noDefault: '', description: '', done: false, rating: 0, cost: 0, dueDate: '2019-05-01' });
+    setData(newArray);
+  };
 
   const handleClick = (route: string) => {
     navigate('/' + route);
@@ -30,7 +42,7 @@ const TagView = () => {
             <Button variant="outlined" sx={{ margin: '10px' }}>
               Back
             </Button>
-            <Button variant="outlined" sx={{ margin: '10px' }}>
+            <Button variant="outlined" sx={{ margin: '10px' }} onClick={handleNext}>
               Next
             </Button>
           </Box>

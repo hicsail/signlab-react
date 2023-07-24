@@ -42,6 +42,7 @@ const DropdownComponent: React.FC<LinksProps> = ({ links }: LinksProps) => {
                     color: 'black'
                   }}
                   key={sublink.title}
+                  href={`/${sublink.link}`}
                 >
                   {sublink.title}
                 </Button>
