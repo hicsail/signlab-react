@@ -27,24 +27,24 @@ const ControlComponent: React.FC<Table> = ({ tableRows }: Table) => {
   };
 
   const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 55 },
+    { field: 'id', headerName: 'ID', width: 75 },
     {
       field: 'name',
       headerName: 'Name',
-      width: 180,
+      width: 200,
       editable: true
     },
     {
       field: 'description',
       headerName: 'Description',
-      width: 450,
+      width: 470,
       editable: true
     },
     {
       field: 'delete',
       type: 'actions',
       headerName: 'Delete',
-      width: 80,
+      width: 100,
       cellClassName: 'delete',
       getActions: ({ id }) => {
         return [<GridActionsCellItem icon={<DeleteIcon />} label="Delete" onClick={handleDeleteClick(id)} />];
@@ -79,7 +79,7 @@ const ControlComponent: React.FC<Table> = ({ tableRows }: Table) => {
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 10
+              pageSize: 8
             }
           }
         }}
