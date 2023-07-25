@@ -10,6 +10,7 @@ import { NewStudy } from './pages/NewStudy';
 import { ContributePage } from './pages/Contribute';
 import { TagView } from './pages/TagView';
 import { SampleContextProvider } from './context/SampleContext';
+import { StudyControl } from './pages/StudyControl';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path={'/'} element={<HomePage />} />
             <Route path={'/newproject'} element={<NewProject />} />
             <Route path={'/newstudy'} element={<NewStudy />} />
+            <Route path={'/studycontrol'} element={<StudyControl />} />
             <Route path={'/projectcontrol'} element={<ProjectControl />} />
             <Route path={'/successpage'} element={<SuccessPage />} />
             <Route path={'/contribute'} element={<ContributePage />} />
