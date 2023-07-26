@@ -1,6 +1,8 @@
 import { Box, Container } from '@mui/material';
 import { ControlComponent } from '../components/ControlComponent';
 
+// currently hardcoded values, but eventully
+// there will be a fetching function that retrieves project information
 const rows = [
   {
     id: 1,
@@ -40,7 +42,7 @@ const StudyControl: React.FC = () => {
   return (
     <Container sx={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContext: 'space-between' }}>
       <h3 style={{ top: '10%', paddingBottom: '10px' }}>Study Control</h3>
-      <Box sx={{}}>
+      <Box sx={{ position: '-webkit-sticky' }}>
         <ControlComponent tableRows={rows} />
       </Box>
     </Container>
