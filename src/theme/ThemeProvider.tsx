@@ -9,12 +9,12 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
   const theme = createTheme({
     palette: {
       background: {
-        paper: '#fef8f8'
+        paper: '#c10b0b'
       },
       text: {
-        primary: '#g123a1'
+        primary: '#000000'
       },
-      divider: '#97948b'
+      divider: '#ffffff'
     },
     typography: {
       button: {

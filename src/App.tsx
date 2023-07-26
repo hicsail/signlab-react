@@ -11,6 +11,7 @@ import { ContributePage } from './pages/Contribute';
 import { TagView } from './pages/TagView';
 import { SampleContextProvider } from './context/SampleContext';
 import { StudyControl } from './pages/StudyControl';
+import { ProjectAccess } from './pages/ProjectAccess';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path={'/newstudy'} element={<NewStudy />} />
             <Route path={'/studycontrol'} element={<StudyControl />} />
             <Route path={'/projectcontrol'} element={<ProjectControl />} />
+            <Route path={'/projectaccess'} element={<ProjectAccess />} />
             <Route path={'/successpage'} element={<SuccessPage />} />
             <Route path={'/contribute'} element={<ContributePage />} />
             <Route path={'/tagging'} element={<TagView />} />
