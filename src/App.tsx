@@ -3,15 +3,17 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { HomePage } from './pages/Home';
 import { ThemeProvider } from './theme/ThemeProvider';
 import { NavBar } from './components/NavigationBar';
-import { NewProject } from './pages/NewProject';
-import { ProjectControl } from './pages/ProjectControl';
+import { NewProject } from './pages/projects/NewProject';
+import { ProjectControl } from './pages/projects/ProjectControl';
 import { SuccessPage } from './pages/SuccessPage';
-import { NewStudy } from './pages/NewStudy';
-import { ContributePage } from './pages/Contribute';
-import { TagView } from './pages/TagView';
+import { NewStudy } from './pages/studies/NewStudy';
+import { ContributePage } from './pages/contribute/Contribute';
+import { TagView } from './components/TagView';
 import { SampleContextProvider } from './context/SampleContext';
-import { StudyControl } from './pages/StudyControl';
-import { ProjectAccess } from './pages/ProjectAccess';
+import { StudyControl } from './pages/studies/StudyControl';
+import { ProjectAccess } from './pages/datasets/ProjectAccess';
+import { ProjectUserPermissions } from './pages/projects/ProjectUserPermissions';
+import { StudyUserPermissions } from './pages/studies/UserPermissions';
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
             <Route path={'/studycontrol'} element={<StudyControl />} />
             <Route path={'/projectcontrol'} element={<ProjectControl />} />
             <Route path={'/projectaccess'} element={<ProjectAccess />} />
+            <Route path={'/userpermissions'} element={<ProjectUserPermissions />} />
+            <Route path={'/studyuserpermissions'} element={<StudyUserPermissions />} />
             <Route path={'/successpage'} element={<SuccessPage />} />
             <Route path={'/contribute'} element={<ContributePage />} />
             <Route path={'/tagging'} element={<TagView />} />

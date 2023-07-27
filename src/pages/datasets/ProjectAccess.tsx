@@ -2,8 +2,7 @@ import { Accordion, Box, Typography } from '@mui/material';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { ControlComponent } from '../components/ControlComponent';
-import { DatasetAccessComponent } from '../components/DatasetAccessComponent';
+import { DatasetAccessComponent } from '../../components/DatasetAccessComponent';
 
 const rows = [
   {

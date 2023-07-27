@@ -1,5 +1,5 @@
 import { Box, Container } from '@mui/material';
-import { ControlComponent } from '../components/ControlComponent';
+import { ControlComponent } from '../../components/ControlComponent';
 
 // currently hardcoded values, but eventully
 // there will be a fetching function that retrieves project information

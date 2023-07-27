@@ -1,30 +1,19 @@
-import { Box, Checkbox } from '@mui/material';
+import { Box, Switch } from '@mui/material';
 import useEnhancedEffect from '@mui/material/utils/useEnhancedEffect';
 import { DataGrid, GridColDef, GridRenderCellParams, useGridApiContext } from '@mui/x-data-grid';
 import { GridRowModesModel } from '@mui/x-data-grid-pro';
 import { useRef, useState } from 'react';
 
-interface Row {
-  id: number;
-  name: string;
-  description: string;
-  access: boolean;
+function renderSwitch(params: GridRenderCellParams<any, boolean>) {
+  return <Switch defaultChecked value={params.value} />;
 }
 
-interface Table {
-  tableRows: Row[];
-}
-
-function renderCheckbox(params: GridRenderCellParams<any, boolean>) {
-  return <Checkbox value={params.value} />;
-}
-
-function CheckboxEditInputCell(props: GridRenderCellParams<any, boolean>) {
+function SwitchEditInputCell(props: GridRenderCellParams<any, boolean>) {
   const { id, value, field, hasFocus } = props;
   const apiRef = useGridApiContext();
   const ref = useRef<HTMLElement>();
 
-  const handleChange = (event: React.SyntheticEvent, newValue: boolean | false) => {
+  const handleChange = (newValue: boolean | false) => {
     apiRef.current.setEditCellValue({ id, field, value: newValue });
   };
 
@@ -37,16 +26,46 @@ function CheckboxEditInputCell(props: GridRenderCellParams<any, boolean>) {
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', pr: 2 }}>
-      <Checkbox name="checkbox" value={value} onChange={handleChange} />
+      <Switch disabled defaultChecked value={value} onChange={() => handleChange} />
     </Box>
   );
 }
 
-const renderCheckboxEditInputCell: GridColDef['renderCell'] = (params) => {
-  return <CheckboxEditInputCell {...params} />;
+const renderSwitchEditInputCell: GridColDef['renderCell'] = (params) => {
+  return <SwitchEditInputCell {...params} />;
 };
 
-const DatasetAccessComponent: React.FC<Table> = ({ tableRows }: Table) => {
+const tableRows = [
+  {
+    id: 1,
+    name: 'Professor Flour',
+    username: 'flour123',
+    email: 'bread@bread.com',
+    access: true
+  },
+  {
+    id: 2,
+    name: 'Elon',
+    username: 'elon1012',
+    email: 'elonmusk@hotmail.com',
+    access: true
+  },
+  {
+    id: 3,
+    name: 'Chrishell Stausse',
+    username: 'chrishell123',
+    email: 'chrishell@gmail.com',
+    access: true
+  },
+  {
+    id: 4,
+    name: 'Project Charles',
+    description: 'Investment, wealth and alternative managers, asset owners and insurers in over 30 countries rely on Charles River IMS to manage USD $48 Trillion in assets.',
+    access: false
+  }
+];
+
+const ProjectUserPermissions: React.FC = () => {
   const [rows] = useState(tableRows);
   const [rowModesModel, setRowModesModel] = useState<GridRowModesModel>({});
 
@@ -55,25 +74,31 @@ const DatasetAccessComponent: React.FC<Table> = ({ tableRows }: Table) => {
   };
 
   const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 75 },
+    { field: 'id', headerName: 'ID', width: 55 },
     {
       field: 'name',
       headerName: 'Name',
-      width: 200,
+      width: 190,
       editable: true
     },
     {
-      field: 'description',
-      headerName: 'Description',
-      width: 450,
+      field: 'username',
+      headerName: 'Username',
+      width: 190,
       editable: true
     },
     {
-      field: 'checkbox',
+      field: 'email',
+      headerName: 'Email',
+      width: 280,
+      editable: true
+    },
+    {
+      field: 'switch',
       type: 'boolean',
-      headerName: 'Checkbox',
-      renderCell: renderCheckbox,
-      renderEditCell: renderCheckboxEditInputCell,
+      headerName: 'Switch',
+      renderCell: renderSwitch,
+      renderEditCell: renderSwitchEditInputCell,
       editable: true,
       width: 90
     }
@@ -85,7 +110,10 @@ const DatasetAccessComponent: React.FC<Table> = ({ tableRows }: Table) => {
         sx={{
           '& .MuiDataGrid-cellContent': {
             whiteSpace: 'normal',
-            lineHeight: 'normal'
+            lineHeight: 'normal',
+            fontSize: '15px',
+            fontWeight: 'normal',
+            fontFamily: 'BlinkMacSystemFont'
           },
           '& .MuiDataGrid-cell': {
             maxHeight: 'none !important',
@@ -94,8 +122,8 @@ const DatasetAccessComponent: React.FC<Table> = ({ tableRows }: Table) => {
             lineHeight: '16px !important',
             display: 'flex !important',
             alignItems: 'center',
-            paddingTop: '10px !important',
-            paddingBottom: '10px !important'
+            paddingTop: '6px !important',
+            paddingBottom: '8px !important'
           }
         }}
         getRowHeight={() => 'auto'}
@@ -118,4 +146,4 @@ const DatasetAccessComponent: React.FC<Table> = ({ tableRows }: Table) => {
   );
 };
 
-export { DatasetAccessComponent };
+export { ProjectUserPermissions };

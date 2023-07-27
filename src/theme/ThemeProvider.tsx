@@ -9,7 +9,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
   const theme = createTheme({
     palette: {
       background: {
-        paper: '#c10b0b'
+        paper: '#fefefe'
       },
       text: {
         primary: '#000000'
