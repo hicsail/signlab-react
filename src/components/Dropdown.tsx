@@ -14,12 +14,13 @@ interface Link {
 }
 
 interface LinksProps {
+  source: string;
   links: Link[];
 }
 
 /*const { project, study } = useContext(SampleContext); */
 
-const DropdownComponent: React.FC<LinksProps> = ({ links }: LinksProps) => {
+const DropdownComponent: React.FC<LinksProps> = ({ source, links }: LinksProps) => {
   /* const handleClick = (e: any) => {
     setStudy(e.target.value);
   }; */
@@ -34,16 +35,28 @@ const DropdownComponent: React.FC<LinksProps> = ({ links }: LinksProps) => {
           <AccordionDetails key={item.name}>
             {item.sublinks?.map((sublink: SubLink) => (
               <p key={sublink.title}>
-                <Button
-                  sx={{
-                    fontSize: '15px',
-                    color: 'black'
-                  }}
-                  key={sublink.title}
-                  href={`/${sublink.link}`}
-                >
-                  {sublink.title}
-                </Button>
+                {source == 'env' ? (
+                  <Button
+                    sx={{
+                      fontSize: '15px',
+                      color: 'black'
+                    }}
+                    key={sublink.title}
+                  >
+                    {sublink.title}
+                  </Button>
+                ) : (
+                  <Button
+                    sx={{
+                      fontSize: '15px',
+                      color: 'black'
+                    }}
+                    key={sublink.title}
+                    href={`/${sublink.link}`}
+                  >
+                    {sublink.title}
+                  </Button>
+                )}
               </p>
             ))}
           </AccordionDetails>

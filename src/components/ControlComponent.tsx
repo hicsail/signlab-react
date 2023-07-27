@@ -27,7 +27,7 @@ const ControlComponent: React.FC<Table> = ({ tableRows }: Table) => {
   };
 
   const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 75 },
+    { field: 'id', headerName: 'ID', width: 55 },
     {
       field: 'name',
       headerName: 'Name',

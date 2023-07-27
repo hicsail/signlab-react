@@ -42,7 +42,7 @@ const Navigation: React.FC = () => {
 
   return (
     <Box>
-      <DropdownComponent links={names} />
+      <DropdownComponent links={names} source={'nav'} />
     </Box>
   );
 };

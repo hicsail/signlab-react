@@ -25,7 +25,7 @@ const Environment: React.FC = () => {
 
   return (
     <Box>
-      <DropdownComponent links={items} />
+      <DropdownComponent links={items} source={'env'} />
     </Box>
   );
 };
