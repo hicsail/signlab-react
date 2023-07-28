@@ -24,7 +24,7 @@ function CheckboxEditInputCell(props: GridRenderCellParams<any, boolean>) {
   const apiRef = useGridApiContext();
   const ref = useRef<HTMLElement>();
 
-  const handleChange = (event: React.SyntheticEvent, newValue: boolean | false) => {
+  const handleChange = (newValue: boolean | false) => {
     apiRef.current.setEditCellValue({ id, field, value: newValue });
   };
 
@@ -37,7 +37,7 @@ function CheckboxEditInputCell(props: GridRenderCellParams<any, boolean>) {
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', pr: 2 }}>
-      <Checkbox name="checkbox" value={value} onChange={handleChange} />
+      <Checkbox name="checkbox" value={value} onChange={() => handleChange} />
     </Box>
   );
 }
