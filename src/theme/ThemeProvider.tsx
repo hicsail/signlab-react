@@ -33,6 +33,14 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
     }
   });
 
+  theme.typography.h3 = {
+    color: 'black',
+    fontFamily: 'BlinkMacSystemFont',
+    padding: '14px',
+    fontWeight: 'normal',
+    fontSize: '40px'
+  };
+
   theme.typography.h5 = {
     color: 'black',
     fontFamily: 'BlinkMacSystemFont',

@@ -18,10 +18,10 @@ function NavBar() {
           ASL-LEX SignLab
         </Typography>
         <Divider orientation="vertical" flexItem />
-        <Link sx={{ fontSize: '16px', paddingLeft: '1rem', color: 'white' }} underline="none">
+        <Link sx={{ fontSize: '16px', paddingLeft: '1rem', color: 'white' }} underline="none" href={`/loginpage`}>
           Login
         </Link>
-        <Link sx={{ fontSize: '16px', paddingLeft: '1rem', color: 'white' }} underline="none">
+        <Link sx={{ fontSize: '16px', paddingLeft: '1rem', color: 'white' }} underline="none" href={`/signuppage`}>
           Sign Up
         </Link>
       </Toolbar>

@@ -15,6 +15,7 @@ import { ProjectAccess } from './pages/datasets/ProjectAccess';
 import { ProjectUserPermissions } from './pages/projects/ProjectUserPermissions';
 import { StudyUserPermissions } from './pages/studies/UserPermissions';
 import { DownloadTags } from './pages/studies/DownloadTags';
+import { LoginPage } from './pages/Loginpage';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <NavBar />
           <Routes>
             <Route path={'/'} element={<HomePage />} />
+            <Route path={'/loginpage'} element={<LoginPage />} />
             <Route path={'/newproject'} element={<NewProject />} />
             <Route path={'/projectcontrol'} element={<ProjectControl />} />
             <Route path={'/projectaccess'} element={<ProjectAccess />} />
