@@ -14,6 +14,7 @@ import { StudyControl } from './pages/studies/StudyControl';
 import { ProjectAccess } from './pages/datasets/ProjectAccess';
 import { ProjectUserPermissions } from './pages/projects/ProjectUserPermissions';
 import { StudyUserPermissions } from './pages/studies/UserPermissions';
+import { DownloadTags } from './pages/studies/DownloadTags';
 
 function App() {
   return (
@@ -24,12 +25,13 @@ function App() {
           <Routes>
             <Route path={'/'} element={<HomePage />} />
             <Route path={'/newproject'} element={<NewProject />} />
-            <Route path={'/newstudy'} element={<NewStudy />} />
-            <Route path={'/studycontrol'} element={<StudyControl />} />
             <Route path={'/projectcontrol'} element={<ProjectControl />} />
             <Route path={'/projectaccess'} element={<ProjectAccess />} />
             <Route path={'/userpermissions'} element={<ProjectUserPermissions />} />
+            <Route path={'/newstudy'} element={<NewStudy />} />
+            <Route path={'/studycontrol'} element={<StudyControl />} />
             <Route path={'/studyuserpermissions'} element={<StudyUserPermissions />} />
+            <Route path={'/downloadtags'} element={<DownloadTags />} />
             <Route path={'/successpage'} element={<SuccessPage />} />
             <Route path={'/contribute'} element={<ContributePage />} />
             <Route path={'/tagging'} element={<TagView />} />

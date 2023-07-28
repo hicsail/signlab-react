@@ -14,7 +14,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
       text: {
         primary: '#000000'
       },
-      divider: '#ffffff'
+      divider: '#a1a1a1'
     },
     typography: {
       button: {

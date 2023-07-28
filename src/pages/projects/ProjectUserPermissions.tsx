@@ -106,6 +106,7 @@ const ProjectUserPermissions: React.FC = () => {
 
   return (
     <Box sx={{ height: 800, width: '100%' }}>
+      <h3 style={{ top: '10%', paddingBottom: '10px' }}>User Permissions</h3>
       <DataGrid
         sx={{
           '& .MuiDataGrid-cellContent': {

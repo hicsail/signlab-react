@@ -1,6 +1,6 @@
 import { Box, Switch } from '@mui/material';
 import useEnhancedEffect from '@mui/material/utils/useEnhancedEffect';
-import { DataGrid, GridColDef, GridRenderCellParams, useGridApiContext } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridColumnMenu, GridColumnMenuProps, GridRenderCellParams, useGridApiContext } from '@mui/x-data-grid';
 import { GridRowModesModel } from '@mui/x-data-grid-pro';
 import { useRef, useState } from 'react';
 
@@ -38,6 +38,26 @@ function SwitchEditInputCell(props: GridRenderCellParams<any, boolean>) {
     </Box>
   );
 }
+
+function CustomColumnMenu(props: GridColumnMenuProps) {
+  return (
+    <GridColumnMenu
+      {...props}
+      slots={{
+        //Hide `columnMenuColumnsItem`
+        columnMenuColumnsItem: null
+      }}
+    />
+  );
+}
+
+const renderAdminSwitchEditInputCell: GridColDef['renderCell'] = (params) => {
+  return <SwitchEditInputCell {...params} />;
+};
+
+const renderVisibleSwitchEditInputCell: GridColDef['renderCell'] = (params) => {
+  return <SwitchEditInputCell {...params} />;
+};
 
 const renderSwitchEditInputCell: GridColDef['renderCell'] = (params) => {
   return <SwitchEditInputCell {...params} />;
@@ -83,7 +103,7 @@ const StudyUserPermissions: React.FC = () => {
   };
 
   const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 55 },
+    { field: 'id', headerName: 'ID', width: 45 },
     {
       field: 'name',
       headerName: 'Name',
@@ -99,26 +119,26 @@ const StudyUserPermissions: React.FC = () => {
     {
       field: 'email',
       headerName: 'Email',
-      width: 180,
+      width: 200,
       editable: true
     },
     {
-      field: 'switch',
+      field: 'adminSwitch',
       type: 'boolean',
       headerName: 'Study Admin',
       renderCell: renderAdminSwitch,
-      renderEditCell: renderSwitchEditInputCell,
+      renderEditCell: renderAdminSwitchEditInputCell,
       editable: true,
-      width: 90
+      width: 120
     },
     {
-      field: 'switch',
+      field: 'visibleSwitch',
       type: 'boolean',
       headerName: 'Study Visible',
       renderCell: renderVisibleSwitch,
-      renderEditCell: renderSwitchEditInputCell,
+      renderEditCell: renderVisibleSwitchEditInputCell,
       editable: true,
-      width: 90
+      width: 120
     },
     {
       field: 'switch',
@@ -127,32 +147,27 @@ const StudyUserPermissions: React.FC = () => {
       renderCell: renderSwitch,
       renderEditCell: renderSwitchEditInputCell,
       editable: true,
-      width: 90
+      width: 120
     }
   ];
 
   return (
     <Box sx={{ height: 800, width: '100%' }}>
+      <h3 style={{ top: '10%', paddingBottom: '10px' }}>User Permissions</h3>
       <DataGrid
         sx={{
           '& .MuiDataGrid-cellContent': {
-            whiteSpace: 'normal',
-            lineHeight: 'normal',
             fontSize: '15px',
             fontWeight: 'normal',
             fontFamily: 'BlinkMacSystemFont'
           },
           '& .MuiDataGrid-cell': {
-            maxHeight: 'none !important',
             overflow: 'auto',
-            whiteSpce: 'initial !important',
-            lineHeight: '16px !important',
-            display: 'flex !important',
-            alignItems: 'center',
-            paddingTop: '6px !important',
+            paddingTop: '8px !important',
             paddingBottom: '8px !important'
           }
         }}
+        slots={{ columnMenu: CustomColumnMenu }}
         getRowHeight={() => 'auto'}
         rows={rows}
         columns={columns}
@@ -161,7 +176,7 @@ const StudyUserPermissions: React.FC = () => {
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 8
+              pageSize: 5
             }
           }
         }}
