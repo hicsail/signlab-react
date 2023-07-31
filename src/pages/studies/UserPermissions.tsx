@@ -1,42 +1,22 @@
 import { Box, Switch } from '@mui/material';
-import useEnhancedEffect from '@mui/material/utils/useEnhancedEffect';
 import { DataGrid, GridColDef, GridColumnMenu, GridColumnMenuProps, GridRenderCellParams, useGridApiContext } from '@mui/x-data-grid';
 import { GridRowModesModel } from '@mui/x-data-grid-pro';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 function SwitchEditInputCell(props: GridRenderCellParams<any, boolean>) {
-  const { id, value, field, hasFocus } = props;
+  const { id, value, field } = props;
+  const [check, setCheck] = useState(value);
   const apiRef = useGridApiContext();
-  const ref = useRef<HTMLElement>();
+
+  console.log('haha');
 
   const handleChange = (newValue: boolean | false) => {
+    console.log('check');
+    setCheck(newValue);
     apiRef.current.setEditCellValue({ id, field, value: newValue });
   };
 
-  useEnhancedEffect(() => {
-    if (hasFocus && ref.current) {
-      const input = ref.current.querySelector<HTMLInputElement>(`input[value="${value}"]`);
-      input?.focus();
-    }
-  }, [hasFocus, value]);
-
-  return (
-    <Box sx={{ display: 'flex', alignItems: 'center', pr: 2 }}>
-      <Switch disabled defaultChecked value={value} onChange={() => handleChange} />
-    </Box>
-  );
-}
-
-function CustomColumnMenu(props: GridColumnMenuProps) {
-  return (
-    <GridColumnMenu
-      {...props}
-      slots={{
-        //Hide `columnMenuColumnsItem`
-        columnMenuColumnsItem: null
-      }}
-    />
-  );
+  return <Switch checked={check} onChange={() => handleChange} />;
 }
 
 const renderAdminSwitchEditInputCell: GridColDef['renderCell'] = (params) => {
@@ -66,21 +46,24 @@ const tableRows = [
     name: 'Heather',
     username: 'Heather82',
     email: 'heather@hotmail.com',
-    access: true
+    adminSwitch: false,
+    visibleSwitch: true,
+    switch: true
   },
   {
     id: 3,
     name: 'Kamila',
     username: 'kamila0509',
-    email: 'kamila@gmail.com',
-    access: true
+    email: 'kamila@gmail.com'
   },
   {
     id: 4,
     name: 'Mr Ronaldinho',
     username: 'ron12345',
     email: 'ron@bu.edu',
-    access: false
+    adminSwitch: true,
+    visibleSwitch: false,
+    switch: true
   }
 ];
 
@@ -116,7 +99,7 @@ const StudyUserPermissions: React.FC = () => {
       field: 'adminSwitch',
       type: 'boolean',
       headerName: 'Study Admin',
-      renderCell: (params) => <Switch value={params.value} />,
+      renderCell: (params) => <Switch checked={params.value} />,
       renderEditCell: renderAdminSwitchEditInputCell,
       editable: true,
       width: 120
@@ -125,7 +108,7 @@ const StudyUserPermissions: React.FC = () => {
       field: 'visibleSwitch',
       type: 'boolean',
       headerName: 'Study Visible',
-      renderCell: (params) => <Switch value={params.value} />,
+      renderCell: (params) => <Switch checked={params.value} />,
       renderEditCell: renderVisibleSwitchEditInputCell,
       editable: true,
       width: 120
@@ -134,7 +117,7 @@ const StudyUserPermissions: React.FC = () => {
       field: 'switch',
       type: 'boolean',
       headerName: 'Contribute',
-      renderCell: (params) => <Switch value={params.value} />,
+      renderCell: (params) => <Switch checked={params.value} />,
       renderEditCell: renderSwitchEditInputCell,
       editable: true,
       width: 120
@@ -157,7 +140,6 @@ const StudyUserPermissions: React.FC = () => {
             paddingBottom: '8px !important'
           }
         }}
-        slots={{ columnMenu: CustomColumnMenu }}
         getRowHeight={() => 'auto'}
         rows={rows}
         columns={columns}
