@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { DropdownComponent } from './Dropdown';
-import { SampleContext } from '../context/SampleContext';
+import { SampleContext } from '../context/EnvironmentContext';
 import { useContext, useEffect, useState } from 'react';
 
 const Navigation: React.FC = () => {

@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { DropdownComponent } from './Dropdown';
 import { useContext } from 'react';
-import { SampleContext } from '../context/SampleContext';
+import { SampleContext } from '../context/EnvironmentContext';
 
 const Environment: React.FC = () => {
   const { study, project } = useContext(SampleContext);

@@ -9,7 +9,7 @@ import { SuccessPage } from './pages/SuccessPage';
 import { NewStudy } from './pages/studies/NewStudy';
 import { ContributePage } from './pages/contribute/Contribute';
 import { TagView } from './components/TagView';
-import { SampleContextProvider } from './context/SampleContext';
+import { EnvironmentContextProvider } from './context/EnvironmentContext';
 import { StudyControl } from './pages/studies/StudyControl';
 import { ProjectAccess } from './pages/datasets/ProjectAccess';
 import { ProjectUserPermissions } from './pages/projects/ProjectUserPermissions';
@@ -21,7 +21,7 @@ function App() {
   return (
     <ThemeProvider>
       <BrowserRouter>
-        <SampleContextProvider>
+        <EnvironmentContextProvider>
           <NavBar />
           <Routes>
             <Route path={'/'} element={<HomePage />} />
@@ -38,7 +38,7 @@ function App() {
             <Route path={'/contribute'} element={<ContributePage />} />
             <Route path={'/tagging'} element={<TagView />} />
           </Routes>
-        </SampleContextProvider>
+        </EnvironmentContextProvider>
       </BrowserRouter>
     </ThemeProvider>
   );
