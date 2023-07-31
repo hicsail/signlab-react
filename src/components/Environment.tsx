@@ -1,21 +1,21 @@
 import { Box } from '@mui/material';
 import { DropdownComponent } from './Dropdown';
 import { useContext } from 'react';
-import { SampleContext } from '../context/EnvironmentContext';
+import { EnvironmentContext } from '../context/EnvironmentContext';
 
 const Environment: React.FC = () => {
-  const { study, project } = useContext(SampleContext);
+  const { study, project } = useContext(EnvironmentContext);
 
   const items = [
     {
-      name: 'Project: ' + project,
+      name: `Project: ${project}`,
       sublinks: [
         { title: 'Project name 1', link: 'pn1' },
         { title: 'Project name 2', link: 'pn2' }
       ]
     },
     {
-      name: 'Study: ' + study,
+      name: `Study: ${study}`,
       sublinks: [
         { title: 'Study name 1', link: 'sn1' },
         { title: 'Study name 2', link: 'sn2' }

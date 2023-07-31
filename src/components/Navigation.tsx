@@ -1,10 +1,10 @@
 import { Box } from '@mui/material';
 import { DropdownComponent } from './Dropdown';
-import { SampleContext } from '../context/EnvironmentContext';
+import { EnvironmentContext } from '../context/EnvironmentContext';
 import { useContext, useEffect, useState } from 'react';
 
 const Navigation: React.FC = () => {
-  const { study } = useContext(SampleContext);
+  const { study } = useContext(EnvironmentContext);
 
   const [names, setNames] = useState([
     {
@@ -35,7 +35,7 @@ const Navigation: React.FC = () => {
   ]);
 
   useEffect(() => {
-    if (study.length > 1) {
+    if (study) {
       setNames((names) => [...names, { name: 'Contribute', sublinks: [{ title: 'Contribute to a Study', link: 'contribute' }] }]);
     }
   }, []);
