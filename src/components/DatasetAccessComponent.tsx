@@ -1,4 +1,4 @@
-import { Box, Checkbox } from '@mui/material';
+import { Box, Checkbox, Switch } from '@mui/material';
 import useEnhancedEffect from '@mui/material/utils/useEnhancedEffect';
 import { DataGrid, GridColDef, GridRenderCellParams, useGridApiContext } from '@mui/x-data-grid';
 import { GridRowModesModel } from '@mui/x-data-grid-pro';
@@ -15,11 +15,11 @@ interface Table {
   tableRows: Row[];
 }
 
-function renderCheckbox(params: GridRenderCellParams<any, boolean>) {
-  return <Checkbox value={params.value} />;
+function renderSwitch(params: GridRenderCellParams<any, boolean>) {
+  return <Switch defaultChecked value={params.value} />;
 }
 
-function CheckboxEditInputCell(props: GridRenderCellParams<any, boolean>) {
+function SwitchEditInputCell(props: GridRenderCellParams<any, boolean>) {
   const { id, value, field, hasFocus } = props;
   const apiRef = useGridApiContext();
   const ref = useRef<HTMLElement>();
@@ -37,13 +37,13 @@ function CheckboxEditInputCell(props: GridRenderCellParams<any, boolean>) {
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', pr: 2 }}>
-      <Checkbox name="checkbox" value={value} onChange={() => handleChange} />
+      <Switch disabled defaultChecked value={value} onChange={() => handleChange} />
     </Box>
   );
 }
 
-const renderCheckboxEditInputCell: GridColDef['renderCell'] = (params) => {
-  return <CheckboxEditInputCell {...params} />;
+const renderSwitchEditInputCell: GridColDef['renderCell'] = (params) => {
+  return <SwitchEditInputCell {...params} />;
 };
 
 const DatasetAccessComponent: React.FC<Table> = ({ tableRows }: Table) => {
@@ -69,33 +69,29 @@ const DatasetAccessComponent: React.FC<Table> = ({ tableRows }: Table) => {
       editable: true
     },
     {
-      field: 'checkbox',
+      field: 'switch',
       type: 'boolean',
-      headerName: 'Checkbox',
-      renderCell: renderCheckbox,
-      renderEditCell: renderCheckboxEditInputCell,
+      headerName: 'Project Access to Dataset',
+      renderCell: renderSwitch,
+      renderEditCell: renderSwitchEditInputCell,
       editable: true,
-      width: 90
+      width: 120
     }
   ];
 
   return (
-    <Box sx={{ height: 800, width: '100%' }}>
+    <Box sx={{ height: 800, width: '100%', boxShadow: '1px 9px 15px darkgrey' }}>
       <DataGrid
         sx={{
           '& .MuiDataGrid-cellContent': {
-            whiteSpace: 'normal',
-            lineHeight: 'normal'
+            fontSize: '15px',
+            fontWeight: 'normal',
+            fontFamily: 'BlinkMacSystemFont'
           },
           '& .MuiDataGrid-cell': {
-            maxHeight: 'none !important',
             overflow: 'auto',
-            whiteSpce: 'initial !important',
-            lineHeight: '16px !important',
-            display: 'flex !important',
-            alignItems: 'center',
-            paddingTop: '10px !important',
-            paddingBottom: '10px !important'
+            paddingTop: '8px !important',
+            paddingBottom: '8px !important'
           }
         }}
         getRowHeight={() => 'auto'}
