@@ -4,18 +4,6 @@ import { DataGrid, GridColDef, GridColumnMenu, GridColumnMenuProps, GridRenderCe
 import { GridRowModesModel } from '@mui/x-data-grid-pro';
 import { useRef, useState } from 'react';
 
-function renderAdminSwitch(params: GridRenderCellParams<any, boolean>) {
-  return <Switch defaultChecked value={params.value} />;
-}
-
-function renderVisibleSwitch(params: GridRenderCellParams<any, boolean>) {
-  return <Switch defaultChecked value={params.value} />;
-}
-
-function renderSwitch(params: GridRenderCellParams<any, boolean>) {
-  return <Switch defaultChecked value={params.value} />;
-}
-
 function SwitchEditInputCell(props: GridRenderCellParams<any, boolean>) {
   const { id, value, field, hasFocus } = props;
   const apiRef = useGridApiContext();
@@ -69,7 +57,9 @@ const tableRows = [
     name: 'Prof Appavoo',
     username: 'appavoo',
     email: 'appavoo@bread.com',
-    access: true
+    adminSwitch: true,
+    visibleSwitch: false,
+    switch: true
   },
   {
     id: 2,
@@ -126,7 +116,7 @@ const StudyUserPermissions: React.FC = () => {
       field: 'adminSwitch',
       type: 'boolean',
       headerName: 'Study Admin',
-      renderCell: renderAdminSwitch,
+      renderCell: (params) => <Switch value={params.value} />,
       renderEditCell: renderAdminSwitchEditInputCell,
       editable: true,
       width: 120
@@ -135,7 +125,7 @@ const StudyUserPermissions: React.FC = () => {
       field: 'visibleSwitch',
       type: 'boolean',
       headerName: 'Study Visible',
-      renderCell: renderVisibleSwitch,
+      renderCell: (params) => <Switch value={params.value} />,
       renderEditCell: renderVisibleSwitchEditInputCell,
       editable: true,
       width: 120
@@ -144,7 +134,7 @@ const StudyUserPermissions: React.FC = () => {
       field: 'switch',
       type: 'boolean',
       headerName: 'Contribute',
-      renderCell: renderSwitch,
+      renderCell: (params) => <Switch value={params.value} />,
       renderEditCell: renderSwitchEditInputCell,
       editable: true,
       width: 120

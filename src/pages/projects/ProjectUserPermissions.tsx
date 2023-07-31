@@ -4,10 +4,6 @@ import { DataGrid, GridColDef, GridRenderCellParams, useGridApiContext } from '@
 import { GridRowModesModel } from '@mui/x-data-grid-pro';
 import { useRef, useState } from 'react';
 
-function renderSwitch(params: GridRenderCellParams<any, boolean>) {
-  return <Switch defaultChecked value={params.value} />;
-}
-
 function SwitchEditInputCell(props: GridRenderCellParams<any, boolean>) {
   const { id, value, field, hasFocus } = props;
   const apiRef = useGridApiContext();
@@ -97,7 +93,7 @@ const ProjectUserPermissions: React.FC = () => {
       field: 'switch',
       type: 'boolean',
       headerName: 'Switch',
-      renderCell: renderSwitch,
+      renderCell: (params) => <Switch defaultChecked value={params.value} />,
       renderEditCell: renderSwitchEditInputCell,
       editable: true,
       width: 90
