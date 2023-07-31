@@ -1,6 +1,6 @@
 import { FormControl, Input, InputLabel, Typography } from '@mui/material';
 
-export const LoginPage = () => {
+const LoginPage = () => {
   return (
     <div style={{ margin: 10 }}>
       <Typography variant="h3" sx={{ position: 'absolute', top: '15%', width: '90%', left: '5%' }}>
@@ -17,3 +17,5 @@ export const LoginPage = () => {
     </div>
   );
 };
+
+export { LoginPage };

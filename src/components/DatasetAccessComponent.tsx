@@ -1,4 +1,4 @@
-import { Box, Checkbox, Switch } from '@mui/material';
+import { Box, Switch } from '@mui/material';
 import useEnhancedEffect from '@mui/material/utils/useEnhancedEffect';
 import { DataGrid, GridColDef, GridRenderCellParams, useGridApiContext } from '@mui/x-data-grid';
 import { GridRowModesModel } from '@mui/x-data-grid-pro';
