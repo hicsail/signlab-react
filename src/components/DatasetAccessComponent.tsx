@@ -15,10 +15,6 @@ interface Table {
   tableRows: Row[];
 }
 
-function renderSwitch(params: GridRenderCellParams<any, boolean>) {
-  return <Switch defaultChecked value={params.value} />;
-}
-
 function SwitchEditInputCell(props: GridRenderCellParams<any, boolean>) {
   const { id, value, field, hasFocus } = props;
   const apiRef = useGridApiContext();
@@ -55,7 +51,7 @@ const DatasetAccessComponent: React.FC<Table> = ({ tableRows }: Table) => {
   };
 
   const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 75 },
+    { field: 'id', headerName: 'ID', width: 55 },
     {
       field: 'name',
       headerName: 'Name',
@@ -71,11 +67,11 @@ const DatasetAccessComponent: React.FC<Table> = ({ tableRows }: Table) => {
     {
       field: 'switch',
       type: 'boolean',
-      headerName: 'Project Access to Dataset',
-      renderCell: renderSwitch,
+      headerName: 'Project Access',
+      renderCell: (params) => <Switch value={params.value} />,
       renderEditCell: renderSwitchEditInputCell,
       editable: true,
-      width: 120
+      width: 140
     }
   ];
 
