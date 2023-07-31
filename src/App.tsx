@@ -15,7 +15,7 @@ import { ProjectAccess } from './pages/datasets/ProjectAccess';
 import { ProjectUserPermissions } from './pages/projects/ProjectUserPermissions';
 import { StudyUserPermissions } from './pages/studies/UserPermissions';
 import { DownloadTags } from './pages/studies/DownloadTags';
-import { LoginPage } from './pages/Loginpage';
+import { LoginPage } from './pages/LoginPage';
 
 function App() {
   return (
