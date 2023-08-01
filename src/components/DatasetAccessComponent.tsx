@@ -15,7 +15,7 @@ interface Table {
   tableRows: Row[];
 }
 
-function SwitchEditInputCell(props: GridRenderCellParams<any, boolean>) {
+const SwitchEditInputCell: React.FC<GridRenderCellParams> = (props: GridRenderCellParams<any, boolean>) => {
   const { id, value, field, hasFocus } = props;
   const apiRef = useGridApiContext();
   const ref = useRef<HTMLElement>();
@@ -31,12 +31,8 @@ function SwitchEditInputCell(props: GridRenderCellParams<any, boolean>) {
     }
   }, [hasFocus, value]);
 
-  return (
-    <Box sx={{ display: 'flex', alignItems: 'center', pr: 2 }}>
-      <Switch disabled defaultChecked value={value} onChange={() => handleChange} />
-    </Box>
-  );
-}
+  return <Switch disabled defaultChecked value={value} onChange={() => handleChange} />;
+};
 
 const renderSwitchEditInputCell: GridColDef['renderCell'] = (params) => {
   return <SwitchEditInputCell {...params} />;
@@ -79,11 +75,6 @@ const DatasetAccessComponent: React.FC<Table> = ({ tableRows }: Table) => {
     <Box sx={{ height: 800, width: '100%', boxShadow: '1px 9px 15px darkgrey' }}>
       <DataGrid
         sx={{
-          '& .MuiDataGrid-cellContent': {
-            fontSize: '15px',
-            fontWeight: 'normal',
-            fontFamily: 'BlinkMacSystemFont'
-          },
           '& .MuiDataGrid-cell': {
             overflow: 'auto',
             paddingTop: '8px !important',

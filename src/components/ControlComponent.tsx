@@ -56,17 +56,9 @@ const ControlComponent: React.FC<Table> = ({ tableRows }: Table) => {
     <Box sx={{ height: 800, width: '100%' }}>
       <DataGrid
         sx={{
-          '& .MuiDataGrid-cellContent': {
-            whiteSpace: 'normal',
-            lineHeight: 'normal'
-          },
           '& .MuiDataGrid-cell': {
-            maxHeight: 'none !important',
-            overflow: 'auto',
             whiteSpce: 'initial !important',
             lineHeight: '16px !important',
-            display: 'flex !important',
-            alignItems: 'center',
             paddingTop: '10px !important',
             paddingBottom: '10px !important'
           }

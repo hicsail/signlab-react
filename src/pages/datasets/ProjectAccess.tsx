@@ -1,4 +1,4 @@
-import { Accordion, Box, Typography } from '@mui/material';
+import { Accordion, Box, Container, Typography } from '@mui/material';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -43,7 +43,11 @@ const ProjectAccess: React.FC = () => {
           <Typography sx={{ fontSize: '15px', position: 'absolute', top: '14px', right: '52%' }}>Dataset 1 description</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <DatasetAccessComponent tableRows={rows} />
+          <Container sx={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContext: 'space-between' }}>
+            <Box sx={{ position: '-webkit-sticky' }}>
+              <DatasetAccessComponent tableRows={rows} />
+            </Box>
+          </Container>
         </AccordionDetails>
       </Accordion>
       <Accordion disableGutters>
@@ -52,7 +56,11 @@ const ProjectAccess: React.FC = () => {
           <Typography sx={{ fontSize: '15px', position: 'absolute', top: '14px', right: '52%' }}>Dataset2 description</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.</Typography>
+          <Container sx={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContext: 'space-between' }}>
+            <Box sx={{ position: '-webkit-sticky' }}>
+              <DatasetAccessComponent tableRows={rows} />
+            </Box>
+          </Container>
         </AccordionDetails>
       </Accordion>
     </Box>

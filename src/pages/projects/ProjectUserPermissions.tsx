@@ -4,7 +4,7 @@ import { DataGrid, GridColDef, GridRenderCellParams, useGridApiContext } from '@
 import { GridRowModesModel } from '@mui/x-data-grid-pro';
 import { useRef, useState } from 'react';
 
-function SwitchEditInputCell(props: GridRenderCellParams<any, boolean>) {
+const SwitchEditInputCell: React.FC<GridRenderCellParams> = (props: GridRenderCellParams<any, boolean>) => {
   const { id, value, field, hasFocus } = props;
   const apiRef = useGridApiContext();
   const ref = useRef<HTMLElement>();
@@ -20,15 +20,7 @@ function SwitchEditInputCell(props: GridRenderCellParams<any, boolean>) {
     }
   }, [hasFocus, value]);
 
-  return (
-    <Box sx={{ display: 'flex', alignItems: 'center', pr: 2 }}>
-      <Switch disabled defaultChecked value={value} onChange={() => handleChange} />
-    </Box>
-  );
-}
-
-const renderSwitchEditInputCell: GridColDef['renderCell'] = (params) => {
-  return <SwitchEditInputCell {...params} />;
+  return <Switch disabled defaultChecked value={value} onChange={() => handleChange} />;
 };
 
 const tableRows = [
@@ -37,27 +29,28 @@ const tableRows = [
     name: 'Professor Flour',
     username: 'flour123',
     email: 'bread@bread.com',
-    access: true
+    switch: true
   },
   {
     id: 2,
     name: 'Elon',
     username: 'elon1012',
     email: 'elonmusk@hotmail.com',
-    access: true
+    switch: true
   },
   {
     id: 3,
     name: 'Chrishell Stausse',
     username: 'chrishell123',
     email: 'chrishell@gmail.com',
-    access: true
+    switch: false
   },
   {
     id: 4,
     name: 'Project Charles',
-    description: 'Investment, wealth and alternative managers, asset owners and insurers in over 30 countries rely on Charles River IMS to manage USD $48 Trillion in assets.',
-    access: false
+    username: 'charlie',
+    email: '111@hotmail.com',
+    switch: false
   }
 ];
 
@@ -94,7 +87,7 @@ const ProjectUserPermissions: React.FC = () => {
       type: 'boolean',
       headerName: 'Switch',
       renderCell: (params) => <Switch defaultChecked value={params.value} />,
-      renderEditCell: renderSwitchEditInputCell,
+      renderEditCell: (params) => <SwitchEditInputCell {...params} />,
       editable: true,
       width: 90
     }
@@ -105,20 +98,7 @@ const ProjectUserPermissions: React.FC = () => {
       <h3 style={{ top: '10%', paddingBottom: '10px' }}>User Permissions</h3>
       <DataGrid
         sx={{
-          '& .MuiDataGrid-cellContent': {
-            whiteSpace: 'normal',
-            lineHeight: 'normal',
-            fontSize: '15px',
-            fontWeight: 'normal',
-            fontFamily: 'BlinkMacSystemFont'
-          },
           '& .MuiDataGrid-cell': {
-            maxHeight: 'none !important',
-            overflow: 'auto',
-            whiteSpce: 'initial !important',
-            lineHeight: '16px !important',
-            display: 'flex !important',
-            alignItems: 'center',
             paddingTop: '6px !important',
             paddingBottom: '8px !important'
           }

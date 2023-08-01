@@ -58,7 +58,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
 
   theme.typography.body2 = {
     fontFamily: 'BlinkMacSystemFont',
-    fontWeight: 'bold',
+    fontWeight: 'normal',
     fontSize: '15px',
     textAlign: 'left'
   };

@@ -1,34 +1,26 @@
 import { Box, Switch } from '@mui/material';
+import useEnhancedEffect from '@mui/material/utils/useEnhancedEffect';
 import { DataGrid, GridColDef, GridRenderCellParams, useGridApiContext } from '@mui/x-data-grid';
 import { GridRowModesModel } from '@mui/x-data-grid-pro';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
-function SwitchEditInputCell(props: GridRenderCellParams<any, boolean>) {
-  const { id, value, field } = props;
-  const [check, setCheck] = useState(value);
+const SwitchEditInputCell: React.FC<GridRenderCellParams> = (props: GridRenderCellParams<any, boolean>) => {
+  const { id, value, field, hasFocus } = props;
   const apiRef = useGridApiContext();
-
-  console.log('haha');
+  const ref = useRef<HTMLElement>();
 
   const handleChange = (newValue: boolean | false) => {
-    console.log('check');
-    setCheck(newValue);
     apiRef.current.setEditCellValue({ id, field, value: newValue });
   };
 
-  return <Switch checked={check} onChange={() => handleChange} />;
-}
+  useEnhancedEffect(() => {
+    if (hasFocus && ref.current) {
+      const input = ref.current.querySelector<HTMLInputElement>(`input[value="${value}"]`);
+      input?.focus();
+    }
+  }, [hasFocus, value]);
 
-const renderAdminSwitchEditInputCell: GridColDef['renderCell'] = (params) => {
-  return <SwitchEditInputCell {...params} />;
-};
-
-const renderVisibleSwitchEditInputCell: GridColDef['renderCell'] = (params) => {
-  return <SwitchEditInputCell {...params} />;
-};
-
-const renderSwitchEditInputCell: GridColDef['renderCell'] = (params) => {
-  return <SwitchEditInputCell {...params} />;
+  return <Switch disabled defaultChecked value={value} onChange={() => handleChange} />;
 };
 
 const tableRows = [
@@ -98,28 +90,28 @@ const StudyUserPermissions: React.FC = () => {
     {
       field: 'adminSwitch',
       type: 'boolean',
+      editable: true,
       headerName: 'Study Admin',
       renderCell: (params) => <Switch checked={params.value} />,
-      renderEditCell: renderAdminSwitchEditInputCell,
-      editable: true,
+      renderEditCell: (params) => <SwitchEditInputCell {...params} />,
       width: 120
     },
     {
       field: 'visibleSwitch',
       type: 'boolean',
+      editable: true,
       headerName: 'Study Visible',
       renderCell: (params) => <Switch checked={params.value} />,
-      renderEditCell: renderVisibleSwitchEditInputCell,
-      editable: true,
+      renderEditCell: (params) => <SwitchEditInputCell {...params} />,
       width: 120
     },
     {
       field: 'switch',
       type: 'boolean',
+      editable: true,
       headerName: 'Contribute',
       renderCell: (params) => <Switch checked={params.value} />,
-      renderEditCell: renderSwitchEditInputCell,
-      editable: true,
+      renderEditCell: (params) => <SwitchEditInputCell {...params} />,
       width: 120
     }
   ];
@@ -129,11 +121,6 @@ const StudyUserPermissions: React.FC = () => {
       <h3 style={{ top: '10%', paddingBottom: '10px' }}>User Permissions</h3>
       <DataGrid
         sx={{
-          '& .MuiDataGrid-cellContent': {
-            fontSize: '15px',
-            fontWeight: 'normal',
-            fontFamily: 'BlinkMacSystemFont'
-          },
           '& .MuiDataGrid-cell': {
             overflow: 'auto',
             paddingTop: '8px !important',
