@@ -76,11 +76,11 @@ const DatasetControlComponent: React.FC<Table> = ({ tableRows }: Table) => {
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 8
+              pageSize: 10
             }
           }
         }}
-        pageSizeOptions={[5]}
+        pageSizeOptions={[5, 10, 15]}
         checkboxSelection
         disableRowSelectionOnClick
       />

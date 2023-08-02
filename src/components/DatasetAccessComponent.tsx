@@ -89,7 +89,7 @@ const DatasetAccessComponent: React.FC<Table> = ({ tableRows }: Table) => {
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 8
+              pageSize: 10
             }
           }
         }}
