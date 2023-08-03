@@ -1,12 +1,11 @@
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useState } from 'react';
-import { Box, Paper, Step, StepContent, StepLabel, Stepper, Typography } from '@mui/material';
+import DownloadIcon from '@mui/icons-material/Download';
+import { useRef, useState } from 'react';
+import { Box, IconButton, Paper, Step, StepContent, StepLabel, Stepper, TextField, Typography } from '@mui/material';
 
 interface ShowProps {
   show: boolean;
@@ -16,27 +15,43 @@ interface ShowProps {
 const steps = [
   {
     label: 'Select Dataset to Upload To',
-    description: `For each ad campaign that you create, you can control how much
-                you're willing to spend on clicks and conversions.`
+    description: `Select Existing Dataset.`,
+    element: <TextField required id="standard-basic" variant="standard" />
   },
   {
     label: 'Upload Information on Entries',
-    description: 'An ad group contains one or more ads which target a shared set of keywords.'
+    description: '',
+    element: (
+      <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+        <Button>Upload CSV</Button>
+        <IconButton sx={{ color: 'darkgreen', marginLeft: '20px' }}>
+          <DownloadIcon />
+        </IconButton>
+      </Box>
+    )
   },
   {
     label: 'Upload Entry Videos',
-    description: `Try out different ad text to see what brings in the most customers,
-                and learn how to enhance your ads using features like ad extensions.
-                If you run into any problems with your ads, find out how to tell if
-                they're running and how to resolve approval issues.`
+    description: '',
+    element: (
+      <Button variant="outlined" sx={{ margin: '10px' }}>
+        Upload Videos (ZIP)
+      </Button>
+    )
   }
 ];
 
 const UploadEntries: React.FC<ShowProps> = (props: ShowProps) => {
   const [activeStep, setActiveStep] = useState(0);
+  //const [stepCompleted, setCompleted] = useState({ step: 0, completed: false });
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+
+    /*if (stepCompleted.completed) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      setCompleted({ step: activeStep, completed: false });
+    }*/
   };
 
   const handleBack = () => {
@@ -51,13 +66,14 @@ const UploadEntries: React.FC<ShowProps> = (props: ShowProps) => {
       <Dialog open={props.show} onClose={props.toggleModal}>
         <DialogTitle sx={{ fontWeight: 'bold', marginTop: '10px' }}>New Entry Upload</DialogTitle>
         <DialogContent>
-          <Box sx={{ maxWidth: 400 }}>
-            <Stepper activeStep={activeStep} orientation="vertical">
+          <Box sx={{ minWidth: 400 }}>
+            <Stepper sx={{ minWidth: 400 }} activeStep={activeStep} orientation="vertical">
               {steps.map((step, index) => (
                 <Step key={step.label}>
                   <StepLabel optional={index === 2 ? <Typography variant="caption">Last step</Typography> : null}>{step.label}</StepLabel>
                   <StepContent>
                     <Typography variant="body2">{step.description}</Typography>
+                    {step.element ? step.element : null}
                     <Box sx={{ mb: 2 }}>
                       <div>
                         <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }}>
