@@ -13,26 +13,21 @@ interface ShowProps {
 const AddDataset: React.FC<ShowProps> = (props: ShowProps) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  //const [formErrors, setErrors] = useState({ name: '', description: '' });
   const [nameValid, setNameValid] = useState(false);
   const [descriptionValid, setDescriptionValid] = useState(false);
   const [formValid, setFormValid] = useState(false);
 
   const validateField = (fieldName: string, value: string) => {
-    //let fieldValidationErrors = formErrors;
     switch (fieldName) {
       case 'name':
         setNameValid(value.length >= 2);
-        //fieldValidationErrors.name = nameValid ? '' : ' is invalid';
         break;
       case 'description':
         setDescriptionValid(value.length >= 2);
-        //fieldValidationErrors.description = nameValid ? '' : ' is invalid';
         break;
       default:
         break;
     }
-    //setErrors(fieldValidationErrors);
     validateForm();
   };
 
