@@ -19,7 +19,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
     typography: {
       button: {
         textTransform: 'none',
-        fontFamily: 'BlinkMacSystemFont'
+        fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont'
       }
     },
     components: {
@@ -27,7 +27,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
         defaultProps: {
           color: '#000',
           fontSize: '20px',
-          fontFamily: 'BlinkMacSystemFont'
+          fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont'
         }
       }
     }
@@ -35,7 +35,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
 
   theme.typography.h3 = {
     color: 'black',
-    fontFamily: 'BlinkMacSystemFont',
+    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont',
     padding: '14px',
     fontWeight: 'normal',
     fontSize: '40px'
@@ -43,21 +43,21 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
 
   theme.typography.h5 = {
     color: 'black',
-    fontFamily: 'BlinkMacSystemFont',
+    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont',
     padding: '14px',
     fontWeight: 'bold',
     fontSize: '23px'
   };
 
   theme.typography.body1 = {
-    fontFamily: 'BlinkMacSystemFont',
+    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont',
     fontWeight: 'bold',
     fontSize: '18px',
     textAlign: 'left'
   };
 
   theme.typography.body2 = {
-    fontFamily: 'BlinkMacSystemFont',
+    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont',
     fontWeight: 'normal',
     fontSize: '15px',
     textAlign: 'left'
