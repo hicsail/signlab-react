@@ -1,48 +1,62 @@
-import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react';
+import { JsonForms } from '@jsonforms/react';
+import { materialRenderers, materialCells } from '@jsonforms/material-renderers';
 
 interface ShowProps {
   show: boolean;
   toggleModal: () => void;
 }
 
-const AddDataset: React.FC<ShowProps> = (props: ShowProps) => {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [nameValid, setNameValid] = useState(false);
-  const [descriptionValid, setDescriptionValid] = useState(false);
-  const [formValid, setFormValid] = useState(false);
-
-  const validateField = (fieldName: string, value: string) => {
-    switch (fieldName) {
-      case 'name':
-        setNameValid(value.length >= 2);
-        break;
-      case 'description':
-        setDescriptionValid(value.length >= 2);
-        break;
-      default:
-        break;
+const schema = {
+  type: 'object',
+  properties: {
+    name: {
+      type: 'string',
+      description: 'Please enter new dataset name'
+    },
+    description: {
+      type: 'string',
+      description: 'Please enter new dataset description'
     }
-    validateForm();
+  },
+  required: ['name', 'description']
+};
+
+const uischema = {
+  type: 'Group',
+  elements: [
+    {
+      type: 'Control',
+      label: 'Name',
+      scope: '#/properties/name'
+    },
+    {
+      type: 'Control',
+      label: 'Description',
+      scope: '#/properties/description'
+    }
+  ]
+};
+
+const AddDataset: React.FC<ShowProps> = (props: ShowProps) => {
+  const [error, setError] = useState(true);
+  const initialData = {
+    name: '',
+    description: ''
   };
 
-  const validateForm = () => {
-    setFormValid(nameValid && descriptionValid);
-  };
+  const [data, setData] = useState(initialData);
 
-  const handleChange = (e: any, type: string) => {
-    const value = e.target.value;
-    if (type == 'name') {
-      setName(value);
-      validateField(type, value);
+  const handleChange = (data: any) => {
+    setData(data);
+    if (data.name.length > 1 && data.description.length > 1) {
+      setError(false);
     } else {
-      setDescription(value);
-      validateField(type, value);
+      setError(true);
     }
   };
 
@@ -50,38 +64,14 @@ const AddDataset: React.FC<ShowProps> = (props: ShowProps) => {
     <div>
       <Dialog open={props.show} onClose={props.toggleModal}>
         <DialogTitle>Create New Dataset</DialogTitle>
-        <DialogTitle sx={{ color: formValid ? 'gray' : 'red', fontSize: '12px', marginTop: '-20px', fontStyle: 'italic' }}>Name and Description are required</DialogTitle>
         <DialogContent>
-          <form className="addDataset">
-            <TextField
-              value={name}
-              onChange={(event) => handleChange(event, 'name')}
-              required
-              margin="dense"
-              id="name"
-              label="Dataset Name"
-              fullWidth
-              InputLabelProps={{ shrink: true }}
-              variant="standard"
-            />
-            <TextField
-              value={description}
-              onChange={(event) => handleChange(event, 'description')}
-              required
-              margin="dense"
-              id="description"
-              label="Dataset Description"
-              fullWidth
-              InputLabelProps={{ shrink: true }}
-              variant="standard"
-            />
-          </form>
+          <JsonForms schema={schema} uischema={uischema} data={data} renderers={materialRenderers} cells={materialCells} onChange={({ data }) => handleChange(data)} />
         </DialogContent>
         <DialogActions>
           <button onClick={props.toggleModal} type="submit">
             Cancel
           </button>
-          <button disabled={!formValid} onClick={props.toggleModal} type="submit">
+          <button disabled={error} onClick={props.toggleModal} type="submit">
             Create
           </button>
         </DialogActions>
