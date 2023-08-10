@@ -1,6 +1,13 @@
-import { Container, Typography, Stepper, Step, StepLabel, Button, TextField, Box, StepContent, Paper } from '@mui/material';
+import { Container, Typography, Stepper, Step, StepLabel, Button, TextField, Box } from '@mui/material';
 import React from 'react';
 import { useState } from 'react';
+import { TagField, TagFieldType } from '../../models/TagField';
+import { AslLexSignBankField, aslLexSignBankControlRendererTester } from '../../custom-fields/asl-lex-field';
+import { fileListControlRendererTester, FileListField } from '../../custom-fields/file-list';
+import { VideoOptionUpload, videoOptionUploadRendererTester } from '../../custom-fields/video-option-upload.component';
+import { userVideoOptionRendererTester, UserVideoOption } from '../../custom-fields/user-video-option-field.component';
+import { VideoFieldComponent, videoFieldTester } from '../../video-recording/components/video-field.component';
+import { TagFieldGeneratorService } from '../../services/tag-field-generator.service';
 
 const NewStudy: React.FC = () => {
   //all constants
@@ -18,6 +25,29 @@ const NewStudy: React.FC = () => {
   const handleReset = () => {
     setActiveStep(0);
   };
+
+  const renderers = [
+    {
+      tester: aslLexSignBankControlRendererTester,
+      renderer: AslLexSignBankField
+    },
+    { tester: fileListControlRendererTester, renderer: FileListField },
+    { tester: videoOptionUploadRendererTester, renderer: VideoOptionUpload },
+    { tester: userVideoOptionRendererTester, renderer: UserVideoOption },
+    { tester: videoFieldTester, renderer: VideoFieldComponent },
+    { tester: oneOfFieldTester, renderer: OneOfField }
+  ];
+
+  const tagFieldOptions = [
+    { type: TagFieldType.AslLex, name: 'ASL-LEX Sign', icon: 'accessibility' },
+    { type: TagFieldType.AutoComplete, name: 'Categorical', icon: 'text_format' },
+    { type: TagFieldType.BooleanOption, name: 'True/False Option', icon: 'flag' },
+    { type: TagFieldType.EmbeddedVideoOption, name: 'Video Option', icon: 'video_library' },
+    { type: TagFieldType.FreeText, name: 'Free Text', icon: 'text_fields' },
+    { type: TagFieldType.Numeric, name: 'Numeric', icon: 'bar_chart' },
+    { type: TagFieldType.Slider, name: 'Slider', icon: 'tune' },
+    { type: TagFieldType.VideoRecord, name: 'Record Video', icon: 'videocam' }
+  ];
 
   const steps = [
     {
