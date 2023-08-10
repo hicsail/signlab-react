@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
-import { GridRowModesModel, GridActionsCellItem, GridRowId } from '@mui/x-data-grid-pro';
+import { GridRowModesModel, GridActionsCellItem, GridRowId } from '@mui/x-data-grid';
 import { useState } from 'react';
 
 interface Row {

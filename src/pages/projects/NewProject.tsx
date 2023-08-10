@@ -20,7 +20,7 @@ const schema = {
   required: ['name', 'description'],
   errorMessage: {
     type: 'data should be an object',
-    properties: { name: 'Project name should be ...', description: 'Description ahah' },
+    properties: { name: 'Project name should be ...' },
     _: 'data should ...'
   }
 };
@@ -73,7 +73,7 @@ const NewProject: React.FC = () => {
   };
 
   return (
-    <Container sx={{ left: '2%', width: '96%', top: '100px', position: 'absolute' }}>
+    <Container sx={{ right: '8%', width: '96%', top: '100px', position: 'absolute' }}>
       <JsonForms schema={schema} uischema={uischema} data={data} renderers={materialRenderers} cells={materialCells} onChange={({ data }) => handleChange(data)} />
       <Button disabled={error} sx={{ color: 'white', bgcolor: '#2582f3', marginTop: '35px', position: 'absolute', right: '5%' }} variant="outlined" onClick={handleSubmit}>
         Submit
