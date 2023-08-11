@@ -413,7 +413,7 @@ export class SliderField extends TagField {
     ];
   }
 }
-
+/* 
 export class VideoRecordField extends TagField {
   protected hasDatasets: boolean;
   protected datasets: Observable<Dataset[]>;
@@ -531,4 +531,4 @@ export class VideoRecordField extends TagField {
       }
     ];
   }
-}
+} */

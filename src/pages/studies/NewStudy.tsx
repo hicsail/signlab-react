@@ -1,13 +1,16 @@
-import { Container, Typography, Stepper, Step, StepLabel, Button, TextField, Box } from '@mui/material';
+import { Container, Typography, Button, TextField, Box, Stepper, Step, StepLabel } from '@mui/material';
 import React from 'react';
 import { useState } from 'react';
+import { materialRenderers } from '@jsonforms/material-renderers';
 import { TagField, TagFieldType } from '../../models/TagField';
-import { AslLexSignBankField, aslLexSignBankControlRendererTester } from '../../custom-fields/asl-lex-field';
-import { fileListControlRendererTester, FileListField } from '../../custom-fields/file-list';
-import { VideoOptionUpload, videoOptionUploadRendererTester } from '../../custom-fields/video-option-upload.component';
-import { userVideoOptionRendererTester, UserVideoOption } from '../../custom-fields/user-video-option-field.component';
-import { VideoFieldComponent, videoFieldTester } from '../../video-recording/components/video-field.component';
-import { TagFieldGeneratorService } from '../../services/tag-field-generator.service';
+import { TagsDisplay } from '../../components/TagsDisplay';
+import { NewStudyJsonForm } from '../../components/NewStudyJsonForm';
+//import { AslLexSignBankField, aslLexSignBankControlRendererTester } from '../../custom-fields/asl-lex-field';
+//import { fileListControlRendererTester, FileListField } from '../../custom-fields/file-list';
+//import { VideoOptionUpload, videoOptionUploadRendererTester } from '../../custom-fields/video-option-upload.component';
+//import { userVideoOptionRendererTester, UserVideoOption } from '../../custom-fields/user-video-option-field.component';
+//import { VideoFieldComponent, videoFieldTester } from '../../video-recording/components/video-field.component';
+//import { TagFieldGeneratorService } from '../../services/tag-field-generator.service';
 
 const NewStudy: React.FC = () => {
   //all constants
@@ -26,17 +29,7 @@ const NewStudy: React.FC = () => {
     setActiveStep(0);
   };
 
-  const renderers = [
-    {
-      tester: aslLexSignBankControlRendererTester,
-      renderer: AslLexSignBankField
-    },
-    { tester: fileListControlRendererTester, renderer: FileListField },
-    { tester: videoOptionUploadRendererTester, renderer: VideoOptionUpload },
-    { tester: userVideoOptionRendererTester, renderer: UserVideoOption },
-    { tester: videoFieldTester, renderer: VideoFieldComponent },
-    { tester: oneOfFieldTester, renderer: OneOfField }
-  ];
+  const renderers = [...materialRenderers];
 
   const tagFieldOptions = [
     { type: TagFieldType.AslLex, name: 'ASL-LEX Sign', icon: 'accessibility' },
@@ -49,28 +42,24 @@ const NewStudy: React.FC = () => {
     { type: TagFieldType.VideoRecord, name: 'Record Video', icon: 'videocam' }
   ];
 
-  const steps = [
-    {
-      label: 'Study Identification',
-      element: <TextField required margin="dense" id="name" label="Dataset Name" fullWidth InputLabelProps={{ shrink: true }} variant="standard" />
-    },
-    {
-      label: 'Construct Tagging Interface',
-      element: (
-        <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-          <Button>Upload CSV</Button>
-        </Box>
-      )
-    },
-    {
-      label: 'Select Tag Training',
-      element: (
-        <Button variant="outlined" sx={{ margin: '10px' }}>
-          Upload Videos (ZIP)
-        </Button>
-      )
+  const steps = ['Study Identification', 'Construct Tagging Interface', 'Select Tag Training'];
+
+  function getSectionComponent() {
+    switch (activeStep) {
+      case 0:
+        return <NewStudyJsonForm />;
+      case 1:
+        return <TagsDisplay />;
+      case 2:
+        return (
+          <Button variant="outlined" sx={{ margin: '10px' }}>
+            Upload Videos (ZIP)
+          </Button>
+        );
+      default:
+        return null;
     }
-  ];
+  }
   //all functions
   // @ts-ignore
   function produceJSONForm() {
@@ -92,14 +81,14 @@ const NewStudy: React.FC = () => {
       <Typography variant="h5">Create New Study</Typography>
       <Box sx={{ width: '100%' }}>
         <Stepper activeStep={activeStep}>
-          {steps.map((step) => {
+          {steps.map((label, index) => {
             const stepProps: { completed?: boolean } = {};
             const labelProps: {
               optional?: React.ReactNode;
             } = {};
             return (
-              <Step key={step.label} {...stepProps}>
-                <StepLabel {...labelProps}>{step.label}</StepLabel>
+              <Step key={label} {...stepProps}>
+                <StepLabel {...labelProps}>{label}</StepLabel>
               </Step>
             );
           })}
@@ -114,13 +103,17 @@ const NewStudy: React.FC = () => {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
+            <Box sx={{ height: '23rem' }}>
+              <Typography sx={{ mt: 2, mb: 1 }}>{getSectionComponent()}</Typography>
+            </Box>
+
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-              <Button color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
+              <Button variant="outlined" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
                 Back
               </Button>
-              <Box sx={{ flex: '1 1 auto' }} />
-              <Button onClick={handleNext}>{activeStep === steps.length - 1 ? 'Finish' : 'Next'}</Button>
+              <Button variant="outlined" onClick={handleNext}>
+                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+              </Button>
             </Box>
           </React.Fragment>
         )}
