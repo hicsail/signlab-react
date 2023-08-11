@@ -81,14 +81,11 @@ const NewStudy: React.FC = () => {
       <Typography variant="h5">Create New Study</Typography>
       <Box sx={{ width: '100%' }}>
         <Stepper activeStep={activeStep}>
-          {steps.map((label, index) => {
+          {steps.map((label) => {
             const stepProps: { completed?: boolean } = {};
-            const labelProps: {
-              optional?: React.ReactNode;
-            } = {};
             return (
               <Step key={label} {...stepProps}>
-                <StepLabel {...labelProps}>{label}</StepLabel>
+                <StepLabel>{label}</StepLabel>
               </Step>
             );
           })}
@@ -103,7 +100,7 @@ const NewStudy: React.FC = () => {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <Box sx={{ height: '23rem' }}>
+            <Box sx={{ height: '27rem' }}>
               <Typography sx={{ mt: 2, mb: 1 }}>{getSectionComponent()}</Typography>
             </Box>
 
