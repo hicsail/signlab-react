@@ -1,4 +1,4 @@
-import { Box, Grid, IconButton, Typography } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
 import AccessibilityIcon from '@mui/icons-material/Accessibility';
 import TextFormatIcon from '@mui/icons-material/TextFormat';
 import AssistantPhotoIcon from '@mui/icons-material/AssistantPhoto';
@@ -27,16 +27,15 @@ const TagsDisplay: React.FC = () => {
           <Typography variant="h5">Tag Fields</Typography>
           {buttons.map((button: any) => (
             <Box key={button.title}>
-              <IconButton sx={{ color: 'black', marginBottom: '2px' }}>
-                {button.icon}
-                <Typography variant="body1">{button.title}</Typography>
-              </IconButton>
+              <Button size="large" sx={{ color: 'black', fontSize: '16px' }} startIcon={button.icon}>
+                {button.title}
+              </Button>
             </Box>
           ))}
         </Box>
       </Grid>
       <Grid item xs={8}>
-        <Box sx={{ height: 400, bgcolor: 'powderblue' }}>will display chosen tags here</Box>
+        <Box sx={{ height: 400, bgcolor: '#fffdf0', textAlign: 'center' }}>Preview</Box>
       </Grid>
     </Grid>
   );

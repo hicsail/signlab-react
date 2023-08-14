@@ -1,10 +1,12 @@
-import { Container, Typography, Button, TextField, Box, Stepper, Step, StepLabel } from '@mui/material';
+import { Container, Typography, Button, Dialog, Box, Stepper, Step, StepLabel } from '@mui/material';
 import React from 'react';
 import { useState } from 'react';
 import { materialRenderers } from '@jsonforms/material-renderers';
-import { TagField, TagFieldType } from '../../models/TagField';
+import { AslLexField, AutoCompleteField, BooleanField, EmbeddedVideoOption, FreeTextField, NumericField, SliderField, TagField, TagFieldType } from '../../models/TagField';
 import { TagsDisplay } from '../../components/TagsDisplay';
 import { NewStudyJsonForm } from '../../components/NewStudyJsonForm';
+import { TagFieldGeneratorService } from '../../services/tag-field-generator.service';
+import { TagFormPreviewDialog } from './TagFormPreview';
 //import { AslLexSignBankField, aslLexSignBankControlRendererTester } from '../../custom-fields/asl-lex-field';
 //import { fileListControlRendererTester, FileListField } from '../../custom-fields/file-list';
 //import { VideoOptionUpload, videoOptionUploadRendererTester } from '../../custom-fields/video-option-upload.component';
@@ -15,7 +17,7 @@ import { NewStudyJsonForm } from '../../components/NewStudyJsonForm';
 const NewStudy: React.FC = () => {
   //all constants
   const [activeStep, setActiveStep] = React.useState(0);
-  const [tagFields, setTagFields] = useState([]);
+  const tagFields: TagField[] = [];
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -42,6 +44,39 @@ const NewStudy: React.FC = () => {
     { type: TagFieldType.VideoRecord, name: 'Record Video', icon: 'videocam' }
   ];
 
+  const addTagField = (tagFieldType: TagFieldType) => {
+    const field = TagFieldGeneratorService(tagFieldType);
+    tagFields.push(field);
+  };
+
+  const removeField = (index: number) => {
+    tagFields.splice(index, 1);
+  };
+
+  const produceJSONForm = () => {
+    const dataSchema: { type: string; properties: any; required: string[] } = { type: 'object', properties: {}, required: [] };
+    const uiSchema: { type: string; elements: any[] } = { type: 'VerticalLayout', elements: [] };
+
+    for (const tagField of tagFields) {
+      dataSchema.properties = {
+        ...dataSchema.properties,
+        ...tagField.asDataProperty()
+      };
+      uiSchema.elements = [...uiSchema.elements, ...tagField.asUIProperty()];
+    }
+
+    return { dataSchema: dataSchema, uiSchema: uiSchema };
+  };
+
+  const dialog = Dialog;
+
+  const openTagFormPreview = () => {
+    const jsonForms = produceJSONForm();
+    dialog.open(TagFormPreviewDialog, {
+      width: '800px'
+    });
+  };
+
   const steps = ['Study Identification', 'Construct Tagging Interface', 'Select Tag Training'];
 
   function getSectionComponent() {
@@ -59,21 +94,6 @@ const NewStudy: React.FC = () => {
       default:
         return null;
     }
-  }
-  //all functions
-  // @ts-ignore
-  function produceJSONForm() {
-    // @ts-ignore
-    const schema = {
-      type: 'object',
-      properties: {},
-      required: []
-    };
-    // @ts-ignore
-    const uischema = {
-      type: 'VerticalLayout',
-      elements: []
-    };
   }
 
   return (
