@@ -1,6 +1,4 @@
-import { Injectable } from 'injection-js';
-import { TagField, TagFieldType, AslLexField, AutoCompleteField, BooleanField, EmbeddedVideoOption, FreeTextField, NumericField, SliderField } from '../models/TagField';
-import React from 'react';
+import { TagFieldType, AslLexField, AutoCompleteField, BooleanField, EmbeddedVideoOption, FreeTextField, NumericField, SliderField } from '../models/TagField';
 //import { DatasetService } from '../../core/services/dataset.service';
 
 /**

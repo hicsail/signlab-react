@@ -6,7 +6,7 @@ import { AslLexField, AutoCompleteField, BooleanField, EmbeddedVideoOption, Free
 import { TagsDisplay } from '../../components/TagsDisplay';
 import { NewStudyJsonForm } from '../../components/NewStudyJsonForm';
 import { TagFieldGeneratorService } from '../../services/tag-field-generator.service';
-import { TagFormPreviewDialog } from './TagFormPreview';
+import { TagFormPreviewDialog } from '../../components/TagFormPreview';
 //import { AslLexSignBankField, aslLexSignBankControlRendererTester } from '../../custom-fields/asl-lex-field';
 //import { fileListControlRendererTester, FileListField } from '../../custom-fields/file-list';
 //import { VideoOptionUpload, videoOptionUploadRendererTester } from '../../custom-fields/video-option-upload.component';
@@ -17,7 +17,6 @@ import { TagFormPreviewDialog } from './TagFormPreview';
 const NewStudy: React.FC = () => {
   //all constants
   const [activeStep, setActiveStep] = React.useState(0);
-  const tagFields: TagField[] = [];
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -29,52 +28,6 @@ const NewStudy: React.FC = () => {
 
   const handleReset = () => {
     setActiveStep(0);
-  };
-
-  const renderers = [...materialRenderers];
-
-  const tagFieldOptions = [
-    { type: TagFieldType.AslLex, name: 'ASL-LEX Sign', icon: 'accessibility' },
-    { type: TagFieldType.AutoComplete, name: 'Categorical', icon: 'text_format' },
-    { type: TagFieldType.BooleanOption, name: 'True/False Option', icon: 'flag' },
-    { type: TagFieldType.EmbeddedVideoOption, name: 'Video Option', icon: 'video_library' },
-    { type: TagFieldType.FreeText, name: 'Free Text', icon: 'text_fields' },
-    { type: TagFieldType.Numeric, name: 'Numeric', icon: 'bar_chart' },
-    { type: TagFieldType.Slider, name: 'Slider', icon: 'tune' },
-    { type: TagFieldType.VideoRecord, name: 'Record Video', icon: 'videocam' }
-  ];
-
-  const addTagField = (tagFieldType: TagFieldType) => {
-    const field = TagFieldGeneratorService(tagFieldType);
-    tagFields.push(field);
-  };
-
-  const removeField = (index: number) => {
-    tagFields.splice(index, 1);
-  };
-
-  const produceJSONForm = () => {
-    const dataSchema: { type: string; properties: any; required: string[] } = { type: 'object', properties: {}, required: [] };
-    const uiSchema: { type: string; elements: any[] } = { type: 'VerticalLayout', elements: [] };
-
-    for (const tagField of tagFields) {
-      dataSchema.properties = {
-        ...dataSchema.properties,
-        ...tagField.asDataProperty()
-      };
-      uiSchema.elements = [...uiSchema.elements, ...tagField.asUIProperty()];
-    }
-
-    return { dataSchema: dataSchema, uiSchema: uiSchema };
-  };
-
-  const dialog = Dialog;
-
-  const openTagFormPreview = () => {
-    const jsonForms = produceJSONForm();
-    dialog.open(TagFormPreviewDialog, {
-      width: '800px'
-    });
   };
 
   const steps = ['Study Identification', 'Construct Tagging Interface', 'Select Tag Training'];
@@ -112,7 +65,7 @@ const NewStudy: React.FC = () => {
         </Stepper>
         {activeStep === steps.length ? (
           <React.Fragment>
-            <Typography sx={{ mt: 2, mb: 1 }}>All steps completed - you&apos;re finished</Typography>
+            <Typography sx={{ mt: 2, mb: 1 }}>All steps completed - your new study is created</Typography>
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Box sx={{ flex: '1 1 auto' }} />
               <Button onClick={handleReset}>Reset</Button>
@@ -120,9 +73,7 @@ const NewStudy: React.FC = () => {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <Box sx={{ height: '27rem' }}>
-              <Typography sx={{ mt: 2, mb: 1 }}>{getSectionComponent()}</Typography>
-            </Box>
+            <Box sx={{ height: '30rem' }}>{getSectionComponent()}</Box>
 
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Button variant="outlined" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>

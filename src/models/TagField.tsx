@@ -1,7 +1,4 @@
 import { JsonSchema, Layout } from '@jsonforms/core';
-import { Observable, firstValueFrom } from 'rxjs';
-import { DatasetService } from '../services/dataset.service';
-import { Dataset } from '../graphql/graphql';
 
 /*
  * Different kind of tag fields that are supported
@@ -43,7 +40,7 @@ export abstract class TagField {
     return this.data.shortDescription || '';
   }
 
-  async getDataSchema() {
+  async getDataSchema(): Promise<JsonSchema> {
     const properties = await this.getFieldSpecificProperties();
     return {
       type: 'object',

@@ -7,17 +7,73 @@ import TextFieldsIcon from '@mui/icons-material/TextFields';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import TuneIcon from '@mui/icons-material/Tune';
 import VideocamIcon from '@mui/icons-material/Videocam';
+import { materialRenderers } from '@jsonforms/material-renderers';
+import { TagField, TagFieldType } from '../models/TagField';
+import { TagFormPreviewDialog } from './TagFormPreview';
+import { TagFieldGeneratorService } from '../services/tag-field-generator.service';
+import { useState } from 'react';
+import { TagFieldComponent } from './TagFieldComponent';
+
+type TagPreviewInformation = {
+  previewDataSchema: any;
+  previewUiSchema: any;
+  renderers: any;
+};
 
 const TagsDisplay: React.FC = () => {
-  const buttons = [
-    { title: 'ASL-LEX Sign', icon: <AccessibilityIcon /> },
-    { title: 'Categorical', icon: <TextFormatIcon /> },
-    { title: 'True/False Option', icon: <AssistantPhotoIcon /> },
-    { title: 'Video Option', icon: <VideoLibraryIcon /> },
-    { title: 'Free Text', icon: <TextFieldsIcon /> },
-    { title: 'Numeric', icon: <BarChartIcon /> },
-    { title: 'Slider', icon: <TuneIcon /> },
-    { title: 'Record Video', icon: <VideocamIcon /> }
+  const [tagFields, setTagFields] = useState<TagField[]>([]);
+  const [data, setData] = useState<TagPreviewInformation>({ previewDataSchema: {}, previewUiSchema: {}, renderers: [] });
+  const [open, setOpen] = useState(false);
+  const renderers = [...materialRenderers];
+
+  const addTagField = (tagFieldType: TagFieldType) => {
+    const field = TagFieldGeneratorService(tagFieldType);
+    setTagFields([...tagFields, field]);
+    console.log(tagFields);
+  };
+
+  /* const removeField = (index: number) => {
+    tagFields.splice(index, 1);
+  }; */
+
+  const produceJSONForm = () => {
+    const dataSchema: { type: string; properties: any; required: string[] } = { type: 'object', properties: {}, required: [] };
+    const uiSchema: { type: string; elements: any[] } = { type: 'VerticalLayout', elements: [] };
+
+    for (const tagField of tagFields) {
+      dataSchema.properties = {
+        ...dataSchema.properties,
+        ...tagField.asDataProperty()
+      };
+      if (tagField.isRequired()) {
+        dataSchema.required.push(tagField.getFieldName());
+      }
+      uiSchema.elements = [...uiSchema.elements, ...tagField.asUIProperty()];
+    }
+
+    return { dataSchema: dataSchema, uiSchema: uiSchema };
+  };
+
+  const openTagFormPreview = () => {
+    const jsonForms = produceJSONForm();
+    const data: TagPreviewInformation = {
+      previewDataSchema: jsonForms.dataSchema,
+      previewUiSchema: jsonForms.uiSchema,
+      renderers: renderers
+    };
+    setData(data);
+    setOpen(true);
+  };
+
+  const tagFieldOptions = [
+    { name: 'ASL-LEX Sign', icon: <AccessibilityIcon />, type: TagFieldType.AslLex },
+    { name: 'Categorical', icon: <TextFormatIcon />, type: TagFieldType.AutoComplete },
+    { name: 'True/False Option', icon: <AssistantPhotoIcon />, type: TagFieldType.BooleanOption },
+    { name: 'Video Option', icon: <VideoLibraryIcon />, type: TagFieldType.EmbeddedVideoOption },
+    { name: 'Free Text', icon: <TextFieldsIcon />, type: TagFieldType.FreeText },
+    { name: 'Numeric', icon: <BarChartIcon />, type: TagFieldType.Numeric },
+    { name: 'Slider', icon: <TuneIcon />, type: TagFieldType.Slider },
+    { name: 'Record Video', icon: <VideocamIcon />, type: TagFieldType.VideoRecord }
   ];
 
   return (
@@ -25,17 +81,23 @@ const TagsDisplay: React.FC = () => {
       <Grid item xs={4}>
         <Box sx={{ height: 400, display: 'flex', flexDirection: 'column', justifyContext: 'space-between' }}>
           <Typography variant="h5">Tag Fields</Typography>
-          {buttons.map((button: any) => (
-            <Box key={button.title}>
-              <Button size="large" sx={{ color: 'black', fontSize: '16px' }} startIcon={button.icon}>
-                {button.title}
+          {tagFieldOptions.map((button: any) => (
+            <Box key={button.name}>
+              <Button sx={{ color: 'black', fontSize: '16px' }} startIcon={button.icon} onClick={() => addTagField(button.type)}>
+                {button.name}
               </Button>
             </Box>
           ))}
         </Box>
+        <Button variant="outlined" sx={{ marginTop: '10px' }} onClick={openTagFormPreview}>
+          Preview
+        </Button>
       </Grid>
+      <TagFormPreviewDialog data={data} clicked={open} />
       <Grid item xs={8}>
-        <Box sx={{ height: 400, bgcolor: '#fffdf0', textAlign: 'center' }}>Preview</Box>
+        <Box sx={{ height: 400, bgcolor: '#fffdf0', textAlign: 'center' }}>
+          {tagFields.length > 0 ? tagFields.map((value: TagField) => <TagFieldComponent key={value.kind} field={value} />) : <Box>No Tags Selected</Box>}
+        </Box>
       </Grid>
     </Grid>
   );
