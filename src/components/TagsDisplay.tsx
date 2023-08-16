@@ -7,6 +7,7 @@ import TextFieldsIcon from '@mui/icons-material/TextFields';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import TuneIcon from '@mui/icons-material/Tune';
 import VideocamIcon from '@mui/icons-material/Videocam';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { materialRenderers } from '@jsonforms/material-renderers';
 import { TagField, TagFieldType } from '../models/TagField';
 import { TagFormPreviewDialog } from './TagFormPreview';
@@ -29,12 +30,12 @@ const TagsDisplay: React.FC = () => {
   const addTagField = (tagFieldType: TagFieldType) => {
     const field = TagFieldGeneratorService(tagFieldType);
     setTagFields([...tagFields, field]);
-    console.log(tagFields);
   };
 
-  /* const removeField = (index: number) => {
+  const removeField = (index: number) => {
     tagFields.splice(index, 1);
-  }; */
+    setTagFields([...tagFields]);
+  };
 
   const produceJSONForm = () => {
     const dataSchema: { type: string; properties: any; required: string[] } = { type: 'object', properties: {}, required: [] };
@@ -96,7 +97,16 @@ const TagsDisplay: React.FC = () => {
       <TagFormPreviewDialog data={data} clicked={open} />
       <Grid item xs={8}>
         <Box sx={{ height: 400, bgcolor: '#fffdf0', textAlign: 'center' }}>
-          {tagFields.length > 0 ? tagFields.map((value: TagField) => <TagFieldComponent key={value.kind} field={value} />) : <Box>No Tags Selected</Box>}
+          {tagFields.length > 0 ? (
+            tagFields.map((value: TagField, index: number) => (
+              <Box key={index} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                <TagFieldComponent field={value} />
+                <Button startIcon={<DeleteIcon />} onClick={() => removeField(index)} />
+              </Box>
+            ))
+          ) : (
+            <Box>No Tags Selected</Box>
+          )}
         </Box>
       </Grid>
     </Grid>

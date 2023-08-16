@@ -28,15 +28,19 @@ export abstract class TagField {
     this.type = type;
   }
 
-  getFieldName() {
+  setData(data: any) {
+    this.data = data;
+  }
+
+  getFieldName(): string {
     return this.data.fieldName || '';
   }
 
-  isRequired() {
+  isRequired(): boolean {
     return this.data.required || false;
   }
 
-  getDescription() {
+  getDescription(): string {
     return this.data.shortDescription || '';
   }
 
