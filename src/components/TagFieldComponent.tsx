@@ -22,9 +22,7 @@ export const TagFieldComponent: React.FC<FieldProps> = ({ field }: FieldProps) =
   }, []);
 
   const handleChange = (data: any) => {
-    console.log(data);
     field.setData(data);
-    console.log(field.data);
     setJsonData(data);
   };
 

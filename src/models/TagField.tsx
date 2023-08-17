@@ -321,7 +321,7 @@ export class NumericField extends TagField {
       },
       {
         type: 'Control',
-        scope: '#properties/maximum'
+        scope: '#/properties/maximum'
       }
     ];
   }

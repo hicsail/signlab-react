@@ -63,7 +63,7 @@ const TagsDisplay: React.FC = () => {
       renderers: renderers
     };
     setData(data);
-    setOpen(true);
+    setOpen((open) => !open);
   };
 
   const tagFieldOptions = [
@@ -92,9 +92,9 @@ const TagsDisplay: React.FC = () => {
         </Box>
         <Button variant="outlined" sx={{ marginTop: '10px' }} onClick={openTagFormPreview}>
           Preview
-        </Button>
+        </Button>{' '}
+        <TagFormPreviewDialog data={data} clicked={open} />
       </Grid>
-      <TagFormPreviewDialog data={data} clicked={open} />
       <Grid item xs={8}>
         <Box sx={{ height: 400, bgcolor: '#fffdf0', textAlign: 'center' }}>
           {tagFields.length > 0 ? (
