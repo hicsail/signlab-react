@@ -14,6 +14,7 @@ import { TagFormPreviewDialog } from './TagFormPreview';
 import { TagFieldGeneratorService } from '../services/tag-field-generator.service';
 import { useState } from 'react';
 import { TagFieldComponent } from './TagFieldComponent';
+import { AddDataset } from './AddDataset';
 
 type TagPreviewInformation = {
   previewDataSchema: any;
@@ -63,6 +64,10 @@ const TagsDisplay: React.FC = () => {
       renderers: renderers
     };
     setData(data);
+    setOpen(true);
+  };
+
+  const toggleModal = () => {
     setOpen((open) => !open);
   };
 
@@ -78,8 +83,8 @@ const TagsDisplay: React.FC = () => {
   ];
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={4}>
+    <Grid container spacing={4}>
+      <Grid item xs={3}>
         <Box sx={{ height: 400, display: 'flex', flexDirection: 'column', justifyContext: 'space-between' }}>
           <Typography variant="h5">Tag Fields</Typography>
           {tagFieldOptions.map((button: any) => (
@@ -90,18 +95,18 @@ const TagsDisplay: React.FC = () => {
             </Box>
           ))}
         </Box>
+        <TagFormPreviewDialog data={data} clicked={open} toggleModal={toggleModal} />
         <Button variant="outlined" sx={{ marginTop: '10px' }} onClick={openTagFormPreview}>
           Preview
-        </Button>{' '}
-        <TagFormPreviewDialog data={data} clicked={open} />
+        </Button>
       </Grid>
-      <Grid item xs={8}>
+      <Grid item xs={9}>
         <Box sx={{ height: 400, bgcolor: '#fffdf0', textAlign: 'center' }}>
           {tagFields.length > 0 ? (
             tagFields.map((value: TagField, index: number) => (
               <Box key={index} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                 <TagFieldComponent field={value} />
-                <Button startIcon={<DeleteIcon />} onClick={() => removeField(index)} />
+                <Button size="large" sx={{ marginTop: '45px' }} startIcon={<DeleteIcon />} onClick={() => removeField(index)} />
               </Box>
             ))
           ) : (

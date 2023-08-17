@@ -27,7 +27,7 @@ export const TagFieldComponent: React.FC<FieldProps> = ({ field }: FieldProps) =
   };
 
   return (
-    <Card sx={{ maxWidth: 555, height: 200 }}>
+    <Card sx={{ width: '90%', height: '15%', margin: '45px 15px -15px 10px' }}>
       <Typography sx={{ margin: '15px 15px 2px 15px', fontSize: '25px' }}>{field.data.fieldName || 'Empty'}</Typography>
       <Typography sx={{ marginLeft: '15px', color: 'gray', fontWeight: 'medium' }} variant="body2">
         {field.kindDisplay}
