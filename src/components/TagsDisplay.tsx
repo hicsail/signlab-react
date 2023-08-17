@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from '@mui/material';
+import { Box, Button, Grid, Stack, Typography } from '@mui/material';
 import AccessibilityIcon from '@mui/icons-material/Accessibility';
 import TextFormatIcon from '@mui/icons-material/TextFormat';
 import AssistantPhotoIcon from '@mui/icons-material/AssistantPhoto';
@@ -14,7 +14,6 @@ import { TagFormPreviewDialog } from './TagFormPreview';
 import { TagFieldGeneratorService } from '../services/tag-field-generator.service';
 import { useState } from 'react';
 import { TagFieldComponent } from './TagFieldComponent';
-import { AddDataset } from './AddDataset';
 
 type TagPreviewInformation = {
   previewDataSchema: any;
@@ -85,18 +84,23 @@ const TagsDisplay: React.FC = () => {
   return (
     <Grid container spacing={4}>
       <Grid item xs={3}>
-        <Box sx={{ height: 400, display: 'flex', flexDirection: 'column', justifyContext: 'space-between' }}>
+        <Stack direction="column" justifyContent="flex-end">
           <Typography variant="h5">Tag Fields</Typography>
           {tagFieldOptions.map((button: any) => (
-            <Box key={button.name}>
-              <Button sx={{ color: 'black', fontSize: '16px' }} startIcon={button.icon} onClick={() => addTagField(button.type)}>
-                {button.name}
-              </Button>
-            </Box>
+            <Button
+              variant="outlined"
+              color="secondary"
+              key={button.name}
+              sx={{ color: 'black', fontSize: '14px', width: '12rem', marginBottom: '6px' }}
+              startIcon={button.icon}
+              onClick={() => addTagField(button.type)}
+            >
+              {button.name}
+            </Button>
           ))}
-        </Box>
+        </Stack>
         <TagFormPreviewDialog data={data} clicked={open} toggleModal={toggleModal} />
-        <Button variant="outlined" sx={{ marginTop: '10px' }} onClick={openTagFormPreview}>
+        <Button variant="outlined" sx={{ marginTop: '50px', left: '-40px' }} onClick={openTagFormPreview}>
           Preview
         </Button>
       </Grid>

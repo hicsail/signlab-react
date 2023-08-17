@@ -1,5 +1,5 @@
 import { JsonForms } from '@jsonforms/react';
-import { Box, Button, Container, Dialog, DialogActions, DialogContent, DialogTitle, Typography } from '@mui/material';
+import { Box, Button, Container, Dialog, DialogActions, DialogContent, Typography } from '@mui/material';
 import { useState } from 'react';
 
 type TagPreviewInformation = {

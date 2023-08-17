@@ -1,12 +1,7 @@
-import { Container, Typography, Button, Dialog, Box, Stepper, Step, StepLabel } from '@mui/material';
+import { Container, Typography, Button, Box, Stepper, Step, StepLabel } from '@mui/material';
 import React from 'react';
-import { useState } from 'react';
-import { materialRenderers } from '@jsonforms/material-renderers';
-import { AslLexField, AutoCompleteField, BooleanField, EmbeddedVideoOption, FreeTextField, NumericField, SliderField, TagField, TagFieldType } from '../../models/TagField';
 import { TagsDisplay } from '../../components/TagsDisplay';
 import { NewStudyJsonForm } from '../../components/NewStudyJsonForm';
-import { TagFieldGeneratorService } from '../../services/tag-field-generator.service';
-import { TagFormPreviewDialog } from '../../components/TagFormPreview';
 //import { AslLexSignBankField, aslLexSignBankControlRendererTester } from '../../custom-fields/asl-lex-field';
 //import { fileListControlRendererTester, FileListField } from '../../custom-fields/file-list';
 //import { VideoOptionUpload, videoOptionUploadRendererTester } from '../../custom-fields/video-option-upload.component';
@@ -48,11 +43,13 @@ const NewStudy: React.FC = () => {
         return null;
     }
   }
-
+  //sx={{ '& .MuiContainer-root': { width: '550rem' } }}
   return (
-    <Container sx={{ left: '5%', width: '90%', top: '100px', position: 'absolute' }}>
-      <Typography variant="h5">Create New Study</Typography>
-      <Box sx={{ width: '100%' }}>
+    <Container sx={{ position: 'absolute', left: '-5%', right: '-5%', alignItems: 'baseline', width: '100%', top: '100px', display: 'flex', flexDirection: 'column' }}>
+      <Typography sx={{ margin: '10px 0px 15px 10px' }} variant="h5">
+        Create New Study
+      </Typography>
+      <Container sx={{ maxWidth: 'xl' }}>
         <Stepper activeStep={activeStep}>
           {steps.map((label) => {
             const stepProps: { completed?: boolean } = {};
@@ -73,8 +70,9 @@ const NewStudy: React.FC = () => {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <Box sx={{ height: '30rem' }}>{getSectionComponent()}</Box>
-
+            <Container maxWidth="lg" sx={{ height: '36rem', display: 'flex' }}>
+              {getSectionComponent()}
+            </Container>
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Button variant="outlined" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
                 Back
@@ -85,7 +83,7 @@ const NewStudy: React.FC = () => {
             </Box>
           </React.Fragment>
         )}
-      </Box>
+      </Container>
     </Container>
   );
 };

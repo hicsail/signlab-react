@@ -12,7 +12,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
         paper: '#fefefe'
       },
       text: {
-        primary: '#020202'
+        primary: '#000000'
       },
       divider: '#a1a1a1'
     },
