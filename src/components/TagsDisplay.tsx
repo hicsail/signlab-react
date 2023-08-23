@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Stack, Typography } from '@mui/material';
+import { Box, Grid, Button, Container, Typography } from '@mui/material';
 import AccessibilityIcon from '@mui/icons-material/Accessibility';
 import TextFormatIcon from '@mui/icons-material/TextFormat';
 import AssistantPhotoIcon from '@mui/icons-material/AssistantPhoto';
@@ -33,8 +33,10 @@ const TagsDisplay: React.FC = () => {
   };
 
   const removeField = (index: number) => {
+    console.log(tagFields);
     tagFields.splice(index, 1);
     setTagFields([...tagFields]);
+    console.log(tagFields);
   };
 
   const produceJSONForm = () => {
@@ -82,9 +84,9 @@ const TagsDisplay: React.FC = () => {
   ];
 
   return (
-    <Grid container spacing={4}>
-      <Grid item xs={3}>
-        <Stack direction="column" justifyContent="flex-end">
+    <Grid container spacing={3}>
+      <Grid item xs={3} sx={{ marginLeft: '-20px' }}>
+        <Container sx={{ display: 'flex', maxWidth: '100%', flexDirection: 'column', marginRight: '50px' }}>
           <Typography variant="h5">Tag Fields</Typography>
           {tagFieldOptions.map((button: any) => (
             <Button
@@ -98,7 +100,7 @@ const TagsDisplay: React.FC = () => {
               {button.name}
             </Button>
           ))}
-        </Stack>
+        </Container>
         <TagFormPreviewDialog data={data} clicked={open} toggleModal={toggleModal} />
         <Button variant="outlined" sx={{ marginTop: '50px', left: '-40px' }} onClick={openTagFormPreview}>
           Preview

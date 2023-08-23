@@ -70,7 +70,7 @@ const NewStudy: React.FC = () => {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <Container maxWidth="lg" sx={{ height: '36rem', display: 'flex' }}>
+            <Container maxWidth="lg" sx={{ height: '36rem', width: '100%' }}>
               {getSectionComponent()}
             </Container>
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>

@@ -27,7 +27,7 @@ export abstract class TagField {
     this.kindDisplay = kindDisplay;
     this.type = type;
   }
-
+  //in TagFieldComponent we need to set data on json form change
   setData(data: any) {
     this.data = data;
   }

@@ -15,6 +15,7 @@ interface DialogProps {
 
 export const TagFormPreviewDialog: React.FC<DialogProps> = (props: DialogProps) => {
   const [data, setData] = useState('');
+  console.log(props);
 
   return (
     <Container>
