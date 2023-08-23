@@ -15,14 +15,13 @@ interface DialogProps {
 
 export const TagFormPreviewDialog: React.FC<DialogProps> = (props: DialogProps) => {
   const [data, setData] = useState('');
-  console.log(props);
 
   return (
     <Container>
-      <Dialog fullWidth open={props.clicked} onClose={props.toggleModal} maxWidth="md">
+      <Dialog open={props.clicked} onClose={props.toggleModal} maxWidth="md">
         <DialogContent>
           <Container sx={{ display: 'flex', flexDirection: 'row' }}>
-            <Container sx={{ background: 'black', width: '32rem', height: '25rem', marginRight: '40px' }}>
+            <Container sx={{ background: 'black', width: '30rem', height: '25rem', marginRight: '40px' }}>
               <Typography variant="body2" sx={{ color: ' white !important' }}>
                 Your Video Will Appear Here
               </Typography>

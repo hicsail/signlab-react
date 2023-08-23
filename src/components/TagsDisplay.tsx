@@ -35,10 +35,10 @@ const TagsDisplay: React.FC = () => {
   };
 
   const removeField = (index: number) => {
-    console.log(tagFields);
     tagFields.splice(index, 1);
     setTagFields([...tagFields]);
-    console.log(tagFields);
+    valid.splice(index, 1);
+    setValid([...valid]);
   };
 
   const produceJSONForm = () => {
