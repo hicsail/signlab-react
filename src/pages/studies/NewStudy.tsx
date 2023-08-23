@@ -25,7 +25,7 @@ const NewStudy: React.FC = () => {
     setActiveStep(0);
   };
 
-  const steps = ['Study Identification', 'Construct Tagging Interface', 'Select Tag Training'];
+  const steps = ['Study Identification', 'Construct Tagging Interface', 'Select Tag Training Items'];
 
   function getSectionComponent() {
     switch (activeStep) {
