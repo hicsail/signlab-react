@@ -24,12 +24,14 @@ type TagPreviewInformation = {
 const TagsDisplay: React.FC = () => {
   const [tagFields, setTagFields] = useState<TagField[]>([]);
   const [data, setData] = useState<TagPreviewInformation>({ previewDataSchema: {}, previewUiSchema: {}, renderers: [] });
+  const [valid, setValid] = useState<boolean[]>([]);
   const [open, setOpen] = useState(false);
   const renderers = [...materialRenderers];
 
   const addTagField = (tagFieldType: TagFieldType) => {
     const field = TagFieldGeneratorService(tagFieldType);
     setTagFields([...tagFields, field]);
+    setValid([...valid, false]);
   };
 
   const removeField = (index: number) => {
@@ -102,7 +104,7 @@ const TagsDisplay: React.FC = () => {
           ))}
         </Container>
         <TagFormPreviewDialog data={data} clicked={open} toggleModal={toggleModal} />
-        <Button variant="outlined" sx={{ marginTop: '50px', left: '-40px' }} onClick={openTagFormPreview}>
+        <Button variant="outlined" sx={{ marginTop: '50px', left: '-40px' }} onClick={openTagFormPreview} disabled={valid.includes(false)}>
           Preview
         </Button>
       </Grid>
@@ -111,7 +113,7 @@ const TagsDisplay: React.FC = () => {
           {tagFields.length > 0 ? (
             tagFields.map((value: TagField, index: number) => (
               <Box key={index} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                <TagFieldComponent field={value} />
+                <TagFieldComponent field={value} valid={valid} validate={setValid} index={index} />
                 <Button size="large" sx={{ marginTop: '45px' }} startIcon={<DeleteIcon />} onClick={() => removeField(index)} />
               </Box>
             ))
