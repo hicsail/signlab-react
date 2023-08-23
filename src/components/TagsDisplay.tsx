@@ -87,7 +87,7 @@ const TagsDisplay: React.FC = () => {
 
   return (
     <Grid container spacing={3}>
-      <Grid item xs={3} sx={{ marginLeft: '-20px' }}>
+      <Grid item xs={3} sx={{ margin: '0px 40px 0px -40px' }}>
         <Container sx={{ display: 'flex', maxWidth: '100%', flexDirection: 'column', marginRight: '50px' }}>
           <Typography variant="h5">Tag Fields</Typography>
           {tagFieldOptions.map((button: any) => (
@@ -109,7 +109,7 @@ const TagsDisplay: React.FC = () => {
         </Button>
       </Grid>
       <Grid item xs={9}>
-        <Box sx={{ height: 400, bgcolor: '#fffdf0', textAlign: 'center' }}>
+        <Box sx={{ height: 400, bgcolor: '#f8f6e0', textAlign: 'center' }}>
           {tagFields.length > 0 ? (
             tagFields.map((value: TagField, index: number) => (
               <Box key={index} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
