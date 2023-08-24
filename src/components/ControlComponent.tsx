@@ -37,14 +37,14 @@ const ControlComponent: React.FC<Table> = ({ tableRows }: Table) => {
     {
       field: 'description',
       headerName: 'Description',
-      width: 450,
+      width: 575,
       editable: true
     },
     {
       field: 'delete',
       type: 'actions',
       headerName: 'Delete',
-      width: 90,
+      width: 120,
       cellClassName: 'delete',
       getActions: ({ id }) => {
         return [<GridActionsCellItem icon={<DeleteIcon />} label="Delete" onClick={handleDeleteClick(id)} />];

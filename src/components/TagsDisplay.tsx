@@ -87,7 +87,7 @@ const TagsDisplay: React.FC = () => {
 
   return (
     <Grid container spacing={3}>
-      <Grid item xs={3} sx={{ margin: '0px 40px 0px -40px' }}>
+      <Grid item xs={3} sx={{ margin: '0px 40px 10px -40px' }}>
         <Container sx={{ display: 'flex', maxWidth: '100%', flexDirection: 'column', marginRight: '50px' }}>
           <Typography variant="h5">Tag Fields</Typography>
           {tagFieldOptions.map((button: any) => (
@@ -103,10 +103,10 @@ const TagsDisplay: React.FC = () => {
             </Button>
           ))}
         </Container>
-        <TagFormPreviewDialog data={data} clicked={open} toggleModal={toggleModal} />
-        <Button variant="outlined" sx={{ marginTop: '50px', left: '-40px' }} onClick={openTagFormPreview} disabled={valid.includes(false)}>
+        <Button variant="outlined" sx={{ position: 'absolute', margin: '5px 0px 20px -90px' }} onClick={openTagFormPreview} disabled={valid.includes(false)}>
           Preview
         </Button>
+        <TagFormPreviewDialog data={data} clicked={open} toggleModal={toggleModal} />
       </Grid>
       <Grid item xs={9}>
         <Box sx={{ height: 400, bgcolor: '#f8f6e0', textAlign: 'center' }}>

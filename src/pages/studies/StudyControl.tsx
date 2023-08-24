@@ -40,11 +40,13 @@ const rows = [
 
 const StudyControl: React.FC = () => {
   return (
-    <Container sx={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContext: 'space-between' }}>
-      <h3 style={{ top: '10%', paddingBottom: '10px' }}>Study Control</h3>
-      <Box sx={{ position: '-webkit-sticky' }}>
-        <ControlComponent tableRows={rows} />
-      </Box>
+    <Container sx={{ position: 'absolute', top: '75px', left: '1%', right: '1%' }}>
+      <Container sx={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContext: 'space-between' }}>
+        <h3 style={{ top: '10%', paddingBottom: '10px' }}>Study Control</h3>
+        <Box sx={{ position: '-webkit-sticky' }}>
+          <ControlComponent tableRows={rows} />
+        </Box>
+      </Container>
     </Container>
   );
 };

@@ -2,6 +2,7 @@ import { Container, Typography, Button, Box, Stepper, Step, StepLabel } from '@m
 import React from 'react';
 import { TagsDisplay } from '../../components/TagsDisplay';
 import { NewStudyJsonForm } from '../../components/NewStudyJsonForm';
+import { TagTrainingComponent } from '../../components/TagTrainingComponent';
 //import { AslLexSignBankField, aslLexSignBankControlRendererTester } from '../../custom-fields/asl-lex-field';
 //import { fileListControlRendererTester, FileListField } from '../../custom-fields/file-list';
 //import { VideoOptionUpload, videoOptionUploadRendererTester } from '../../custom-fields/video-option-upload.component';
@@ -34,11 +35,7 @@ const NewStudy: React.FC = () => {
       case 1:
         return <TagsDisplay />;
       case 2:
-        return (
-          <Button variant="outlined" sx={{ margin: '10px' }}>
-            Upload Videos (ZIP)
-          </Button>
-        );
+        return <TagTrainingComponent />;
       default:
         return null;
     }
@@ -65,15 +62,15 @@ const NewStudy: React.FC = () => {
             <Typography sx={{ mt: 2, mb: 1 }}>All steps completed - your new study is created</Typography>
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Box sx={{ flex: '1 1 auto' }} />
-              <Button onClick={handleReset}>Reset</Button>
+              <Button onClick={handleReset}>Start Over</Button>
             </Box>
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <Container maxWidth="lg" sx={{ height: '36rem', width: '100%' }}>
+            <Container maxWidth="lg" sx={{ width: '100%' }}>
               {getSectionComponent()}
             </Container>
-            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+            <Box sx={{ marginTop: '30px', display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Button variant="outlined" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
                 Back
               </Button>

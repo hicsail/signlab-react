@@ -21,7 +21,7 @@ function NavBar() {
         <Link sx={{ fontSize: '16px', paddingLeft: '1rem', color: 'white' }} underline="none" href={`/loginpage`}>
           Login
         </Link>
-        <Link sx={{ fontSize: '16px', paddingLeft: '1rem', color: 'white' }} underline="none" href={`/signuppage`}>
+        <Link sx={{ fontSize: '16px', paddingLeft: '1rem', color: 'white' }} underline="none" href={`/loginpage`}>
           Sign Up
         </Link>
       </Toolbar>
