@@ -1,10 +1,14 @@
 import { AppBar, Toolbar, CssBaseline, Typography, Link } from '@mui/material';
 import { SideBar } from './SideBar';
 import { Divider } from '@mui/material';
+import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function NavBar() {
+  const { token, initialized } = useAuth();
+  const navigate = useNavigate();
   return (
-    <AppBar>
+    <AppBar sx={{ background: '#6b37fa' }}>
       <CssBaseline />
       <Toolbar>
         <SideBar />
@@ -18,12 +22,20 @@ function NavBar() {
           ASL-LEX SignLab
         </Typography>
         <Divider orientation="vertical" flexItem />
-        <Link sx={{ fontSize: '16px', paddingLeft: '1rem', color: 'white' }} underline="none" href={`/loginpage`}>
-          Login
-        </Link>
-        <Link sx={{ fontSize: '16px', paddingLeft: '1rem', color: 'white' }} underline="none" href={`/loginpage`}>
-          Sign Up
-        </Link>
+        {!token || !initialized ? (
+          <div>
+            <Link sx={{ fontSize: '16px', paddingLeft: '1rem', color: 'white' }} underline="none" href={`/loginpage`}>
+              Log In
+            </Link>
+            <Link sx={{ fontSize: '16px', paddingLeft: '1rem', color: 'white' }} underline="none" href={`/loginpage`}>
+              Sign Up
+            </Link>
+          </div>
+        ) : (
+          <Link sx={{ fontSize: '16px', paddingLeft: '1rem', color: 'white' }} onClick={() => navigate('/logoutpage')}>
+            Log Out
+          </Link>
+        )}
       </Toolbar>
     </AppBar>
   );

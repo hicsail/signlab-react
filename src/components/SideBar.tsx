@@ -3,9 +3,11 @@ import { Divider, Drawer, IconButton, List, Typography, Link } from '@mui/materi
 import MenuIcon from '@mui/icons-material/Menu';
 import { Environment } from './Environment';
 import { Navigation } from './Navigation';
+import { useAuth } from '../context/AuthContext';
 
 function SideBar() {
   const [openDrawer, setOpenDrawer] = useState(false);
+  const { token, initialized } = useAuth();
 
   return (
     <div>
@@ -26,11 +28,15 @@ function SideBar() {
           </Link>
         </List>
         <Divider sx={{ paddingTop: '8px' }} orientation="horizontal" flexItem />
-        <Typography variant="h5">Environment</Typography>
-        <Environment />
-        <Divider orientation="horizontal" flexItem />
-        <Typography variant="h5">Navigation</Typography>
-        <Navigation />
+        {token && initialized && (
+          <div>
+            <Typography variant="h5">Environment</Typography>
+            <Environment />
+            <Divider orientation="horizontal" flexItem />
+            <Typography variant="h5">Navigation</Typography>
+            <Navigation />
+          </div>
+        )}
       </Drawer>
       <IconButton onClick={() => setOpenDrawer(!openDrawer)}>
         <MenuIcon />

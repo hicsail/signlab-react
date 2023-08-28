@@ -1,4 +1,5 @@
-/* eslint-disable */
+/* Generated File DO NOT EDIT. */
+/* tslint:disable */
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -11,240 +12,255 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
   DateTime: any;
-  /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
 };
 
-export type AuthResponse = {
-  __typename?: 'AuthResponse';
-  token: Scalars['String'];
-  user: User;
+/** Input type for accepting an invite */
+export type AcceptInviteModel = {
+  /** The email address of the user accepting the invite */
+  email: Scalars['String'];
+  /** The full name of the user accepting the invite */
+  fullname: Scalars['String'];
+  /** The invite code that was included in the invite email */
+  inviteCode: Scalars['String'];
+  /** The password for the new user account */
+  password: Scalars['String'];
+  /** The ID of the project the invite is associated with */
+  projectId: Scalars['String'];
 };
 
-export type Dataset = {
-  __typename?: 'Dataset';
-  /** The user who created the dataset */
-  creator: User;
-  /** Human readable discription to describe the purpose of the dataset */
-  description: Scalars['String'];
+export type AccessToken = {
+  __typename?: 'AccessToken';
+  accessToken: Scalars['String'];
+};
+
+export type ConfigurableProjectSettings = {
+  description?: InputMaybe<Scalars['String']>;
+  homePage?: InputMaybe<Scalars['String']>;
+  logo?: InputMaybe<Scalars['String']>;
+  muiTheme?: InputMaybe<Scalars['JSON']>;
+  name?: InputMaybe<Scalars['String']>;
+  redirectUrl?: InputMaybe<Scalars['String']>;
+};
+
+export type EmailLoginDto = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+  projectId: Scalars['String'];
+};
+
+export type ForgotDto = {
+  email: Scalars['String'];
+  projectId: Scalars['String'];
+};
+
+export type InviteModel = {
+  __typename?: 'InviteModel';
+  /** The date and time at which the invitation was created. */
+  createdAt: Scalars['DateTime'];
+  /** The date and time at which the invitation was deleted, if applicable. */
+  deletedAt?: Maybe<Scalars['DateTime']>;
+  /** The email address of the user being invited. */
+  email: Scalars['String'];
+  /** The date and time at which the invitation expires. */
+  expiresAt: Scalars['DateTime'];
+  /** The ID of the invitation. */
   id: Scalars['ID'];
-  /** Human readable way to idenfity the dataset, unique */
-  name: Scalars['String'];
-  projectAccess: Scalars['JSON'];
+  /** The ID of the project to which the invitation belongs. */
+  projectId: Scalars['String'];
+  /** The role that the user being invited will have. */
+  role: Scalars['Int'];
+  /** The status of the invitation. */
+  status: InviteStatus;
+  /** The date and time at which the invitation was last updated. */
+  updatedAt: Scalars['DateTime'];
 };
 
-export type DatasetCreate = {
-  /** The ID of the user who is creating the dataset */
-  creatorID: Scalars['ID'];
-  /** Human readable discription to describe the purpose of the dataset */
-  description: Scalars['String'];
-  /** Human readable way to idenfity the dataset, unique */
-  name: Scalars['String'];
-};
+/** The status of an invite */
+export enum InviteStatus {
+  Accepted = 'ACCEPTED',
+  Cancelled = 'CANCELLED',
+  Expired = 'EXPIRED',
+  Pending = 'PENDING'
+}
 
 export type Mutation = {
   __typename?: 'Mutation';
-  changeDatasetDescription: Scalars['Boolean'];
-  changeDatasetName: Scalars['Boolean'];
-  changeProjectAccess: Scalars['Boolean'];
-  createDataset: Dataset;
-  createOrganization: Organization;
-  createProject: Project;
-  deleteProject: Scalars['Boolean'];
-  login: AuthResponse;
-  projectAdminChange: Scalars['Boolean'];
-  signup: AuthResponse;
+  acceptInvite: InviteModel;
+  cancelInvite: InviteModel;
+  createInvite: InviteModel;
+  createProject: ProjectModel;
+  forgotPassword: Scalars['Boolean'];
+  loginEmail: AccessToken;
+  loginUsername: AccessToken;
+  resendInvite: InviteModel;
+  resetPassword: Scalars['Boolean'];
+  signup: AccessToken;
+  updateProject: ProjectModel;
+  updateProjectAuthMethods: ProjectModel;
+  updateProjectSettings: ProjectModel;
 };
 
-
-export type MutationChangeDatasetDescriptionArgs = {
-  dataset: Scalars['ID'];
-  newDescription: Scalars['String'];
+export type MutationAcceptInviteArgs = {
+  input: AcceptInviteModel;
 };
 
-
-export type MutationChangeDatasetNameArgs = {
-  dataset: Scalars['ID'];
-  newName: Scalars['String'];
+export type MutationCancelInviteArgs = {
+  id: Scalars['ID'];
 };
 
-
-export type MutationChangeProjectAccessArgs = {
-  projectAccessChange: ProjectAccessChange;
+export type MutationCreateInviteArgs = {
+  email: Scalars['String'];
+  role?: InputMaybe<Scalars['Int']>;
 };
-
-
-export type MutationCreateDatasetArgs = {
-  datasetCreate: DatasetCreate;
-};
-
-
-export type MutationCreateOrganizationArgs = {
-  orgCreate: OrganizationCreate;
-};
-
 
 export type MutationCreateProjectArgs = {
-  projectCreate: ProjectCreate;
+  project: ProjectCreateInput;
 };
 
-
-export type MutationDeleteProjectArgs = {
-  projectID: Scalars['ID'];
+export type MutationForgotPasswordArgs = {
+  user: ForgotDto;
 };
 
-
-export type MutationLoginArgs = {
-  credentials: UserCredentials;
+export type MutationLoginEmailArgs = {
+  user: EmailLoginDto;
 };
 
-
-export type MutationProjectAdminChangeArgs = {
-  projectAdminChange: ProjectAdminChange;
+export type MutationLoginUsernameArgs = {
+  user: UsernameLoginDto;
 };
 
+export type MutationResendInviteArgs = {
+  id: Scalars['ID'];
+};
+
+export type MutationResetPasswordArgs = {
+  user: ResetDto;
+};
 
 export type MutationSignupArgs = {
-  credentials: UserSignup;
+  user: UserSignupDto;
 };
 
-export type Organization = {
-  __typename?: 'Organization';
-  _id: Scalars['ID'];
-  name: Scalars['String'];
+export type MutationUpdateProjectArgs = {
+  id: Scalars['String'];
+  settings: ConfigurableProjectSettings;
 };
 
-export type OrganizationCreate = {
-  name: Scalars['String'];
+export type MutationUpdateProjectAuthMethodsArgs = {
+  id: Scalars['String'];
+  projectAuthMethods: ProjectAuthMethodsInput;
 };
 
-export type PasswordComplexity = {
-  __typename?: 'PasswordComplexity';
-  lowerCase?: Maybe<Scalars['Float']>;
-  max?: Maybe<Scalars['Float']>;
-  min?: Maybe<Scalars['Float']>;
-  numeric?: Maybe<Scalars['Float']>;
-  requirementCount?: Maybe<Scalars['Float']>;
-  symbol?: Maybe<Scalars['Float']>;
-  upperCase?: Maybe<Scalars['Float']>;
+export type MutationUpdateProjectSettingsArgs = {
+  id: Scalars['String'];
+  projectSettings: ProjectSettingsInput;
 };
 
-/** Projects that are part of an organization */
-export type Project = {
-  __typename?: 'Project';
-  /** unique identifier for the project */
-  _id: Scalars['ID'];
-  /** organization that the project belongs to */
-  created: Scalars['DateTime'];
-  /** description of the project */
+export type ProjectAuthMethodsInput = {
+  emailAuth?: InputMaybe<Scalars['Boolean']>;
+  googleAuth?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type ProjectAuthMethodsModel = {
+  __typename?: 'ProjectAuthMethodsModel';
+  emailAuth: Scalars['Boolean'];
+  googleAuth: Scalars['Boolean'];
+};
+
+export type ProjectCreateInput = {
+  allowSignup: Scalars['Boolean'];
   description: Scalars['String'];
-  /** name of the project, unique in an organization */
+  displayProjectName: Scalars['Boolean'];
+  emailAuth: Scalars['Boolean'];
+  googleAuth: Scalars['Boolean'];
+  homePage?: InputMaybe<Scalars['String']>;
+  logo?: InputMaybe<Scalars['String']>;
+  muiTheme?: InputMaybe<Scalars['JSON']>;
+  name: Scalars['String'];
+  redirectUrl?: InputMaybe<Scalars['String']>;
+};
+
+export type ProjectModel = {
+  description?: Maybe<Scalars['String']>;
   name: Scalars['String'];
 };
 
-export type ProjectAccessChange = {
-  /** The ID of the dataset to change project access to */
-  datasetID: Scalars['ID'];
-  /** If the project should have access to the dataset */
-  hasAccess: Scalars['Boolean'];
-  /** The ID of the project to change access to */
-  projectID: Scalars['ID'];
+export type ProjectSettingsInput = {
+  allowSignup?: InputMaybe<Scalars['Boolean']>;
+  displayProjectName?: InputMaybe<Scalars['Boolean']>;
 };
 
-export type ProjectAdminChange = {
-  /** Whether the user should have admin access to the project */
-  hasAdminAccess: Scalars['Boolean'];
-  /** The ID of the project to update */
-  projectID: Scalars['ID'];
-  /** The ID of the user to update */
-  userID: Scalars['ID'];
-};
-
-export type ProjectCreate = {
-  /** description of the project */
-  description: Scalars['String'];
-  /** name of the project, unique in an organization */
-  name: Scalars['String'];
+export type ProjectSettingsModel = {
+  __typename?: 'ProjectSettingsModel';
+  allowSignup: Scalars['Boolean'];
+  displayProjectName: Scalars['Boolean'];
 };
 
 export type Query = {
   __typename?: 'Query';
-  datasetExists: Scalars['Boolean'];
-  exists: Scalars['Boolean'];
-  findOrganization: Organization;
-  getDatasets: Array<Dataset>;
-  getDatasetsByProject: Array<Dataset>;
-  getOrganizations: Array<Organization>;
-  getPasswordComplexity: PasswordComplexity;
-  getProjects: Array<Project>;
-  projectExists: Scalars['Boolean'];
-  userAvailable: UserAvailability;
+  getProject: ProjectModel;
+  getUser: UserModel;
+  invite: InviteModel;
+  invites: Array<InviteModel>;
+  listProjects: Array<ProjectModel>;
+  projectUsers: Array<UserModel>;
+  publicKey: Array<Scalars['String']>;
+  users: Array<UserModel>;
 };
 
-
-export type QueryDatasetExistsArgs = {
-  name: Scalars['String'];
+export type QueryGetProjectArgs = {
+  id: Scalars['String'];
 };
 
-
-export type QueryExistsArgs = {
-  name: Scalars['String'];
+export type QueryGetUserArgs = {
+  id: Scalars['ID'];
 };
 
-
-export type QueryFindOrganizationArgs = {
-  organization: Scalars['String'];
+export type QueryInviteArgs = {
+  id: Scalars['ID'];
 };
 
-
-export type QueryGetDatasetsByProjectArgs = {
-  project: Scalars['ID'];
+export type QueryInvitesArgs = {
+  status?: InputMaybe<InviteStatus>;
 };
 
-
-export type QueryProjectExistsArgs = {
-  name: Scalars['String'];
+export type QueryProjectUsersArgs = {
+  projectId: Scalars['String'];
 };
 
-
-export type QueryUserAvailableArgs = {
-  identification: UserIdentification;
-};
-
-export type User = {
-  __typename?: 'User';
-  _id: Scalars['ID'];
+export type ResetDto = {
+  code: Scalars['String'];
   email: Scalars['String'];
-  name: Scalars['String'];
-  organization: Organization;
-  roles: Scalars['JSON'];
-  username: Scalars['String'];
-};
-
-export type UserAvailability = {
-  __typename?: 'UserAvailability';
-  email: Scalars['Boolean'];
-  username: Scalars['Boolean'];
-};
-
-export type UserCredentials = {
-  organization: Scalars['ID'];
   password: Scalars['String'];
-  username: Scalars['String'];
+  projectId: Scalars['String'];
 };
 
-export type UserIdentification = {
-  email: Scalars['String'];
-  organization: Scalars['ID'];
-  username: Scalars['String'];
+export type UserModel = {
+  __typename?: 'UserModel';
+  createdAt: Scalars['DateTime'];
+  deletedAt?: Maybe<Scalars['DateTime']>;
+  email?: Maybe<Scalars['String']>;
+  fullname?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  projectId: Scalars['String'];
+  role: Scalars['Int'];
+  updatedAt: Scalars['DateTime'];
+  username?: Maybe<Scalars['String']>;
 };
 
-export type UserSignup = {
+export type UserSignupDto = {
   email: Scalars['String'];
-  name: Scalars['String'];
-  organization: Scalars['ID'];
+  fullname: Scalars['String'];
   password: Scalars['String'];
+  projectId: Scalars['String'];
+  username?: InputMaybe<Scalars['String']>;
+};
+
+export type UsernameLoginDto = {
+  password: Scalars['String'];
+  projectId: Scalars['String'];
   username: Scalars['String'];
 };
+

@@ -5,20 +5,19 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 interface SubLink {
   title: string;
-  link: string;
+  link?: string;
 }
 
 interface Link {
   name: string;
   sublinks: SubLink[];
+  handleClick: (event: any) => void;
 }
 
 interface LinksProps {
   source: string;
   links: Link[];
 }
-
-/*const { project, study } = useContext(SampleContext); */
 
 const DropdownComponent: React.FC<LinksProps> = ({ source, links }: LinksProps) => {
   /* const handleClick = (e: any) => {
@@ -42,6 +41,7 @@ const DropdownComponent: React.FC<LinksProps> = ({ source, links }: LinksProps) 
                       color: 'black'
                     }}
                     key={sublink.title}
+                    onClick={() => item.handleClick(sublink.title)}
                   >
                     {sublink.title}
                   </Button>
