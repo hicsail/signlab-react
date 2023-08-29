@@ -20,7 +20,7 @@ const schema = {
   required: ['name', 'description'],
   errorMessage: {
     type: 'data should be an object',
-    properties: { name: 'Project name should be ...', description: 'Description ahah' },
+    properties: { name: 'Project name should be ...' },
     _: 'data should ...'
   }
 };

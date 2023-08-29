@@ -15,9 +15,7 @@ function SideBar() {
         <List sx={{ marginTop: '20px' }}>
           <Link
             sx={{
-              color: 'black',
               fontSize: '22px',
-              fontFamily: 'BlinkMacSystemFont',
               paddingLeft: '16px'
             }}
             underline={'none'}
