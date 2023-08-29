@@ -1,10 +1,9 @@
 import { Box } from '@mui/material';
 import { DropdownComponent } from './Dropdown';
-import { EnvironmentContext } from '../context/EnvironmentContext';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Navigation: React.FC = () => {
-  const { study } = useContext(EnvironmentContext);
+  const [study] = useState('study name');
 
   const [names, setNames] = useState([
     {

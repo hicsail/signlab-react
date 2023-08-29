@@ -1,4 +1,3 @@
-import { Organization } from './organization.dto';
 
 export interface Project {
   /** The generated project ID */

@@ -11,7 +11,7 @@ interface SubLink {
 interface Link {
   name: string;
   sublinks: SubLink[];
-  handleClick: (event: any) => void;
+  handleClick?: (event: any) => void;
 }
 
 interface LinksProps {
@@ -41,7 +41,7 @@ const DropdownComponent: React.FC<LinksProps> = ({ source, links }: LinksProps) 
                       color: 'black'
                     }}
                     key={sublink.title}
-                    onClick={() => item.handleClick(sublink.title)}
+                    onClick={() => item.handleClick!(sublink.title)}
                   >
                     {sublink.title}
                   </Button>
