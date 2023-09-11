@@ -24,7 +24,7 @@ export const ProjectProvider: FC<ProjectProviderProps> = (props) => {
 
   useEffect(() => {
     if (decoded_token?.projectId) {
-      getProject({ variables: { id: decoded_token.projectId } }).then(({ data }) => {
+      getProject({ variables: { id: decoded_token.projectId } }).then((data: any) => {
         if (data?.getProject) {
           setProject(data.getProject as ProjectModel);
           setProjectTheme(
