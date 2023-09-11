@@ -17,7 +17,7 @@ interface LinksProps {
   links: Link[];
 }
 
-const DropdownComponent: React.FC<LinksProps> = ({ links }: LinksProps) => {
+export const DropdownComponent: React.FC<LinksProps> = ({ links }: LinksProps) => {
   return (
     <div>
       {links?.map((item: Link) => (
@@ -46,5 +46,3 @@ const DropdownComponent: React.FC<LinksProps> = ({ links }: LinksProps) => {
     </div>
   );
 };
-
-export { DropdownComponent };

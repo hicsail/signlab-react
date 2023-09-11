@@ -21,7 +21,7 @@ type TagPreviewInformation = {
   renderers: any;
 };
 
-const TagsDisplay: React.FC = () => {
+export const TagsDisplay: React.FC = () => {
   const [tagFields, setTagFields] = useState<TagField[]>([]);
   const [data, setData] = useState<TagPreviewInformation>({ previewDataSchema: {}, previewUiSchema: {}, renderers: [] });
   const [valid, setValid] = useState<boolean[]>([]);
@@ -127,5 +127,3 @@ const TagsDisplay: React.FC = () => {
     </Grid>
   );
 };
-
-export { TagsDisplay };

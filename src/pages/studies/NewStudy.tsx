@@ -10,7 +10,7 @@ import { TagTrainingComponent } from '../../components/TagTrainingComponent';
 //import { VideoFieldComponent, videoFieldTester } from '../../video-recording/components/video-field.component';
 //import { TagFieldGeneratorService } from '../../services/tag-field-generator.service';
 
-const NewStudy: React.FC = () => {
+export const NewStudy: React.FC = () => {
   //all constants
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -84,5 +84,3 @@ const NewStudy: React.FC = () => {
     </Container>
   );
 };
-
-export { NewStudy };

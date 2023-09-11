@@ -1,11 +1,12 @@
+import { JsonFormsRendererRegistryEntry, JsonSchema, UISchemaElement } from '@jsonforms/core';
 import { JsonForms } from '@jsonforms/react';
 import { Box, Button, Container, Dialog, DialogActions, DialogContent, Typography } from '@mui/material';
 import { useState } from 'react';
 
 type TagPreviewInformation = {
-  previewDataSchema: any;
-  previewUiSchema: any;
-  renderers: any;
+  previewDataSchema: JsonSchema;
+  previewUiSchema: UISchemaElement;
+  renderers: JsonFormsRendererRegistryEntry[];
 };
 interface DialogProps {
   data: TagPreviewInformation;

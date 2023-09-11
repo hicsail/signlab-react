@@ -42,7 +42,7 @@ const uischema = {
   ]
 };
 
-const NewProject: React.FC = () => {
+export const NewProject: React.FC = () => {
   const [error, setError] = useState(true);
   const navigate = useNavigate();
 
@@ -81,5 +81,3 @@ const NewProject: React.FC = () => {
     </Container>
   );
 };
-
-export { NewProject };

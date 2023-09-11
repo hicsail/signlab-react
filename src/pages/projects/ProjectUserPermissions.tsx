@@ -54,7 +54,7 @@ const tableRows = [
   }
 ];
 
-const ProjectUserPermissions: React.FC = () => {
+export const ProjectUserPermissions: React.FC = () => {
   const [rows] = useState(tableRows);
   const [rowModesModel, setRowModesModel] = useState<GridRowModesModel>({});
 
@@ -124,5 +124,3 @@ const ProjectUserPermissions: React.FC = () => {
     </Box>
   );
 };
-
-export { ProjectUserPermissions };

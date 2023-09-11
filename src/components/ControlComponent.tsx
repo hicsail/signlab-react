@@ -14,7 +14,7 @@ interface Table {
   tableRows: Row[];
 }
 
-const ControlComponent: React.FC<Table> = ({ tableRows }: Table) => {
+export const ControlComponent: React.FC<Table> = ({ tableRows }: Table) => {
   const [rows, setRows] = useState(tableRows);
   const [rowModesModel, setRowModesModel] = useState<GridRowModesModel>({});
 
@@ -82,5 +82,3 @@ const ControlComponent: React.FC<Table> = ({ tableRows }: Table) => {
     </Box>
   );
 };
-
-export { ControlComponent };

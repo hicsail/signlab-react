@@ -38,7 +38,7 @@ const rows = [
   }
 ];
 
-const StudyControl: React.FC = () => {
+export const StudyControl: React.FC = () => {
   return (
     <Container sx={{ position: 'absolute', top: '75px', left: '1%', right: '1%' }}>
       <Container sx={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContext: 'space-between' }}>
@@ -50,5 +50,3 @@ const StudyControl: React.FC = () => {
     </Container>
   );
 };
-
-export { StudyControl };

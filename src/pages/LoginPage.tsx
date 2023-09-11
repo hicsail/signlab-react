@@ -1,7 +1,7 @@
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Avatar, Box, Container, Link, Typography } from '@mui/material';
 
-const LoginPage = () => {
+export const LoginPage = () => {
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -30,5 +30,3 @@ const LoginPage = () => {
     </Container>
   );
 };
-
-export { LoginPage };

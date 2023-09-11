@@ -18,7 +18,7 @@ interface Table {
   columns: GridColDef[];
 }
 
-const DatasetControlComponent: React.FC<Table> = ({ tableRows, columns }: Table) => {
+export const DatasetControlComponent: React.FC<Table> = ({ tableRows, columns }: Table) => {
   const [rows] = useState(tableRows);
   const [rowModesModel, setRowModesModel] = useState<GridRowModesModel>({});
 
@@ -58,5 +58,3 @@ const DatasetControlComponent: React.FC<Table> = ({ tableRows, columns }: Table)
     </Box>
   );
 };
-
-export { DatasetControlComponent };

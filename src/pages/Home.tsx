@@ -2,7 +2,7 @@ import { keyframes } from 'styled-components';
 import styled from 'styled-components';
 import { useAuth } from '../context/AuthContext';
 
-const HomePage = () => {
+export const HomePage = () => {
   const { token, initialized } = useAuth();
 
   return (
@@ -33,5 +33,3 @@ const AnimatedGradientText = styled.h1`
   !-webkit-text-fill-color: transparent;
   color: #e2b1f2;
 `;
-
-export { HomePage };

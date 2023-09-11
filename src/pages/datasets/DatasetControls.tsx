@@ -76,7 +76,7 @@ interface Control {
   description: string;
 }
 
-const DatasetControls: React.FC = () => {
+export const DatasetControls: React.FC = () => {
   const [add, setAdd] = useState(false);
   const [upload, setUpload] = useState(false);
 
@@ -139,5 +139,3 @@ const DatasetControls: React.FC = () => {
     </Box>
   );
 };
-
-export { DatasetControls };

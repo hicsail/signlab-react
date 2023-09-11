@@ -59,7 +59,7 @@ const tableRows = [
   }
 ];
 
-const StudyUserPermissions: React.FC = () => {
+export const StudyUserPermissions: React.FC = () => {
   const [rows] = useState(tableRows);
   const [rowModesModel, setRowModesModel] = useState<GridRowModesModel>({});
 
@@ -146,5 +146,3 @@ const StudyUserPermissions: React.FC = () => {
     </Box>
   );
 };
-
-export { StudyUserPermissions };

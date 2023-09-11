@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Box, Button, Container } from '@mui/material';
 import { useState } from 'react';
 
-const TagView = () => {
+export const TagView = () => {
   const { state } = useLocation();
   console.log(state);
   const [initialData, setData] = useState({
@@ -58,5 +58,3 @@ const TagView = () => {
     </Container>
   );
 };
-
-export { TagView };

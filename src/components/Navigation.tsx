@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import { DropdownComponent } from './Dropdown';
 import { useEffect, useState } from 'react';
 
-const Navigation: React.FC = () => {
+export const Navigation: React.FC = () => {
   const [study] = useState('study name');
 
   const [names, setNames] = useState([
@@ -45,5 +45,3 @@ const Navigation: React.FC = () => {
     </Box>
   );
 };
-
-export { Navigation };

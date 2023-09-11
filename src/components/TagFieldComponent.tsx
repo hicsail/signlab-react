@@ -32,7 +32,7 @@ export const TagFieldComponent: React.FC<FieldProps> = ({ field, valid, validate
       validate([...valid]);
     }
   };
-  //MuiInputBase-input
+
   return (
     <Card sx={{ width: '90%', height: '15%', margin: '45px 15px -15px 10px' }}>
       <Container sx={{ display: 'flex', flexDirection: 'column', margin: ' 5px 0px -16px -20px' }}>

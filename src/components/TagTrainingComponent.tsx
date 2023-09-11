@@ -77,7 +77,7 @@ const columns: GridColDef[] = [
   }
 ];
 
-const TagTrainingComponent = () => {
+export const TagTrainingComponent = () => {
   const controls = [
     { name: 'First', description: 'The description of the object' },
     { name: 'Second', description: 'Description of the second object' }
@@ -102,5 +102,3 @@ const TagTrainingComponent = () => {
     </Box>
   );
 };
-
-export { TagTrainingComponent };

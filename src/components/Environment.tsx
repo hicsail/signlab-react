@@ -7,7 +7,7 @@ import { EnvironmentContext } from '../context/EnvironmentContext';
 import { useProject } from '../context/ProjectContext';
 import { ProjectModel } from '../graphql/graphql';
 
-const Environment: React.FC = () => {
+export const Environment: React.FC = () => {
   const { study } = useContext(EnvironmentContext);
   const { project, updateProject } = useProject();
 
@@ -55,5 +55,3 @@ const Environment: React.FC = () => {
     </Box>
   );
 };
-
-export { Environment };

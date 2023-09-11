@@ -51,7 +51,7 @@ const uischema = {
   ]
 };
 
-const NewStudyJsonForm: React.FC = () => {
+export const NewStudyJsonForm: React.FC = () => {
   const initialData = {
     name: '',
     description: '',
@@ -78,5 +78,3 @@ const NewStudyJsonForm: React.FC = () => {
     </Box>
   );
 };
-
-export { NewStudyJsonForm };
