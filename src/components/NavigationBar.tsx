@@ -8,7 +8,7 @@ function NavBar() {
   const { token, initialized } = useAuth();
   const navigate = useNavigate();
   return (
-    <AppBar sx={{ background: '#6b37fa' }}>
+    <AppBar sx={{}}>
       <CssBaseline />
       <Toolbar>
         <SideBar />

@@ -16,7 +16,7 @@ import { StudyUserPermissions } from './pages/studies/UserPermissions';
 import { DownloadTags } from './pages/studies/DownloadTags';
 import { LoginPage } from './pages/LoginPage';
 import { DatasetControls } from './pages/datasets/DatasetControls';
-import { Callback } from './pages/Callback';
+import { AuthCallback } from './pages/AuthCallback';
 import { EnvironmentContextProvider } from './context/EnvironmentContext';
 import { AuthProvider } from './context/AuthContext';
 import { AdminGuard } from './guards/AdminGuard';
@@ -31,7 +31,7 @@ function App() {
             <NavBar />
             <Routes>
               <Route path={'/'} element={<HomePage />} />
-              <Route path={'/callback'} element={<Callback />} />
+              <Route path={'/callback'} element={<AuthCallback />} />
               <Route path={'/loginpage'} element={<LoginPage />} />
               <Route element={<AdminGuard />}>
                 <Route path={'/newproject'} element={<NewProject />} />

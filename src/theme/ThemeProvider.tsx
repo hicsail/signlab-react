@@ -29,6 +29,13 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
           fontSize: '20px',
           fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont'
         }
+      },
+      MuiAppBar: {
+        styleOverrides: {
+          colorPrimary: {
+            backgroundColor: '#6b37fa'
+          }
+        }
       }
     }
   });

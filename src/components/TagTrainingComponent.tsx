@@ -99,6 +99,7 @@ export const TagTrainingComponent = () => {
           </AccordionDetails>
         </Accordion>
       ))}
+      <br />
     </Box>
   );
 };

@@ -3,12 +3,6 @@ import React from 'react';
 import { TagsDisplay } from '../../components/TagsDisplay';
 import { NewStudyJsonForm } from '../../components/NewStudyJsonForm';
 import { TagTrainingComponent } from '../../components/TagTrainingComponent';
-//import { AslLexSignBankField, aslLexSignBankControlRendererTester } from '../../custom-fields/asl-lex-field';
-//import { fileListControlRendererTester, FileListField } from '../../custom-fields/file-list';
-//import { VideoOptionUpload, videoOptionUploadRendererTester } from '../../custom-fields/video-option-upload.component';
-//import { userVideoOptionRendererTester, UserVideoOption } from '../../custom-fields/user-video-option-field.component';
-//import { VideoFieldComponent, videoFieldTester } from '../../video-recording/components/video-field.component';
-//import { TagFieldGeneratorService } from '../../services/tag-field-generator.service';
 
 export const NewStudy: React.FC = () => {
   //all constants
@@ -49,9 +43,8 @@ export const NewStudy: React.FC = () => {
       <Container sx={{ maxWidth: 'xl' }}>
         <Stepper activeStep={activeStep}>
           {steps.map((label) => {
-            const stepProps: { completed?: boolean } = {};
             return (
-              <Step key={label} {...stepProps}>
+              <Step key={label}>
                 <StepLabel>{label}</StepLabel>
               </Step>
             );

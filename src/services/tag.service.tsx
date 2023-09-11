@@ -1,7 +1,5 @@
-import { Injectable } from 'injection-js';
 import { Tag } from '../dtos/tag.dto';
 
-@Injectable()
 export class TagService {
   protected currentTag: Tag | null = null;
 
@@ -19,7 +17,4 @@ export class TagService {
   clearCurrentTag = () => {
     this.currentTag = null;
   };
-
-  // getNextUntaggedEntry()
-  // saveTag()
 }

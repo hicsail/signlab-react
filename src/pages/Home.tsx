@@ -2,7 +2,7 @@ import { keyframes } from 'styled-components';
 import styled from 'styled-components';
 import { useAuth } from '../context/AuthContext';
 
-export const HomePage = () => {
+export const HomePage: React.FC = () => {
   const { token, initialized } = useAuth();
 
   return (

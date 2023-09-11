@@ -1,13 +1,6 @@
 import { TagFieldType, AslLexField, AutoCompleteField, BooleanField, EmbeddedVideoOption, FreeTextField, NumericField, SliderField } from '../models/TagField';
-//import { DatasetService } from '../../core/services/dataset.service';
 
-/**
- * Service which provides factor methods for generating tag field options.
- */
-//@Injectable()
 export const TagFieldGeneratorService = (tagFieldType: TagFieldType) => {
-  //constructor(private datasetService: DatasetService) {}
-
   /**
    * Factory method to get the field definition associated with the given
    * field type.
