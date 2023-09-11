@@ -87,7 +87,7 @@ const TagsDisplay: React.FC = () => {
 
   return (
     <Grid container spacing={3}>
-      <Grid item xs={3} sx={{ margin: '0px 40px 10px -40px' }}>
+      <Grid item xs={3} sx={{ margin: '0px 40px 10px -40px', display: 'table-row' }}>
         <Container sx={{ display: 'flex', maxWidth: '100%', flexDirection: 'column', marginRight: '50px' }}>
           <Typography variant="h5">Tag Fields</Typography>
           {tagFieldOptions.map((button: any) => (
@@ -102,14 +102,15 @@ const TagsDisplay: React.FC = () => {
               {button.name}
             </Button>
           ))}
+          <Button variant="outlined" sx={{ marginTop: '5%', width: '12rem' }} onClick={openTagFormPreview} disabled={valid.includes(false)}>
+            Preview
+          </Button>
         </Container>
-        <Button variant="outlined" sx={{ position: 'absolute', margin: '5px 0px 20px -90px' }} onClick={openTagFormPreview} disabled={valid.includes(false)}>
-          Preview
-        </Button>
+
         <TagFormPreviewDialog data={data} clicked={open} toggleModal={toggleModal} />
       </Grid>
-      <Grid item xs={9}>
-        <Box sx={{ height: 400, bgcolor: '#f8f6e0', textAlign: 'center' }}>
+      <Grid item xs={9} sx={{ overflow: 'auto' }}>
+        <Box sx={{ height: 400, textAlign: 'center' }}>
           {tagFields.length > 0 ? (
             tagFields.map((value: TagField, index: number) => (
               <Box key={index} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -120,6 +121,7 @@ const TagsDisplay: React.FC = () => {
           ) : (
             <Box>No Tags Selected</Box>
           )}
+          <br />
         </Box>
       </Grid>
     </Grid>

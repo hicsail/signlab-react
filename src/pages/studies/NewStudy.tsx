@@ -40,7 +40,7 @@ const NewStudy: React.FC = () => {
         return null;
     }
   }
-  //sx={{ '& .MuiContainer-root': { width: '550rem' } }}
+
   return (
     <Container sx={{ position: 'absolute', left: '-5%', right: '-5%', alignItems: 'baseline', width: '100%', top: '100px', display: 'flex', flexDirection: 'column' }}>
       <Typography sx={{ margin: '10px 0px 15px 10px' }} variant="h5">
@@ -67,7 +67,7 @@ const NewStudy: React.FC = () => {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <Container maxWidth="lg" sx={{ width: '100%' }}>
+            <Container maxWidth="lg" sx={{ display: 'table', width: '100%', overflow: 'hidden' }}>
               {getSectionComponent()}
             </Container>
             <Box sx={{ marginTop: '30px', display: 'flex', flexDirection: 'row', pt: 2 }}>
