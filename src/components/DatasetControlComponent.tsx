@@ -26,10 +26,6 @@ const DatasetControlComponent: React.FC<Table> = ({ tableRows, columns }: Table)
     setRowModesModel(newRowModesModel);
   };
 
-  /*const handleDeleteClick = (id: GridRowId) => () => {
-    setRows(rows.filter((row) => row.id !== id));
-  };*/
-
   return (
     <Box sx={{ height: 350, width: '100%', boxShadow: '1px 9px 15px darkgrey' }}>
       <DataGrid

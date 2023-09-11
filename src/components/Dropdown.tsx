@@ -11,19 +11,13 @@ interface SubLink {
 interface Link {
   name: string;
   sublinks: SubLink[];
-  handleClick?: (event: any) => void;
 }
 
 interface LinksProps {
-  source: string;
   links: Link[];
 }
 
-const DropdownComponent: React.FC<LinksProps> = ({ source, links }: LinksProps) => {
-  /* const handleClick = (e: any) => {
-    setStudy(e.target.value);
-  }; */
-
+const DropdownComponent: React.FC<LinksProps> = ({ links }: LinksProps) => {
   return (
     <div>
       {links?.map((item: Link) => (
@@ -34,29 +28,16 @@ const DropdownComponent: React.FC<LinksProps> = ({ source, links }: LinksProps) 
           <AccordionDetails key={item.name}>
             {item.sublinks?.map((sublink: SubLink) => (
               <p key={sublink.title}>
-                {source == 'env' ? (
-                  <Button
-                    sx={{
-                      fontSize: '15px',
-                      color: 'black'
-                    }}
-                    key={sublink.title}
-                    onClick={() => item.handleClick!(sublink.title)}
-                  >
-                    {sublink.title}
-                  </Button>
-                ) : (
-                  <Button
-                    sx={{
-                      fontSize: '15px',
-                      color: 'black'
-                    }}
-                    key={sublink.title}
-                    href={`/${sublink.link}`}
-                  >
-                    {sublink.title}
-                  </Button>
-                )}
+                <Button
+                  sx={{
+                    fontSize: '15px',
+                    color: 'black'
+                  }}
+                  key={sublink.title}
+                  href={`/${sublink.link}`}
+                >
+                  {sublink.title}
+                </Button>
               </p>
             ))}
           </AccordionDetails>

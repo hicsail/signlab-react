@@ -20,7 +20,7 @@ const SwitchEditInputCell: React.FC<GridRenderCellParams> = (props: GridRenderCe
   const apiRef = useGridApiContext();
   const ref = useRef<HTMLElement>();
 
-  const handleChange = (newValue: boolean | false) => {
+  const handleChange = (newValue: boolean) => {
     apiRef.current.setEditCellValue({ id, field, value: newValue });
   };
 
