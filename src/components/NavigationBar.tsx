@@ -8,7 +8,7 @@ function NavBar() {
   const { token, initialized } = useAuth();
   const navigate = useNavigate();
   return (
-    <AppBar sx={{}}>
+    <AppBar>
       <CssBaseline />
       <Toolbar>
         <SideBar />
@@ -32,7 +32,7 @@ function NavBar() {
             </Link>
           </div>
         ) : (
-          <Link sx={{ fontSize: '16px', paddingLeft: '1rem', color: 'white' }} onClick={() => navigate('/logoutpage')}>
+          <Link sx={{ fontSize: '16px', paddingLeft: '1rem', color: 'white' }} underline="none" onClick={() => navigate('/logoutpage')}>
             Log Out
           </Link>
         )}

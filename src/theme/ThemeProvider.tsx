@@ -8,11 +8,17 @@ export interface ThemeProviderProps {
 export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
   const theme = createTheme({
     palette: {
-      background: {
-        paper: '#fefefe'
+      primary: {
+        main: '#6b37fa',
+        contrastText: '#f6f6f6'
+      },
+      secondary: {
+        main: '#fefefe',
+        contrastText: '#000000'
       },
       text: {
-        primary: '#020202'
+        primary: '#020202',
+        secondary: '#787272'
       },
       divider: '#a1a1a1'
     },
@@ -25,16 +31,9 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
     components: {
       MuiLink: {
         defaultProps: {
-          color: '#000',
           fontSize: '20px',
-          fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont'
-        }
-      },
-      MuiAppBar: {
-        styleOverrides: {
-          colorPrimary: {
-            backgroundColor: '#6b37fa'
-          }
+          fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont',
+          color: '#020202'
         }
       }
     }
