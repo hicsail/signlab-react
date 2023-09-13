@@ -69,6 +69,8 @@ export type InviteModel = {
   id: Scalars['ID'];
   /** The ID of the project to which the invitation belongs. */
   projectId: Scalars['String'];
+  /** The ID of the study to which the invitation belongs. */
+  studyId: Scalars['String'];
   /** The role that the user being invited will have. */
   role: Scalars['Int'];
   /** The status of the invitation. */
@@ -100,6 +102,9 @@ export type Mutation = {
   updateProject: ProjectModel;
   updateProjectAuthMethods: ProjectModel;
   updateProjectSettings: ProjectModel;
+  updateStudy: ProjectModel;
+  updateStudyAuthMethods: ProjectModel;
+  updateStudySettings: ProjectModel;
 };
 
 export type MutationAcceptInviteArgs = {
@@ -198,6 +203,11 @@ export type ProjectSettingsModel = {
   displayProjectName: Scalars['Boolean'];
 };
 
+export type StudyModel = {
+  description?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
   getProject: ProjectModel;
@@ -263,4 +273,3 @@ export type UsernameLoginDto = {
   projectId: Scalars['String'];
   username: Scalars['String'];
 };
-

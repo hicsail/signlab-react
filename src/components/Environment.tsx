@@ -2,18 +2,21 @@ import { Box, Accordion, Button, Link } from '@mui/material';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useContext } from 'react';
-import { EnvironmentContext } from '../context/EnvironmentContext';
 import { useProject } from '../context/ProjectContext';
-import { ProjectModel } from '../graphql/graphql';
+import { ProjectModel, StudyModel } from '../graphql/graphql';
 
 export const Environment: React.FC = () => {
-  const { study } = useContext(EnvironmentContext);
+  const { study, updateStudy } = useStudy();
   const { project, updateProject } = useProject();
 
-  const handleClick = (newValue: string) => {
-    const newProject: ProjectModel = { name: newValue };
-    updateProject(newProject);
+  const handleClick = (type: string, newValue: string) => {
+    if (type == 'Project') {
+      const newProject: ProjectModel = { name: newValue };
+      updateProject(newProject);
+    } else {
+      const newStudy: StudyModel = { name: newValue };
+      updateStudy(newStudy);
+    }
   };
 
   const items = [
@@ -43,7 +46,7 @@ export const Environment: React.FC = () => {
                     color: 'black'
                   }}
                   key={subitem.title}
-                  onClick={() => handleClick(subitem)}
+                  onClick={() => handleClick(item.name, subitem)}
                 >
                   {subitem.title}
                 </Button>
@@ -55,3 +58,6 @@ export const Environment: React.FC = () => {
     </Box>
   );
 };
+function useStudy(): { study: any; updateStudy: any } {
+  throw new Error('Function not implemented.');
+}

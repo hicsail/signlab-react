@@ -1,0 +1,92 @@
+query getStudy($id: String!) {
+  getStudy(id: $id) {
+    id
+    name
+    description
+    logo
+    muiTheme
+    homePage
+    redirectUrl
+    createdAt
+    updatedAt
+    deletedAt
+    settings {
+      allowSignup
+      displayStudyName
+    }
+    authMethods {
+      emailAuth
+      googleAuth
+    }
+  }
+}
+
+query listStudies {
+  listStudies {
+    id
+    name
+    description
+    logo
+  }
+}
+
+mutation updateStudySettings($id: String!, $displayStudyName: Boolean, $allowSignup: Boolean) {
+  updateStudySettings(id: $id, studySettings: { displayStudyName: $displayStudyName, allowSignup: $allowSignup }) {
+    id
+    name
+    description
+    logo
+    homePage
+    redirectUrl
+    settings {
+      displayStudyName
+      allowSignup
+    }
+    authMethods {
+      googleAuth
+      emailAuth
+    }
+  }
+}
+
+mutation updateStudyAuthMethods($id: String!, $googleAuth: Boolean, $emailAuth: Boolean) {
+  updateStudyAuthMethods(id: $id, studyAuthMethods: { googleAuth: $googleAuth, emailAuth: $emailAuth }) {
+    id
+    name
+    description
+    logo
+    homePage
+    redirectUrl
+    settings {
+      displayStudyName
+      allowSignup
+    }
+    authMethods {
+      googleAuth
+      emailAuth
+    }
+  }
+}
+
+mutation updateStudy($id: String!, $name: String, $description: String, $logo: String, $muiTheme: JSON, $homePage: String, $redirectUrl: String) {
+  updateStudy(id: $id, settings: { name: $name, description: $description, logo: $logo, muiTheme: $muiTheme, homePage: $homePage, redirectUrl: $redirectUrl }) {
+    id
+    name
+    description
+    logo
+    muiTheme
+    homePage
+    redirectUrl
+    createdAt
+    updatedAt
+    deletedAt
+    settings {
+      displayStudyName
+      allowSignup
+    }
+    authMethods {
+      googleAuth
+      emailAuth
+    }
+  }
+}

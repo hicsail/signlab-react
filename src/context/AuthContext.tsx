@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 export interface DecodedToken {
   id: string;
   projectId: string;
+  studyId: string;
   role: number;
   exp: number;
 }
