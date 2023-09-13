@@ -75,7 +75,7 @@ const uischema = {
   ]
 };
 
-const ContributePage: React.FC = () => {
+export const ContributePage: React.FC = () => {
   const initialData = {
     image: placeholder,
     name: 'Study 12',
@@ -115,5 +115,3 @@ const ContributePage: React.FC = () => {
     </Container>
   );
 };
-
-export { ContributePage };

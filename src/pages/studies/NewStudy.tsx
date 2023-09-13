@@ -1,122 +1,79 @@
-import { Container } from '@mui/material';
-import { useState } from 'react';
-import { materialRenderers, materialCells } from '@jsonforms/material-renderers';
-import { JsonForms } from '@jsonforms/react';
+import { Container, Typography, Button, Box, Stepper, Step, StepLabel } from '@mui/material';
+import React from 'react';
+import { TagsDisplay } from '../../components/TagsDisplay';
+import { NewStudyJsonForm } from '../../components/NewStudyJsonForm';
+import { TagTrainingComponent } from '../../components/TagTrainingComponent';
 
-const schema = {
-  type: 'object',
-  properties: {
-    name: {
-      type: 'string',
-      pattern: '^[a-zA-Z 0-9]*$'
-    },
-    description: {
-      type: 'string'
-    },
-    instructions: {
-      type: 'string'
-    },
-    times: {
-      type: 'string',
-      default: 1
-    },
-    tag: {
-      type: 'number'
-    }
-  },
-  required: ['name', 'description', 'instructions'],
-  errorMessage: {
-    type: 'data should be an object',
-    properties: { name: 'Study name should be ...', description: 'Description ' },
-    _: 'data should ...'
-  }
-};
+export const NewStudy: React.FC = () => {
+  //all constants
+  const [activeStep, setActiveStep] = React.useState(0);
 
-const uischema = {
-  type: 'Categorization',
-  elements: [
-    {
-      type: 'Category',
-      label: 'Study Identification',
-      elements: [
-        {
-          type: 'VerticalLayout',
-          elements: [
-            {
-              type: 'Control',
-              label: 'Name',
-              scope: '#/properties/name'
-            },
-            {
-              type: 'Control',
-              label: 'Description',
-              scope: '#/properties/description'
-            },
-            {
-              type: 'Control',
-              label: 'Instructions',
-              scope: '#/properties/instructions'
-            },
-            {
-              type: 'Control',
-              label: 'Number of times each entry needs to be tagged (default 1)',
-              scope: '#/properties/times'
-            }
-          ]
-        }
-      ]
-    },
-    {
-      type: 'Category',
-      label: 'Construct Tagging Interface',
-      elements: [
-        {
-          type: 'VerticalLayout',
-          elements: [
-            {
-              type: 'Control',
-              label: 'Name',
-              scope: '#/properties/name'
-            },
-            {
-              type: 'Control',
-              label: 'Description',
-              scope: '#/properties/description'
-            },
-            {
-              type: 'Control',
-              label: 'Tag',
-              scope: '#/properties/tag'
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  options: {
-    variant: 'stepper',
-    showNavButtons: true
-  }
-};
-
-const NewStudy: React.FC = () => {
-  const initialData = {
-    name: '',
-    description: '',
-    instructions: ''
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
-  const [data, setData] = useState(initialData);
-
-  const handleChange = (data: any) => {
-    setData(data);
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
+
+  const handleReset = () => {
+    setActiveStep(0);
+  };
+
+  const steps = ['Study Identification', 'Construct Tagging Interface', 'Select Tag Training Items'];
+
+  function getSectionComponent() {
+    switch (activeStep) {
+      case 0:
+        return <NewStudyJsonForm />;
+      case 1:
+        return <TagsDisplay />;
+      case 2:
+        return <TagTrainingComponent />;
+      default:
+        return null;
+    }
+  }
 
   return (
-    <Container sx={{ left: '5%', width: '90%', top: '100px', position: 'absolute' }}>
-      <JsonForms schema={schema} uischema={uischema} data={data} renderers={materialRenderers} cells={materialCells} onChange={({ data }) => handleChange(data)} />
+    <Container sx={{ position: 'absolute', left: '-5%', right: '-5%', alignItems: 'baseline', width: '100%', top: '100px', display: 'flex', flexDirection: 'column' }}>
+      <Typography sx={{ margin: '10px 0px 15px 10px' }} variant="h5">
+        Create New Study
+      </Typography>
+      <Container sx={{ maxWidth: 'xl' }}>
+        <Stepper activeStep={activeStep}>
+          {steps.map((label) => {
+            return (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            );
+          })}
+        </Stepper>
+        {activeStep === steps.length ? (
+          <React.Fragment>
+            <Typography sx={{ mt: 2, mb: 1 }}>All steps completed - your new study is created</Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+              <Box sx={{ flex: '1 1 auto' }} />
+              <Button onClick={handleReset}>Start Over</Button>
+            </Box>
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <Container maxWidth="lg" sx={{ display: 'table', width: '100%', overflow: 'hidden' }}>
+              {getSectionComponent()}
+            </Container>
+            <Box sx={{ marginTop: '30px', display: 'flex', flexDirection: 'row', pt: 2 }}>
+              <Button variant="outlined" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
+                Back
+              </Button>
+              <Button variant="outlined" onClick={handleNext}>
+                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+              </Button>
+            </Box>
+          </React.Fragment>
+        )}
+      </Container>
     </Container>
   );
 };
-
-export { NewStudy };

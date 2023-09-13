@@ -8,14 +8,17 @@ interface Row {
   view: string;
   entry: string;
   responder: string;
-  access: boolean;
+  access?: boolean;
+  partOf?: boolean;
+  available?: boolean;
 }
 
 interface Table {
   tableRows: Row[];
+  columns: GridColDef[];
 }
 
-const DatasetControlComponent: React.FC<Table> = ({ tableRows }: Table) => {
+export const DatasetControlComponent: React.FC<Table> = ({ tableRows, columns }: Table) => {
   const [rows] = useState(tableRows);
   const [rowModesModel, setRowModesModel] = useState<GridRowModesModel>({});
 
@@ -23,40 +26,8 @@ const DatasetControlComponent: React.FC<Table> = ({ tableRows }: Table) => {
     setRowModesModel(newRowModesModel);
   };
 
-  /*const handleDeleteClick = (id: GridRowId) => () => {
-    setRows(rows.filter((row) => row.id !== id));
-  };*/
-
-  const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 180 },
-    {
-      field: 'view',
-      headerName: 'View',
-      width: 140,
-      editable: true
-    },
-    {
-      field: 'entry',
-      headerName: 'Entry ID',
-      width: 200,
-      editable: true
-    },
-    {
-      field: 'responder',
-      headerName: 'Responder ID',
-      width: 200,
-      editable: true
-    },
-    {
-      field: 'access',
-      type: 'boolean',
-      headerName: 'Access',
-      width: 100
-    }
-  ];
-
   return (
-    <Box sx={{ height: 800, width: '100%', boxShadow: '1px 9px 15px darkgrey' }}>
+    <Box sx={{ height: 350, width: '100%', boxShadow: '1px 9px 15px darkgrey' }}>
       <DataGrid
         sx={{
           '&.MuiDataGrid-root': {
@@ -76,7 +47,7 @@ const DatasetControlComponent: React.FC<Table> = ({ tableRows }: Table) => {
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 10
+              pageSize: 5
             }
           }
         }}
@@ -87,5 +58,3 @@ const DatasetControlComponent: React.FC<Table> = ({ tableRows }: Table) => {
     </Box>
   );
 };
-
-export { DatasetControlComponent };

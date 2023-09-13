@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
-import { GridRowModesModel, GridActionsCellItem, GridRowId } from '@mui/x-data-grid';
+import { GridRowModesModel, GridActionsCellItem, GridRowId } from '@mui/x-data-grid-pro';
 import { useState } from 'react';
 
 interface Row {
@@ -14,7 +14,7 @@ interface Table {
   tableRows: Row[];
 }
 
-const ControlComponent: React.FC<Table> = ({ tableRows }: Table) => {
+export const ControlComponent: React.FC<Table> = ({ tableRows }: Table) => {
   const [rows, setRows] = useState(tableRows);
   const [rowModesModel, setRowModesModel] = useState<GridRowModesModel>({});
 
@@ -37,14 +37,14 @@ const ControlComponent: React.FC<Table> = ({ tableRows }: Table) => {
     {
       field: 'description',
       headerName: 'Description',
-      width: 450,
+      width: 575,
       editable: true
     },
     {
       field: 'delete',
       type: 'actions',
       headerName: 'Delete',
-      width: 90,
+      width: 120,
       cellClassName: 'delete',
       getActions: ({ id }) => {
         return [<GridActionsCellItem icon={<DeleteIcon />} label="Delete" onClick={handleDeleteClick(id)} />];
@@ -82,5 +82,3 @@ const ControlComponent: React.FC<Table> = ({ tableRows }: Table) => {
     </Box>
   );
 };
-
-export { ControlComponent };

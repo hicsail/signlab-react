@@ -42,7 +42,7 @@ const uischema = {
   ]
 };
 
-const NewProject: React.FC = () => {
+export const NewProject: React.FC = () => {
   const [error, setError] = useState(true);
   const navigate = useNavigate();
 
@@ -73,13 +73,11 @@ const NewProject: React.FC = () => {
   };
 
   return (
-    <Container sx={{ right: '8%', width: '96%', top: '100px', position: 'absolute' }}>
+    <Container sx={{ left: '2%', width: '96%', top: '100px', position: 'absolute' }}>
       <JsonForms schema={schema} uischema={uischema} data={data} renderers={materialRenderers} cells={materialCells} onChange={({ data }) => handleChange(data)} />
-      <Button disabled={error} sx={{ color: 'white', bgcolor: '#2582f3', marginTop: '35px', position: 'absolute', right: '5%' }} variant="outlined" onClick={handleSubmit}>
+      <Button disabled={error} sx={{ marginTop: '35px', position: 'absolute', right: '5%' }} variant="contained" onClick={handleSubmit}>
         Submit
       </Button>
     </Container>
   );
 };
-
-export { NewProject };

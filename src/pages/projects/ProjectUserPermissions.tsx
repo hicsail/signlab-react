@@ -54,7 +54,7 @@ const tableRows = [
   }
 ];
 
-const ProjectUserPermissions: React.FC = () => {
+export const ProjectUserPermissions: React.FC = () => {
   const [rows] = useState(tableRows);
   const [rowModesModel, setRowModesModel] = useState<GridRowModesModel>({});
 
@@ -63,23 +63,23 @@ const ProjectUserPermissions: React.FC = () => {
   };
 
   const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 55 },
+    { field: 'id', headerName: 'ID', flex: 0.5 },
     {
       field: 'name',
       headerName: 'Name',
-      width: 190,
+      flex: 1.25,
       editable: true
     },
     {
       field: 'username',
       headerName: 'Username',
-      width: 190,
+      flex: 1.75,
       editable: true
     },
     {
       field: 'email',
       headerName: 'Email',
-      width: 280,
+      flex: 1.75,
       editable: true
     },
     {
@@ -89,15 +89,17 @@ const ProjectUserPermissions: React.FC = () => {
       renderCell: (params) => <Switch defaultChecked value={params.value} />,
       renderEditCell: (params) => <SwitchEditInputCell {...params} />,
       editable: true,
-      width: 90
+      flex: 1
     }
   ];
 
   return (
-    <Box sx={{ height: 800, width: '100%' }}>
+    <Box sx={{ height: 800, width: '100%', position: 'absolute', top: '75px', left: '1%', right: '1%' }}>
       <h3 style={{ top: '10%', paddingBottom: '10px' }}>User Permissions</h3>
       <DataGrid
         sx={{
+          width: '100%',
+          position: 'absolute',
           '& .MuiDataGrid-cell': {
             paddingTop: '6px !important',
             paddingBottom: '8px !important'
@@ -122,5 +124,3 @@ const ProjectUserPermissions: React.FC = () => {
     </Box>
   );
 };
-
-export { ProjectUserPermissions };

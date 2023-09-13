@@ -12,7 +12,7 @@ interface ShowProps {
   toggleModal: () => void;
 }
 
-const UploadEntries: React.FC<ShowProps> = (props: ShowProps) => {
+export const UploadEntries: React.FC<ShowProps> = (props: ShowProps) => {
   const [activeStep, setActiveStep] = useState(0);
   const [name, setName] = useState('');
   const [nameValid, setNameValid] = useState(false);
@@ -146,5 +146,3 @@ const UploadEntries: React.FC<ShowProps> = (props: ShowProps) => {
     </div>
   );
 };
-
-export { UploadEntries };

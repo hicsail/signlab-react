@@ -5,6 +5,7 @@ import { DatasetControlComponent } from '../../components/DatasetControlComponen
 import { AddDataset } from '../../components/AddDataset';
 import { useState } from 'react';
 import { UploadEntries } from '../../components/UploadEntries';
+import { GridColDef } from '@mui/x-data-grid';
 
 const controls = [
   { name: 'First', description: 'The description of the object' },
@@ -42,12 +43,40 @@ const rows = [
   }
 ];
 
+const columns: GridColDef[] = [
+  { field: 'id', headerName: 'ID', flex: 0.3 },
+  {
+    field: 'view',
+    headerName: 'View',
+    flex: 0.75,
+    editable: true
+  },
+  {
+    field: 'entry',
+    headerName: 'Entry ID',
+    flex: 1,
+    editable: true
+  },
+  {
+    field: 'responder',
+    headerName: 'Responder ID',
+    flex: 1,
+    editable: true
+  },
+  {
+    field: 'access',
+    type: 'boolean',
+    headerName: 'Access',
+    flex: 0.75
+  }
+];
+
 interface Control {
   name: string;
   description: string;
 }
 
-const DatasetControls: React.FC = () => {
+export const DatasetControls: React.FC = () => {
   const [add, setAdd] = useState(false);
   const [upload, setUpload] = useState(false);
 
@@ -100,7 +129,7 @@ const DatasetControls: React.FC = () => {
             <AccordionDetails>
               <Container sx={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContext: 'space-between' }}>
                 <Box sx={{ position: '-webkit-sticky' }}>
-                  <DatasetControlComponent tableRows={rows} />
+                  <DatasetControlComponent tableRows={rows} columns={columns} />
                 </Box>
               </Container>
             </AccordionDetails>
@@ -110,5 +139,3 @@ const DatasetControls: React.FC = () => {
     </Box>
   );
 };
-
-export { DatasetControls };

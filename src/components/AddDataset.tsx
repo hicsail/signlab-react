@@ -42,7 +42,7 @@ const uischema = {
   ]
 };
 
-const AddDataset: React.FC<ShowProps> = (props: ShowProps) => {
+export const AddDataset: React.FC<ShowProps> = (props: ShowProps) => {
   const [error, setError] = useState(true);
   const initialData = {
     name: '',
@@ -79,5 +79,3 @@ const AddDataset: React.FC<ShowProps> = (props: ShowProps) => {
     </div>
   );
 };
-
-export { AddDataset };

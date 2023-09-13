@@ -5,7 +5,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 interface SubLink {
   title: string;
-  link: string;
+  link?: string;
 }
 
 interface Link {
@@ -14,17 +14,10 @@ interface Link {
 }
 
 interface LinksProps {
-  source: string;
   links: Link[];
 }
 
-/*const { project, study } = useContext(SampleContext); */
-
-const DropdownComponent: React.FC<LinksProps> = ({ source, links }: LinksProps) => {
-  /* const handleClick = (e: any) => {
-    setStudy(e.target.value);
-  }; */
-
+export const DropdownComponent: React.FC<LinksProps> = ({ links }: LinksProps) => {
   return (
     <div>
       {links?.map((item: Link) => (
@@ -35,28 +28,16 @@ const DropdownComponent: React.FC<LinksProps> = ({ source, links }: LinksProps) 
           <AccordionDetails key={item.name}>
             {item.sublinks?.map((sublink: SubLink) => (
               <p key={sublink.title}>
-                {source == 'env' ? (
-                  <Button
-                    sx={{
-                      fontSize: '15px',
-                      color: 'black'
-                    }}
-                    key={sublink.title}
-                  >
-                    {sublink.title}
-                  </Button>
-                ) : (
-                  <Button
-                    sx={{
-                      fontSize: '15px',
-                      color: 'black'
-                    }}
-                    key={sublink.title}
-                    href={`/${sublink.link}`}
-                  >
-                    {sublink.title}
-                  </Button>
-                )}
+                <Button
+                  sx={{
+                    fontSize: '15px',
+                    color: 'black'
+                  }}
+                  key={sublink.title}
+                  href={`/${sublink.link}`}
+                >
+                  {sublink.title}
+                </Button>
               </p>
             ))}
           </AccordionDetails>
@@ -65,5 +46,3 @@ const DropdownComponent: React.FC<LinksProps> = ({ source, links }: LinksProps) 
     </div>
   );
 };
-
-export { DropdownComponent };

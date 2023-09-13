@@ -1,6 +1,6 @@
 import { Typography, Button } from '@mui/material';
 
-const SuccessPage = () => {
+export const SuccessPage = () => {
   return (
     <div>
       <Typography variant="h5">Successfully created!</Typography>
@@ -10,5 +10,3 @@ const SuccessPage = () => {
     </div>
   );
 };
-
-export { SuccessPage };

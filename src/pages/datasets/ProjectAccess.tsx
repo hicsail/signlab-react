@@ -33,7 +33,7 @@ const rows = [
   }
 ];
 
-const ProjectAccess: React.FC = () => {
+export const ProjectAccess: React.FC = () => {
   return (
     <Box sx={{ position: 'absolute', top: '8%', left: '2.5%', right: '2.5%' }}>
       <Typography variant="h5">Project Access</Typography>
@@ -66,5 +66,3 @@ const ProjectAccess: React.FC = () => {
     </Box>
   );
 };
-
-export { ProjectAccess };
